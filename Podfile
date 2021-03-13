@@ -13,7 +13,7 @@ end
 # 引入部分组件使用 :subspecs => ['HDMediator', 'ScanCode']
 
 def remote_pods
-
+  pod 'YYModel'
 end
 
 def pods
