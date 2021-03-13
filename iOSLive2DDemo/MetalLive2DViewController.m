@@ -78,7 +78,7 @@
     self.live2DView.frame = frame;
 
     if (!self.hasLoadResource) {
-        NSString *path = [[NSBundle mainBundle] pathForResource:@"Live2DResources/Shanbao/Shanbao.model3" ofType:@"json"];
+        NSString *path = [[NSBundle mainBundle] pathForResource:@"Live2DResources/Mark/Mark.model3" ofType:@"json"];
         [self.live2DView loadLive2DResourcesWithPath:path];
         self.hasLoadResource = YES;
     }

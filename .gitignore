@@ -525,9 +525,9 @@ hs_err_pid*
 
 !/gradle/wrapper/gradle-wrapper.jar
 
-# 资源文件只需要扇宝，其它都忽略
-**/Live2dResources/*
-!**/Live2dResources/Shanbao
+# 资源文件只需要Mark，其它都忽略
+**/Live2DResources/*
+!**/Live2DResources/Mark
 
 Modules
 .idea
