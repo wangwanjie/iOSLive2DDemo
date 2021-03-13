@@ -1,6 +1,6 @@
 //
 //  L2DModel.mm
-//  ShanBao
+//  iOSLive2DDemo
 //
 //  Created by VanJay on 2020/12/19.
 //

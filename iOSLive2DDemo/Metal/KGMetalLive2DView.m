@@ -1,18 +1,18 @@
 //
-//  KGlive2DView.m
-//  ShanBao
+//  KGMetalLive2DView.m
+//  iOSLive2DDemo
 //
 //  Created by VanJay on 2020/12/19.
 //
 
-#import "KGLive2DView.h"
+#import "KGMetalLive2DView.h"
 #import "L2DModel.h"
 #import "MetalRender.h"
 #import "UIColor+Live2D.h"
 #import <Metal/Metal.h>
 #import <MetalKit/MetalKit.h>
 
-@interface KGlive2DView () <MTKViewDelegate>
+@interface KGMetalLive2DView () <MTKViewDelegate>
 @property (nonatomic, strong) L2DModel *model;
 @property (nonatomic, strong) MetalRender *renderer;
 @property (nonatomic, strong) MTKView *mtkView;
@@ -23,7 +23,7 @@
 @property (nonatomic, assign) MTLClearColor clearColor;
 @end
 
-@implementation KGlive2DView
+@implementation KGMetalLive2DView
 #pragma mark - life cycle
 - (void)commonInit {
 

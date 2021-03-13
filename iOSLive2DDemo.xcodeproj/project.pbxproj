@@ -56,7 +56,7 @@
 		959FF51525FC956100AB0924 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 959FF51425FC956100AB0924 /* OpenGLES.framework */; };
 		959FF51D25FCEE7600AB0924 /* Live2DResources in Resources */ = {isa = PBXBuildFile; fileRef = 959FF51C25FCEE7600AB0924 /* Live2DResources */; };
 		959FF52225FCEEA200AB0924 /* UIColor+Live2D.m in Sources */ = {isa = PBXBuildFile; fileRef = 959FF52125FCEEA200AB0924 /* UIColor+Live2D.m */; };
-		959FF52625FCEEAE00AB0924 /* KGLive2DView.m in Sources */ = {isa = PBXBuildFile; fileRef = 959FF52525FCEEAE00AB0924 /* KGLive2DView.m */; };
+		959FF52625FCEEAE00AB0924 /* KGMetalLive2DView.m in Sources */ = {isa = PBXBuildFile; fileRef = 959FF52525FCEEAE00AB0924 /* KGMetalLive2DView.m */; };
 		959FF53C25FCEEB600AB0924 /* mask.metal in Sources */ = {isa = PBXBuildFile; fileRef = 959FF52925FCEEB600AB0924 /* mask.metal */; };
 		959FF53D25FCEEB600AB0924 /* basic.metal in Sources */ = {isa = PBXBuildFile; fileRef = 959FF52A25FCEEB600AB0924 /* basic.metal */; };
 		959FF53E25FCEEB600AB0924 /* L2DModel.mm in Sources */ = {isa = PBXBuildFile; fileRef = 959FF52F25FCEEB600AB0924 /* L2DModel.mm */; };
@@ -173,8 +173,8 @@
 		959FF51C25FCEE7600AB0924 /* Live2DResources */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Live2DResources; sourceTree = "<group>"; };
 		959FF52025FCEEA200AB0924 /* UIColor+Live2D.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+Live2D.h"; sourceTree = "<group>"; };
 		959FF52125FCEEA200AB0924 /* UIColor+Live2D.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+Live2D.m"; sourceTree = "<group>"; };
-		959FF52425FCEEAE00AB0924 /* KGLive2DView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KGLive2DView.h; sourceTree = "<group>"; };
-		959FF52525FCEEAE00AB0924 /* KGLive2DView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KGLive2DView.m; sourceTree = "<group>"; };
+		959FF52425FCEEAE00AB0924 /* KGMetalLive2DView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KGMetalLive2DView.h; sourceTree = "<group>"; };
+		959FF52525FCEEAE00AB0924 /* KGMetalLive2DView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KGMetalLive2DView.m; sourceTree = "<group>"; };
 		959FF52925FCEEB600AB0924 /* mask.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; path = mask.metal; sourceTree = "<group>"; };
 		959FF52A25FCEEB600AB0924 /* basic.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; path = basic.metal; sourceTree = "<group>"; };
 		959FF52B25FCEEB600AB0924 /* L2DBufferIndex.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = L2DBufferIndex.h; sourceTree = "<group>"; };
@@ -243,17 +243,17 @@
 			isa = PBXGroup;
 			children = (
 				959FF54625FCEF1E00AB0924 /* Common */,
+				959FF51F25FCEEA200AB0924 /* Helper */,
+				959FF51C25FCEE7600AB0924 /* Live2DResources */,
 				959FF48825FC935200AB0924 /* Live2DSDK */,
 				959FF47825FC90C200AB0924 /* Metal */,
 				959FF47725FC90B400AB0924 /* OpenGLES */,
 				959FF45D25FC906300AB0924 /* AppDelegate.h */,
 				959FF45E25FC906300AB0924 /* AppDelegate.m */,
-				959FF51C25FCEE7600AB0924 /* Live2DResources */,
 				959FF46925FC906500AB0924 /* Assets.xcassets */,
 				959FF46E25FC906500AB0924 /* Info.plist */,
 				959FF46B25FC906500AB0924 /* LaunchScreen.storyboard */,
 				959FF46F25FC906500AB0924 /* main.m */,
-				959FF51F25FCEEA200AB0924 /* Helper */,
 				959FF48025FC919800AB0924 /* MetalLive2DViewController.h */,
 				959FF48125FC919800AB0924 /* MetalLive2DViewController.m */,
 				959FF47C25FC918100AB0924 /* OpenGLLive2DViewController.h */,
@@ -276,8 +276,8 @@
 			children = (
 				959FF52D25FCEEB600AB0924 /* Render */,
 				959FF52825FCEEB600AB0924 /* Shader */,
-				959FF52425FCEEAE00AB0924 /* KGLive2DView.h */,
-				959FF52525FCEEAE00AB0924 /* KGLive2DView.m */,
+				959FF52425FCEEAE00AB0924 /* KGMetalLive2DView.h */,
+				959FF52525FCEEAE00AB0924 /* KGMetalLive2DView.m */,
 			);
 			path = Metal;
 			sourceTree = "<group>";
@@ -483,10 +483,10 @@
 		959FF52825FCEEB600AB0924 /* Shader */ = {
 			isa = PBXGroup;
 			children = (
-				959FF52925FCEEB600AB0924 /* mask.metal */,
 				959FF52A25FCEEB600AB0924 /* basic.metal */,
 				959FF52B25FCEEB600AB0924 /* L2DBufferIndex.h */,
 				959FF52C25FCEEB600AB0924 /* L2DShaderType.h */,
+				959FF52925FCEEB600AB0924 /* mask.metal */,
 			);
 			path = Shader;
 			sourceTree = "<group>";
@@ -513,10 +513,10 @@
 				959FF52F25FCEEB600AB0924 /* L2DModel.mm */,
 				959FF53025FCEEB600AB0924 /* L2DModelDefine.h */,
 				959FF53525FCEEB600AB0924 /* L2DModelDefine.mm */,
-				959FF54725FCEF2B00AB0924 /* SBProductioEmotionExpression.h */,
-				959FF54825FCEF2B00AB0924 /* SBProductioEmotionExpression.m */,
 				959FF53425FCEEB600AB0924 /* RawArray.h */,
 				959FF53A25FCEEB600AB0924 /* RawArray.m */,
+				959FF54725FCEF2B00AB0924 /* SBProductioEmotionExpression.h */,
+				959FF54825FCEF2B00AB0924 /* SBProductioEmotionExpression.m */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -579,9 +579,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				959FF51D25FCEE7600AB0924 /* Live2DResources in Resources */,
 				959FF46A25FC906500AB0924 /* Assets.xcassets in Resources */,
 				959FF46D25FC906500AB0924 /* LaunchScreen.storyboard in Resources */,
+				959FF51D25FCEE7600AB0924 /* Live2DResources in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -634,9 +634,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				959FF54925FCEF2B00AB0924 /* SBProductioEmotionExpression.m in Sources */,
 				959FF4F025FC93F900AB0924 /* ACubismMotion.cpp in Sources */,
 				959FF45F25FC906300AB0924 /* AppDelegate.m in Sources */,
+				959FF53D25FCEEB600AB0924 /* basic.metal in Sources */,
 				959FF50725FC93F900AB0924 /* csmRectF.cpp in Sources */,
 				959FF50625FC93F900AB0924 /* csmString.cpp in Sources */,
 				959FF4E925FC93F900AB0924 /* CubismBreath.cpp in Sources */,
@@ -644,35 +644,24 @@
 				959FF4EE25FC93F900AB0924 /* CubismDebug.cpp in Sources */,
 				959FF4EA25FC93F900AB0924 /* CubismDefaultParameterId.cpp in Sources */,
 				959FF4F425FC93F900AB0924 /* CubismExpressionMotion.cpp in Sources */,
-				959FF54125FCEEB600AB0924 /* MetalRender.m in Sources */,
 				959FF4E825FC93F900AB0924 /* CubismEyeBlink.cpp in Sources */,
 				959FF4EB25FC93F900AB0924 /* CubismFramework.cpp in Sources */,
 				959FF4F825FC93F900AB0924 /* CubismId.cpp in Sources */,
-				959FF52625FCEEAE00AB0924 /* KGLive2DView.m in Sources */,
 				959FF4F725FC93F900AB0924 /* CubismIdManager.cpp in Sources */,
-				959FF53E25FCEEB600AB0924 /* L2DModel.mm in Sources */,
-				959FF53D25FCEEB600AB0924 /* basic.metal in Sources */,
 				959FF4EC25FC93F900AB0924 /* CubismJson.cpp in Sources */,
-				959FF54025FCEEB600AB0924 /* L2DModelDefine.mm in Sources */,
 				959FF50425FC93F900AB0924 /* CubismMath.cpp in Sources */,
 				959FF50525FC93F900AB0924 /* CubismMatrix44.cpp in Sources */,
 				959FF4FC25FC93F900AB0924 /* CubismMoc.cpp in Sources */,
-				959FF54325FCEEB700AB0924 /* RawArray.m in Sources */,
 				959FF4FD25FC93F900AB0924 /* CubismModel.cpp in Sources */,
 				959FF50025FC93F900AB0924 /* CubismModelMatrix.cpp in Sources */,
-				959FF53C25FCEEB600AB0924 /* mask.metal in Sources */,
 				959FF4EF25FC93F900AB0924 /* CubismModelSettingJson.cpp in Sources */,
 				959FF4F925FC93F900AB0924 /* CubismModelUserData.cpp in Sources */,
-				959FF53F25FCEEB600AB0924 /* L2DCubism.mm in Sources */,
 				959FF4FA25FC93F900AB0924 /* CubismModelUserDataJson.cpp in Sources */,
-				959FF52225FCEEA200AB0924 /* UIColor+Live2D.m in Sources */,
 				959FF4F125FC93F900AB0924 /* CubismMotion.cpp in Sources */,
 				959FF4F525FC93F900AB0924 /* CubismMotionJson.cpp in Sources */,
 				959FF4F225FC93F900AB0924 /* CubismMotionManager.cpp in Sources */,
-				959FF54225FCEEB600AB0924 /* L2DAppDefine.mm in Sources */,
 				959FF4F625FC93F900AB0924 /* CubismMotionQueueEntry.cpp in Sources */,
 				959FF4F325FC93F900AB0924 /* CubismMotionQueueManager.cpp in Sources */,
-				959FF54425FCEEB700AB0924 /* MetalDrawable.m in Sources */,
 				959FF50A25FC93F900AB0924 /* CubismOffscreenSurface_OpenGLES2.cpp in Sources */,
 				959FF4FF25FC93F900AB0924 /* CubismPhysics.cpp in Sources */,
 				959FF4FE25FC93F900AB0924 /* CubismPhysicsJson.cpp in Sources */,
@@ -684,9 +673,20 @@
 				959FF4FB25FC93F900AB0924 /* CubismUserModel.cpp in Sources */,
 				959FF50225FC93F900AB0924 /* CubismVector2.cpp in Sources */,
 				959FF50125FC93F900AB0924 /* CubismViewMatrix.cpp in Sources */,
+				959FF52625FCEEAE00AB0924 /* KGMetalLive2DView.m in Sources */,
+				959FF54225FCEEB600AB0924 /* L2DAppDefine.mm in Sources */,
+				959FF53F25FCEEB600AB0924 /* L2DCubism.mm in Sources */,
+				959FF53E25FCEEB600AB0924 /* L2DModel.mm in Sources */,
+				959FF54025FCEEB600AB0924 /* L2DModelDefine.mm in Sources */,
 				959FF47025FC906500AB0924 /* main.m in Sources */,
+				959FF53C25FCEEB600AB0924 /* mask.metal in Sources */,
+				959FF54425FCEEB700AB0924 /* MetalDrawable.m in Sources */,
 				959FF48225FC919800AB0924 /* MetalLive2DViewController.m in Sources */,
+				959FF54125FCEEB600AB0924 /* MetalRender.m in Sources */,
 				959FF47E25FC918100AB0924 /* OpenGLLive2DViewController.m in Sources */,
+				959FF54325FCEEB700AB0924 /* RawArray.m in Sources */,
+				959FF54925FCEF2B00AB0924 /* SBProductioEmotionExpression.m in Sources */,
+				959FF52225FCEEA200AB0924 /* UIColor+Live2D.m in Sources */,
 				959FF46525FC906300AB0924 /* ViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

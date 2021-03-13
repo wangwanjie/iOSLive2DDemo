@@ -6,13 +6,13 @@
 //
 
 #import "MetalLive2DViewController.h"
-#import "KGLive2DView.h"
+#import "KGMetalLive2DView.h"
 
 @interface MetalLive2DViewController () <MetalRenderDelegate>
 /// 渲染线程
 @property (nonatomic, strong) dispatch_queue_t renderQueue;
 /// 展示 live2d 的 View
-@property (nonatomic, strong) KGlive2DView *live2DView;
+@property (nonatomic, strong) KGMetalLive2DView *live2DView;
 /// 是否已经加载资源
 @property (nonatomic, assign) BOOL hasLoadResource;
 @end
@@ -88,9 +88,9 @@
 - (void)rendererUpdateWithRender:(MetalRender *)renderer duration:(NSTimeInterval)duration {
 }
 
-- (KGlive2DView *)live2DView {
+- (KGMetalLive2DView *)live2DView {
     if (!_live2DView) {
-        _live2DView = [[KGlive2DView alloc] init];
+        _live2DView = [[KGMetalLive2DView alloc] init];
         _live2DView.delegate = self;
     }
     return _live2DView;

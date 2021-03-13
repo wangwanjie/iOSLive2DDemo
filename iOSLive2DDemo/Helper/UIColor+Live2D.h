@@ -1,6 +1,6 @@
 //
 //  UIColor+Live2D.h
-//  ShanBao
+//  iOSLive2DDemo
 //
 //  Created by VanJay on 2020/12/20.
 //

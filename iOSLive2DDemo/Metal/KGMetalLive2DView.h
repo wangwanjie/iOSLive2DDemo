@@ -1,6 +1,6 @@
 //
-//  KGlive2DView.h
-//  ShanBao
+//  KGMetalLive2DView.h
+//  iOSLive2DDemo
 //
 //  Created by VanJay on 2020/12/19.
 //
@@ -10,14 +10,14 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-typedef NS_ENUM(NSUInteger, KGLive2dViewStatus) {
-    KGLive2dViewStatusWaiting = 0,      ///< 执行待机动作
-    KGLive2dViewStatusSinging = 1,      ///< 唱歌
-    KGLive2dViewStatusPaused = 2,       ///< 暂停
-    KGLive2dViewStatusResetWaiting = 3  ///< 执行重置后待机动作
+typedef NS_ENUM(NSUInteger, KGMetalLive2DViewStatus) {
+    KGMetalLive2DViewStatusWaiting = 0,      ///< 执行待机动作
+    KGMetalLive2DViewStatusSinging = 1,      ///< 唱歌
+    KGMetalLive2DViewStatusPaused = 2,       ///< 暂停
+    KGMetalLive2DViewStatusResetWaiting = 3  ///< 执行重置后待机动作
 };
 
-@interface KGlive2DView : UIView
+@interface KGMetalLive2DView : UIView
 
 /// 加载资源 json
 /// @param path model3 文件路径
@@ -43,7 +43,7 @@ typedef NS_ENUM(NSUInteger, KGLive2dViewStatus) {
 /// 渲染
 @property (nonatomic, strong, readonly) MetalRender *renderer;
 
-/// 已经创建了 transformBuffer，内部默认会将模型缩放到 KGlive2DView 高度
+/// 已经创建了 transformBuffer，内部默认会将模型缩放到 KGMetalLive2DView 高度
 /// 如果外部重写了该属性，需要自行处理缩放
 /// setScale: setOrigin: 需要在此回调后设置才生效
 @property (nonatomic, copy) void (^didCreatedTransformBuffer)(void);

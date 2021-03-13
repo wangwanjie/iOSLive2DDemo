@@ -1,6 +1,6 @@
 //
 //  L2DModelDefine.m
-//  ShanBao
+//  iOSLive2DDemo
 //
 //  Created by VanJay on 2021/2/3.
 //
