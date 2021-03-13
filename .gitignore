@@ -526,8 +526,8 @@ hs_err_pid*
 !/gradle/wrapper/gradle-wrapper.jar
 
 # 资源文件只需要Mark，其它都忽略
-**/Live2DResources/*
-!**/Live2DResources/Mark
+# **/Live2DResources/*
+# !**/Live2DResources/Mark
 
 Modules
 .idea

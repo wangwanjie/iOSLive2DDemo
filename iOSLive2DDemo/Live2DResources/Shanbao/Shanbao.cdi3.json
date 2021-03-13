@@ -1,0 +1,343 @@
+{
+	"Version": 3,
+	"Parameters": [
+		{
+			"Id": "ParamAngleX",
+			"GroupId": "",
+			"Name": "角度 X"
+		},
+		{
+			"Id": "ParamAngleY",
+			"GroupId": "",
+			"Name": "角度 Y"
+		},
+		{
+			"Id": "ParamAngleZ",
+			"GroupId": "",
+			"Name": "角度 Z"
+		},
+		{
+			"Id": "ParamEyeLOpen",
+			"GroupId": "",
+			"Name": "左眼　开闭"
+		},
+		{
+			"Id": "ParamEyeROpen",
+			"GroupId": "",
+			"Name": "右眼　开闭"
+		},
+		{
+			"Id": "ParamEyeBallX",
+			"GroupId": "",
+			"Name": "眼球 X"
+		},
+		{
+			"Id": "ParamEyeBallY",
+			"GroupId": "",
+			"Name": "眼球 Y"
+		},
+		{
+			"Id": "ParamTears",
+			"GroupId": "",
+			"Name": "眼泪"
+		},
+		{
+			"Id": "ParamBrowLY",
+			"GroupId": "",
+			"Name": "左眉    上下"
+		},
+		{
+			"Id": "ParamBrowRY",
+			"GroupId": "",
+			"Name": "右眉    上下"
+		},
+		{
+			"Id": "ParamBrowLSad",
+			"GroupId": "",
+			"Name": "左眉    悲伤"
+		},
+		{
+			"Id": "ParamBrowRSad",
+			"GroupId": "",
+			"Name": "右眉    悲伤"
+		},
+		{
+			"Id": "ParamMouthForm",
+			"GroupId": "",
+			"Name": "嘴部　变形"
+		},
+		{
+			"Id": "ParamMouthOpenY",
+			"GroupId": "",
+			"Name": "嘴巴　张开和闭合"
+		},
+		{
+			"Id": "ParamBodyAngleX",
+			"GroupId": "",
+			"Name": "身体旋转　X"
+		},
+		{
+			"Id": "ParamBodyAngleY",
+			"GroupId": "",
+			"Name": "身体旋转　Y"
+		},
+		{
+			"Id": "ParamBodyAngleZ",
+			"GroupId": "",
+			"Name": "身体旋转　Z"
+		},
+		{
+			"Id": "ParamLhand",
+			"GroupId": "",
+			"Name": "左手"
+		},
+		{
+			"Id": "ParamRhand",
+			"GroupId": "",
+			"Name": "右手"
+		},
+		{
+			"Id": "ParamLRaisehand",
+			"GroupId": "",
+			"Name": "左手  举起"
+		},
+		{
+			"Id": "ParamLhandchang",
+			"GroupId": "",
+			"Name": "左手切换"
+		},
+		{
+			"Id": "ParamBreath",
+			"GroupId": "",
+			"Name": "呼吸"
+		},
+		{
+			"Id": "ParamHairFront",
+			"GroupId": "",
+			"Name": "摇动　前发"
+		},
+		{
+			"Id": "ParamHairSide",
+			"GroupId": "",
+			"Name": "摇动　侧发"
+		},
+		{
+			"Id": "ParamHairBack",
+			"GroupId": "",
+			"Name": "摇动　后发"
+		},
+		{
+			"Id": "Param2",
+			"GroupId": "",
+			"Name": "左蝴蝶结"
+		},
+		{
+			"Id": "Param3",
+			"GroupId": "",
+			"Name": "右蝴蝶结"
+		},
+		{
+			"Id": "Param6",
+			"GroupId": "",
+			"Name": "裙摆1"
+		},
+		{
+			"Id": "Param7",
+			"GroupId": "",
+			"Name": "裙摆2"
+		},
+		{
+			"Id": "Param8",
+			"GroupId": "",
+			"Name": "裙摆3"
+		},
+		{
+			"Id": "Param15",
+			"GroupId": "",
+			"Name": "流苏"
+		}
+	],
+	"ParameterGroups": [],
+	"Parts": [
+		{
+			"Id": "Part54",
+			"Name": "举手前"
+		},
+		{
+			"Id": "Part11",
+			"Name": "头部"
+		},
+		{
+			"Id": "Part30",
+			"Name": "蝴蝶结"
+		},
+		{
+			"Id": "Part31",
+			"Name": "裙摆-前"
+		},
+		{
+			"Id": "Part32",
+			"Name": "上身"
+		},
+		{
+			"Id": "Part33",
+			"Name": "左举手-后"
+		},
+		{
+			"Id": "Part34",
+			"Name": "左手"
+		},
+		{
+			"Id": "Part41",
+			"Name": "右手"
+		},
+		{
+			"Id": "Part51",
+			"Name": "双腿"
+		},
+		{
+			"Id": "Part52",
+			"Name": "裙摆-后"
+		},
+		{
+			"Id": "Part53",
+			"Name": "后头发"
+		},
+		{
+			"Id": "Part2",
+			"Name": "手"
+		},
+		{
+			"Id": "Part10",
+			"Name": "左前臂"
+		},
+		{
+			"Id": "Part12",
+			"Name": "发饰"
+		},
+		{
+			"Id": "Part13",
+			"Name": "刘海"
+		},
+		{
+			"Id": "Part14",
+			"Name": "脸"
+		},
+		{
+			"Id": "Part35",
+			"Name": "握拳手手-左手"
+		},
+		{
+			"Id": "Part42",
+			"Name": "手环-前"
+		},
+		{
+			"Id": "Part43",
+			"Name": "握拳手手-右手"
+		},
+		{
+			"Id": "Part50",
+			"Name": "手环-后"
+		},
+		{
+			"Id": "Part3",
+			"Name": "尾指"
+		},
+		{
+			"Id": "Part4",
+			"Name": "无名指"
+		},
+		{
+			"Id": "Part5",
+			"Name": "手套"
+		},
+		{
+			"Id": "Part6",
+			"Name": "中指"
+		},
+		{
+			"Id": "Part7",
+			"Name": "食指"
+		},
+		{
+			"Id": "Part8",
+			"Name": "手掌"
+		},
+		{
+			"Id": "Part9",
+			"Name": "拇指"
+		},
+		{
+			"Id": "Part15",
+			"Name": "正常表情"
+		},
+		{
+			"Id": "Part29",
+			"Name": "脸"
+		},
+		{
+			"Id": "Part36",
+			"Name": "食指"
+		},
+		{
+			"Id": "Part37",
+			"Name": "拇指"
+		},
+		{
+			"Id": "Part38",
+			"Name": "中指"
+		},
+		{
+			"Id": "Part39",
+			"Name": "无名指"
+		},
+		{
+			"Id": "Part40",
+			"Name": "尾指"
+		},
+		{
+			"Id": "Part44",
+			"Name": "食指"
+		},
+		{
+			"Id": "Part45",
+			"Name": "拇指"
+		},
+		{
+			"Id": "Part47",
+			"Name": "中指"
+		},
+		{
+			"Id": "Part48",
+			"Name": "无名指"
+		},
+		{
+			"Id": "Part49",
+			"Name": "尾指"
+		},
+		{
+			"Id": "Part16",
+			"Name": "左眼"
+		},
+		{
+			"Id": "Part19",
+			"Name": "右眼"
+		},
+		{
+			"Id": "Part17",
+			"Name": "睫毛"
+		},
+		{
+			"Id": "Part18",
+			"Name": "眼珠"
+		},
+		{
+			"Id": "Part20",
+			"Name": "眼睫毛"
+		},
+		{
+			"Id": "Part21",
+			"Name": "眼珠"
+		}
+	]
+}
