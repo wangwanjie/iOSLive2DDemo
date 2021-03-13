@@ -13,6 +13,8 @@
 @property (nonatomic, strong) dispatch_queue_t renderQueue;
 /// 展示 live2d 的 View
 @property (nonatomic, strong) KGMetalLive2DView *live2DView;
+/// 展示 live2d 的 View
+@property (nonatomic, strong) KGMetalLive2DView *live2DView2;
 /// 是否已经加载资源
 @property (nonatomic, assign) BOOL hasLoadResource;
 @end
@@ -30,9 +32,13 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 
+    self.title = @"Live2D Metal Render";
+
     [self.view addSubview:self.live2DView];
+    [self.view addSubview:self.live2DView2];
 
     self.live2DView.preferredFramesPerSecond = 30;
+    self.live2DView2.preferredFramesPerSecond = 30;
 }
 
 - (void)viewDidDisappear:(BOOL)animated {
@@ -40,6 +46,10 @@
 
     if (!self.live2DView.paused) {
         self.live2DView.paused = YES;
+    }
+
+    if (!self.live2DView2.paused) {
+        self.live2DView2.paused = YES;
     }
 }
 
@@ -49,6 +59,9 @@
     if (self.live2DView.paused) {
         self.live2DView.paused = NO;
     }
+    if (self.live2DView2.paused) {
+        self.live2DView2.paused = NO;
+    }
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -57,12 +70,14 @@
     if (self.live2DView.paused) {
         self.live2DView.paused = NO;
     }
+    if (self.live2DView2.paused) {
+        self.live2DView2.paused = NO;
+    }
 }
 
 - (void)dealloc {
 
     self.live2DView.delegate = nil;
-    [self.live2DView handleDealloc];
 
     [NSNotificationCenter.defaultCenter removeObserver:self];
 }
@@ -70,16 +85,12 @@
 - (void)viewDidLayoutSubviews {
     [super viewDidLayoutSubviews];
 
-    CGRect frame = {};
-    frame.origin.x = 0;
-    frame.origin.y = self.view.frame.size.height * (175.0 / 812.0);
-    frame.size.width = self.view.frame.size.width;
-    frame.size.height = self.view.frame.size.height * (482.0 / 812.0);
-    self.live2DView.frame = frame;
+    self.live2DView.frame = CGRectMake(0, 0, CGRectGetWidth(self.view.frame), CGRectGetHeight(self.view.frame) * 0.5);
+    self.live2DView2.frame = CGRectMake(0, CGRectGetMaxY(self.live2DView.frame), CGRectGetWidth(self.view.frame), CGRectGetHeight(self.view.frame) * 0.5);
 
     if (!self.hasLoadResource) {
-        NSString *path = [[NSBundle mainBundle] pathForResource:@"Live2DResources/Mark/Mark.model3" ofType:@"json"];
-        [self.live2DView loadLive2DResourcesWithPath:path];
+        [self.live2DView loadLive2DWithJsonDir:@"Live2DResources/Mark/" mocJsonName:@"Mark.model3.json"];
+        [self.live2DView2 loadLive2DWithJsonDir:@"Live2DResources/Shanbao/" mocJsonName:@"Shanbao.model3.json"];
         self.hasLoadResource = YES;
     }
 }
@@ -88,11 +99,20 @@
 - (void)rendererUpdateWithRender:(MetalRender *)renderer duration:(NSTimeInterval)duration {
 }
 
+#pragma mark - lazy load
 - (KGMetalLive2DView *)live2DView {
     if (!_live2DView) {
         _live2DView = [[KGMetalLive2DView alloc] init];
         _live2DView.delegate = self;
     }
     return _live2DView;
+}
+
+- (KGMetalLive2DView *)live2DView2 {
+    if (!_live2DView2) {
+        _live2DView2 = [[KGMetalLive2DView alloc] init];
+        _live2DView2.delegate = self;
+    }
+    return _live2DView2;
 }
 @end

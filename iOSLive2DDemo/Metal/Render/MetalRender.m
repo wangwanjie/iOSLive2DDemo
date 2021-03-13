@@ -43,7 +43,7 @@
     if (!device) {
         return;
     }
-    L2DModel *model = self.model;
+    L2DUserModel *model = self.model;
     if (!model) {
         return;
     }
@@ -132,7 +132,7 @@
     if (!device) {
         return;
     }
-    L2DModel *model = self.model;
+    L2DUserModel *model = self.model;
     if (!model) {
         return;
     }
@@ -272,7 +272,7 @@
 
 /// Update drawables with dynamics flag.
 - (void)updateDrawables {
-    L2DModel *model = self.model;
+    L2DUserModel *model = self.model;
     if (!model) {
         return;
     }
@@ -441,7 +441,7 @@
     _clearColor = clearColor;
 }
 
-- (void)setModel:(L2DModel *)model {
+- (void)setModel:(L2DUserModel *)model {
     _model = model;
 
     if (self.view && model) {

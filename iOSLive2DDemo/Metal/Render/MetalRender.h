@@ -6,7 +6,7 @@
 //
 
 #include "L2DBufferIndex.h"
-#import "L2DModel.h"
+#import "L2DUserModel.h"
 #import "MetalDrawable.h"
 #import <Metal/Metal.h>
 #import <MetalKit/MetalKit.h>
@@ -29,7 +29,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface MetalRender : NSObject
 @property (nonatomic, weak) id<MetalRenderDelegate> delegate;
-@property (nonatomic, strong) L2DModel *model;
+@property (nonatomic, strong) L2DUserModel *model;
 
 /// Model rendering origin, in normalized device coordinate (NDC).
 ///

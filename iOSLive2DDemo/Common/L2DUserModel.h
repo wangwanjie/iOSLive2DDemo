@@ -1,5 +1,5 @@
 //
-//  L2DModel.h
+//  L2DUserModel.h
 //  iOSLive2DDemo
 //
 //  Created by VanJay on 2020/12/19.
@@ -12,15 +12,27 @@
 #import "SBProductioEmotionExpression.h"
 
 /// Live2D 模型
-@interface L2DModel : NSObject
+@interface L2DUserModel : NSObject
 
-- (instancetype)initWithJsonPath:(NSString *)jsonPath;
+- (instancetype)initWithJsonDir:(NSString *)dirName mocJsonName:(NSString *)mocJsonName;
 
 /// 执行表情
 - (void)performExpression:(SBProductioEmotionExpression *)expression;
 
 /// 执行 id 动作
 - (void)setModelParameterNamed:(NSString *)name value:(float)value;
+
+/// 执行表情
+- (void)performExpressionWithExpressionID:(NSString *)expressionID;
+
+/// 执行动作
+/// @param groupName 动作组名
+/// @param index 动作 id
+/// @param priority 优先级
+- (void)performMotion:(NSString *)groupName index:(NSUInteger)index priority:(L2DPriority)priority;
+
+/// 随机显示表情
+- (void)performRandomExpression;
 
 /// 执行 id 动作
 /// @param name 动作 id
@@ -67,16 +79,6 @@
 // Visibility.
 - (bool)visibilityForDrawable:(int)index;
 - (bool)isVisibilityDidChangedForDrawable:(int)index;
-
-- (void)handleDealloc;
-
-// TODO: Invert mask.
-
-// TODO: Live2D parts.
-
-@end
-
-@interface L2DModel (UpdateAndPhysics)
 
 - (void)update;
 

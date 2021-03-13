@@ -20,8 +20,9 @@ typedef NS_ENUM(NSUInteger, KGMetalLive2DViewStatus) {
 @interface KGMetalLive2DView : UIView
 
 /// 加载资源 json
-/// @param path model3 文件路径
-- (void)loadLive2DResourcesWithPath:(NSString *)path;
+/// @param dirName model3 文件夹路径
+/// @param mocJsonName model3 名称
+- (void)loadLive2DWithJsonDir:(NSString *)dirName mocJsonName:(NSString *)mocJsonName;
 - (void)performExpression:(SBProductioEmotionExpression *)expression;
 - (void)setParameterNamed:(NSString *)name value:(float)value;
 - (void)setParameterNamed:(NSString *)name blendMode:(L2DBlendMode)blendMode value:(float)value;
@@ -31,8 +32,6 @@ typedef NS_ENUM(NSUInteger, KGMetalLive2DViewStatus) {
 - (void)setPartOpacityNamed:(NSString *)name value:(float)value;
 - (float)valueForPartOpacityNamed:(NSString *)name;
 - (void)setPartOpacityWithDictionary:(NSDictionary<NSString *, NSNumber *> *)parts;
-
-- (void)handleDealloc;
 
 @property (nonatomic, assign) NSInteger preferredFramesPerSecond;
 @property (nonatomic, assign) BOOL paused;

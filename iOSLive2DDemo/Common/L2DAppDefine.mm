@@ -24,48 +24,38 @@ namespace L2DAppDefine {
     const csmFloat32 ViewLogicalMaxBottom = -2.0f;
     const csmFloat32 ViewLogicalMaxTop = 2.0f;
 
-    // 相対パス
-    const csmChar* ResourcesPath = "Res/";
-
-    // モデルの後ろにある背景の画像ファイル
-    const csmChar* BackImageName = "back_class_normal.png";
-    // 歯車
-    const csmChar* GearImageName = "icon_gear.png";
-    // 終了ボタン
-    const csmChar* PowerImageName = "close.png";
-
-    // モデル定義------------------------------------------
-    // モデルを配置したディレクトリ名の配列
-    // ディレクトリ名とmodel3.jsonの名前を一致させておくこと
+    // 模型定义------------------------------------------
+    // 放置模型的目录名称数组
+    // 将目录名称与model3.json的名称匹配
     const csmChar* ModelDir[] = {
+        "Shanbao",
         "Haru",
         "Hiyori",
         "Mark",
         "Natori",
         "Rice",
-        "Shanbao",
         "hiyori_pro"
     };
     const csmInt32 ModelDirSize = sizeof(ModelDir) / sizeof(const csmChar*);
 
-    // 外部定義ファイル(json)と合わせる
-    const csmChar* MotionGroupIdle = "Idle"; // アイドリング
-    const csmChar* MotionGroupTapBody = "TapBody"; // 体をタップしたとき
+    // 与外部定义文件（json）结合
+    const csmChar* MotionGroupIdle = "Idle"; // 待机
+    const csmChar* MotionGroupTapBody = "TapBody"; // 当您轻拍身体
 
-    // 外部定義ファイル(json)と合わせる
+    // 与外部定义文件（json）结合
     const csmChar* HitAreaNameHead = "Head";
     const csmChar* HitAreaNameBody = "Body";
 
-    // モーションの優先度定数
+    // 运动优先级常数
     const csmInt32 PriorityNone = 0;
     const csmInt32 PriorityIdle = 1;
     const csmInt32 PriorityNormal = 2;
     const csmInt32 PriorityForce = 3;
 
-    // デバッグ用ログの表示オプション
+    // 调试日志显示选项
     const csmBool DebugLogEnable = true;
     const csmBool DebugTouchLogEnable = false;
 
-    // Frameworkから出力するログのレベル設定
+    // 框架的日志级别设置输出
     const CubismFramework::Option::LogLevel CubismLoggingLevel = CubismFramework::Option::LogLevel_Verbose;
 }

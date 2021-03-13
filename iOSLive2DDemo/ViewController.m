@@ -18,6 +18,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 
+    self.title = @"Live2D Demo";
+
     self.view.backgroundColor = UIColor.whiteColor;
 
     UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];

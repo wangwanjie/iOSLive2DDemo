@@ -6,14 +6,14 @@
 //
 
 #import "KGMetalLive2DView.h"
-#import "L2DModel.h"
+#import "L2DUserModel.h"
 #import "MetalRender.h"
 #import "UIColor+Live2D.h"
 #import <Metal/Metal.h>
 #import <MetalKit/MetalKit.h>
 
 @interface KGMetalLive2DView () <MTKViewDelegate>
-@property (nonatomic, strong) L2DModel *model;
+@property (nonatomic, strong) L2DUserModel *model;
 @property (nonatomic, strong) MetalRender *renderer;
 @property (nonatomic, strong) MTKView *mtkView;
 @property (nonatomic, assign) MTLViewport viewPort;
@@ -58,11 +58,18 @@
 }
 
 - (void)dealloc {
+
     NSLog(@"KGLiv2DView dealloc - %p", self);
 
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
-
     [self stopMetalRender];
+
+    [self removeRenderer:self.renderer];
+
+    [self.mtkView releaseDrawables];
+    self.mtkView.delegate = nil;
+    self.mtkView = nil;
+
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 #pragma mark - Notification
@@ -132,12 +139,12 @@
 }
 
 #pragma mark - public methods
-- (void)loadLive2DResourcesWithPath:(NSString *)path {
-    if (!path) {
+- (void)loadLive2DWithJsonDir:(NSString *)dirName mocJsonName:(NSString *)mocJsonName {
+    if (!dirName || !mocJsonName) {
         NSLog(@"资源路径不存在");
         return;
     }
-    self.model = [[L2DModel alloc] initWithJsonPath:path];
+    self.model = [[L2DUserModel alloc] initWithJsonDir:dirName mocJsonName:mocJsonName];
     if (_renderer) {
         [self removeRenderer:self.renderer];
         self.renderer = nil;
@@ -195,16 +202,6 @@
 
 - (CGSize)canvasSize {
     return self.model.modelSize;
-}
-
-- (void)handleDealloc {
-    [self removeRenderer:self.renderer];
-
-    [self.mtkView releaseDrawables];
-    self.mtkView.delegate = nil;
-    self.mtkView = nil;
-
-    [self.model handleDealloc];
 }
 
 #pragma mark - private methods
