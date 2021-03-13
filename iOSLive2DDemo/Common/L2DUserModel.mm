@@ -279,7 +279,7 @@ using namespace Live2D::Cubism::Framework::DefaultParameterId;
         path = _modelHomeDir + path;
     }
 
-    NSLog(@"%p --- 执行 motion: [%s_%d]", self, group, no);
+    // NSLog(@"%p --- 执行 motion: [%s_%d]", self, group, no);
 
     return _model->_motionManager->StartMotionPriority(motion, autoDelete, priority);
 }
@@ -309,6 +309,37 @@ using namespace Live2D::Cubism::Framework::DefaultParameterId;
         }
         i++;
     }
+}
+
+- (BOOL)hitTest:(const char *)hitAreaName x:(float)x y:(float)y {
+    // 透明时没有碰撞检测
+    if (_model->_opacity < 1) {
+        return false;
+    }
+    const csmInt32 count = _modelSetting->GetHitAreasCount();
+    for (csmInt32 i = 0; i < count; i++) {
+        if (strcmp(_modelSetting->GetHitAreaName(i), hitAreaName) == 0) {
+            const CubismIdHandle drawID = _modelSetting->GetHitAreaId(i);
+            return _model->IsHit(drawID, x, y);
+        }
+    }
+    return false;  // 如果不存在则为 false
+}
+
+- (void)onDrag:(float)x floatY:(float)y {
+    _model->SetDragging(x, y);
+}
+
+- (void)onTap:(float)x floatY:(float)y {
+    if ([self hitTest:L2DAppDefine::HitAreaNameHead x:x y:y]) {
+        [self performRandomExpression];
+    } else if ([self hitTest:L2DAppDefine::HitAreaNameBody x:x y:y]) {
+        [self startRandomMotion:L2DAppDefine::HitAreaNameBody priority:L2DPriorityNormal onFinishedMotionHandler:FinishedMotion];
+    }
+}
+
+static void FinishedMotion(Csm::ACubismMotion *self) {
+    NSLog(@"Motion 执行结束");
 }
 
 - (void)performExpression:(SBProductioEmotionExpression *)expression {

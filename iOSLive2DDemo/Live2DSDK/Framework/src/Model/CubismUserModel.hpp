@@ -286,6 +286,7 @@ public:
     CubismPose*             _pose;                      ///< ポーズ管理
     csmFloat32  _dragX;                                 ///< マウスドラッグのX位置
     csmFloat32  _dragY;                                 ///< マウスドラッグのY位置
+    csmFloat32  _opacity;                               ///< 不透明度
 protected:
     CubismMoc*              _moc;                       ///< Mocデータ
     CubismModelUserData*    _modelUserData;             ///< ユーザデータ
@@ -294,7 +295,6 @@ protected:
 
     csmBool     _initialized;                   ///< 初期化されたかどうか
     csmBool     _updating;                      ///< 更新されたかどうか
-    csmFloat32  _opacity;                       ///< 不透明度
     csmFloat32  _lastLipSyncValue;              ///< 最後のリップシンクの制御値
     csmFloat32  _accelerationX;                 ///< X軸方向の加速度
     csmFloat32  _accelerationY;                 ///< Y軸方向の加速度

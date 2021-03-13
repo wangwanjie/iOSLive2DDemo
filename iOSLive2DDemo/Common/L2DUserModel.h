@@ -84,4 +84,30 @@
 
 - (void)updatePhysics:(NSTimeInterval)dt;
 
+/**
+ * @brief   画面をドラッグしたときの処理
+ *
+ * @param[in]   x   画面のX座標
+ * @param[in]   y   画面のY座標
+ */
+- (void)onDrag:(float)x floatY:(float)y;
+
+/**
+ * @brief   画面をタップしたときの処理
+ *
+ * @param[in]   x   画面のX座標
+ * @param[in]   y   画面のY座標
+ */
+- (void)onTap:(float)x floatY:(float)y;
+
+/**
+ * @brief    当たり判定テスト。<br>
+ *            指定IDの頂点リストから矩形を計算し、座標が矩形範囲内か判定する。
+ *
+ * @param[in]   hitAreaName     当たり判定をテストする対象のID
+ * @param[in]   x               判定を行うX座標
+ * @param[in]   y               判定を行うY座標
+ */
+- (BOOL)hitTest:(const char *)hitAreaName x:(float)x y:(float)y;
+
 @end
