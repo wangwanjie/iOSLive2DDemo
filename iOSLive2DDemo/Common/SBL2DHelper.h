@@ -9,9 +9,9 @@
 #import <CubismFramework.hpp>
 #import <string>
 
-using namespace Live2D::Cubism::Framework;
-
 NS_ASSUME_NONNULL_BEGIN
+
+using namespace Live2D::Cubism::Framework;
 
 extern void PrintLog(const csmChar *format, ...);
 

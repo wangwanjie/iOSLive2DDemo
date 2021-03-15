@@ -29,6 +29,9 @@ NS_ASSUME_NONNULL_BEGIN
 @property (strong, nonatomic) GLKBaseEffect *baseEffect;
 /// rect
 @property (nonatomic, assign) CGRect renderRect;
+
+// 默认 1.0
+@property (nonatomic, assign) CGFloat scale;
 /// テクスチャID
 @property (nonatomic, readonly) GLuint textureId;
 /// 前景色

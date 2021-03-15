@@ -5,8 +5,7 @@
 //  Created by VanJay on 2020/12/19.
 //
 
-#import "L2DUserModel.h"
-#import <Foundation/Foundation.h>
+#import "L2DModelDefine.h"
 #import <Metal/Metal.h>
 #import <MetalKit/MetalKit.h>
 #import <UIKit/UIKit.h>

@@ -6,10 +6,12 @@
 //
 
 #import "RawArray.h"
-#import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 #import "SBProductioEmotionExpression.h"
 #import "L2DModelActionProtocol.h"
+
+#import <CubismFramework.hpp>
+#import <Math/CubismMatrix44.hpp>
 
 @class L2DTextureManager;
 
@@ -58,10 +60,11 @@
 
 - (void)update;
 
-- (void)updatePhysics:(NSTimeInterval)dt;
+- (void)updateWithDeltaTime:(NSTimeInterval)dt;
 
 /// 如果使用 OpenGLES 渲染需要
 - (void)drawModel;
+- (void)drawModelWithMatrix:(Csm::CubismMatrix44 *)matrix;
 
 /**
  * @brief   画面をドラッグしたときの処理

@@ -8,6 +8,8 @@
 #ifndef L2DBufferIndex_h
 #define L2DBufferIndex_h
 
+#import <Foundation/Foundation.h>
+
 /// Shader buffer index.
 typedef enum L2DBufferIndex {
     L2DBufferIndexTransform = 0,

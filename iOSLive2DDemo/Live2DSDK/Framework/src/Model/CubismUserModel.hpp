@@ -288,10 +288,10 @@ public:
     csmFloat32  _dragY;                                 ///< マウスドラッグのY位置
     csmFloat32  _opacity;                               ///< 不透明度
     Rendering::CubismRenderer* _renderer;               ///< レンダラ
+    CubismModelMatrix*      _modelMatrix;               ///< モデル行列
 protected:
     CubismMoc*              _moc;                       ///< Mocデータ
     CubismModelUserData*    _modelUserData;             ///< ユーザデータ
-    CubismModelMatrix*      _modelMatrix;               ///< モデル行列
     CubismModel*            _model;                     ///< Modelインスタンス
 
     csmBool     _initialized;                   ///< 初期化されたかどうか

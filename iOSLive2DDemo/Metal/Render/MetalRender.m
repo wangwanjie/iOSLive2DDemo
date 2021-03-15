@@ -528,7 +528,7 @@
     if (self.delegate && [self.delegate respondsToSelector:@selector(rendererUpdateWithRender:duration:)]) {
         [self.delegate rendererUpdateWithRender:self duration:time];
     }
-    [self.model updatePhysics:time];
+    [self.model updateWithDeltaTime:time];
     [self.model update];
     [self updateDrawables];
 }

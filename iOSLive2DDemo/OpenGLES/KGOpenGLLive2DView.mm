@@ -260,7 +260,7 @@ EAGLContext *CreateBestEAGLContext() {
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
     NSTimeInterval time = 1.0 / (NSTimeInterval)(self.displayLink.preferredFramesPerSecond);
-    [self.model updatePhysics:time];
+    [self.model updateWithDeltaTime:time];
     [self.model update];
     [self.model drawModel];
 

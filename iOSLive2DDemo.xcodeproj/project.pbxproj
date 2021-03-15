@@ -860,9 +860,9 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = AUM2E6FK73;
 				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
 					"\"${SRCROOT}/iOSLive2DDemo/Live2DSDK/Core/include\"",
 					"\"${SRCROOT}/iOSLive2DDemo/Live2DSDK/Framework/src\"",
-					"$(inherited)",
 				);
 				INFOPLIST_FILE = iOSLive2DDemo/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
@@ -895,9 +895,9 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = AUM2E6FK73;
 				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
 					"\"${SRCROOT}/iOSLive2DDemo/Live2DSDK/Core/include\"",
 					"\"${SRCROOT}/iOSLive2DDemo/Live2DSDK/Framework/src\"",
-					"$(inherited)",
 				);
 				INFOPLIST_FILE = iOSLive2DDemo/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;

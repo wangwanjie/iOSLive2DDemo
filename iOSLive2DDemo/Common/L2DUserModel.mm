@@ -44,8 +44,8 @@ using namespace Live2D::Cubism::Framework::DefaultParameterId;
     const Csm::CubismId *_idParamEyeBallY;                           ///< 参数ID: ParamEyeBallXY
 }
 
-@property (nonatomic, assign, readonly, getter=userModel) CubismUserModel *userModel;
-@property (nonatomic, assign, readonly, getter=cubismModel) CubismModel *cubismModel;
+@property (nonatomic, assign, readonly) CubismUserModel *userModel;
+@property (nonatomic, assign, readonly) CubismModel *cubismModel;
 
 @end
 
@@ -606,7 +606,19 @@ static void FinishedMotion(Csm::ACubismMotion *self) {
     _model->GetRenderer<Rendering::CubismRenderer_OpenGLES2>()->DrawModel();
 }
 
-- (void)updatePhysics:(NSTimeInterval)dt {
+- (void)drawModelWithMatrix:(Csm::CubismMatrix44 *)matrix {
+    if (_model == NULL) {
+        return;
+    }
+
+    matrix->MultiplyByMatrix(_model->_modelMatrix);
+
+    _model->GetRenderer<Rendering::CubismRenderer_OpenGLES2>()->SetMvpMatrix(matrix);
+
+    [self drawModel];
+}
+
+- (void)updateWithDeltaTime:(NSTimeInterval)dt {
 
     const csmFloat32 deltaTimeSeconds = dt;
     _userTimeSeconds += deltaTimeSeconds;

@@ -56,8 +56,10 @@ typedef struct {
     self.baseEffect.useConstantColor = GL_TRUE;
 
     self.baseEffect.texture2d0.enabled = GL_TRUE;
-    
+
     self.textureId = 0;
+    
+    self.scale = 1.0;
 }
 
 - (void)setModel:(L2DUserModel *)model {
@@ -111,8 +113,19 @@ typedef struct {
     if (self.delegate && [self.delegate respondsToSelector:@selector(rendererUpdateWithRender:duration:)]) {
         [self.delegate rendererUpdateWithRender:self duration:time];
     }
-    [self.model updatePhysics:time];
+    [self.model updateWithDeltaTime:time];
     [self.model update];
+
+    Csm::CubismMatrix44 projection;
+
+    CGRect renderRect = self.renderRect;
+    int width = renderRect.size.width;
+    int height = renderRect.size.height;
+
+    projection.Scale(1.0f, static_cast<float>(width) / static_cast<float>(height));
+    projection.ScaleRelative(_scale, _scale);
+
+    [self.model drawModelWithMatrix:&projection];
 }
 
 - (void)render:(GLuint)vertexBufferID fragmentBufferID:(GLuint)fragmentBufferID {
