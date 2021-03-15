@@ -8,6 +8,8 @@
 #import <Foundation/Foundation.h>
 #import "L2DUserModel.h"
 #import <GLKit/GLKit.h>
+#import <CubismFramework.hpp>
+#import <Math/CubismMatrix44.hpp>
 
 @class OpenGLRender;
 
@@ -27,12 +29,15 @@ NS_ASSUME_NONNULL_BEGIN
 @property (strong, nonatomic) GLKBaseEffect *baseEffect;
 /// rect
 @property (nonatomic, assign) CGRect renderRect;
-@property (nonatomic, readonly, getter=GetTextureId) GLuint textureId;  // テクスチャID
+/// テクスチャID
+@property (nonatomic, readonly) GLuint textureId;
 /// 前景色
 @property (nonatomic, strong) UIColor *spriteColor;
 
 @property (nonatomic, weak) id<OpenGLRenderDelegate> delegate;
 @property (nonatomic, strong) L2DUserModel *model;
+/// モデル描画に用いるView行列
+@property (nonatomic, assign) Csm::CubismMatrix44 *viewMatrix;
 @end
 
 @interface OpenGLRender (Renderer)
@@ -57,7 +62,7 @@ NS_ASSUME_NONNULL_BEGIN
  * @param[in]     vertexBufferID    フラグメントシェーダID
  * @param[in]     fragmentBufferID  バーテックスシェーダID
  */
-- (void)renderImmidiate:(GLuint)vertexBufferID fragmentBufferID:(GLuint)fragmentBufferID TextureId:(GLuint)textureId uvArray:(float *)uvArray;
+- (void)renderImmidiate:(GLuint)vertexBufferID fragmentBufferID:(GLuint)fragmentBufferID textureId:(GLuint)textureId uvArray:(float *)uvArray;
 
 /**
  * @brief コンストラクタ

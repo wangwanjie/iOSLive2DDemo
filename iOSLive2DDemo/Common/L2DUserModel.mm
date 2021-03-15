@@ -17,6 +17,7 @@
 #import <Utils/CubismString.hpp>
 #import <Motion/CubismMotion.hpp>
 #import "L2DTextureManager.h"
+#import <Rendering/OpenGL/CubismRenderer_OpenGLES2.hpp>
 
 using namespace ::L2DAppDefine;
 using namespace Live2D::Cubism::Core;
@@ -176,6 +177,15 @@ using namespace Live2D::Cubism::Framework::DefaultParameterId;
     }
 
     return self;
+}
+
+- (void)createRenderer {
+    if (_model->_renderer) {
+        _model->DeleteRenderer();
+    }
+    _model->_renderer = Rendering::CubismRenderer::Create();
+
+    _model->_renderer->Initialize(self.cubismModel);
 }
 
 - (void)dealloc {
@@ -430,7 +440,7 @@ static void FinishedMotion(Csm::ACubismMotion *self) {
         csmInt32 glTextueNumber = texture->id;
 
         // OpenGL
-        // _model->GetRenderer<Rendering::CubismRenderer_OpenGLES2>()->BindTexture(modelTextureNumber, glTextueNumber);
+        _model->GetRenderer<Rendering::CubismRenderer_OpenGLES2>()->BindTexture(modelTextureNumber, glTextueNumber);
     }
 }
 
@@ -586,6 +596,14 @@ static void FinishedMotion(Csm::ACubismMotion *self) {
     if (self.expressionManager != NULL) {
         self.expressionManager->UpdateMotion(self.cubismModel, 5.0);  // 使用面部表情进行参数更新（相对变化）
     }
+}
+
+- (void)drawModel {
+    if (_model == NULL) {
+        return;
+    }
+
+    _model->GetRenderer<Rendering::CubismRenderer_OpenGLES2>()->DrawModel();
 }
 
 - (void)updatePhysics:(NSTimeInterval)dt {

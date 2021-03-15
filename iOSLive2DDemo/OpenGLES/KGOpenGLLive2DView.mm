@@ -12,6 +12,10 @@
 #import "L2DUserModel.h"
 #import "OpenGLRender.h"
 #import "UIColor+Live2D.h"
+#import <CubismFramework.hpp>
+#import <Math/CubismViewMatrix.hpp>
+
+using namespace Live2D::Cubism::Framework;
 
 @interface KGOpenGLLive2DView () <GLKViewDelegate>
 @property (nonatomic, strong) GLKBaseEffect *baseEffect;
@@ -30,6 +34,8 @@
 @property (nonatomic, assign) float clearColorG;
 @property (nonatomic, assign) float clearColorB;
 @property (nonatomic, assign) float clearColorA;
+/// モデル描画に用いるView行列
+@property (nonatomic, assign) Csm::CubismMatrix44 *viewMatrix;
 @end
 
 @implementation KGOpenGLLive2DView
@@ -53,6 +59,9 @@ EAGLContext *CreateBestEAGLContext() {
     [self addSubview:_contentView];
 
     [EAGLContext setCurrentContext:_contentView.context];
+
+    // 画面の表示の拡大縮小や移動の変換を行う行列
+    _viewMatrix = new CubismViewMatrix();
 
     self.backgroundColor = UIColor.clearColor;
 
@@ -103,18 +112,16 @@ EAGLContext *CreateBestEAGLContext() {
         return;
     }
     self.model = [[L2DUserModel alloc] initWithJsonDir:dirName mocJsonName:mocJsonName];
+    [self.model createRenderer];
 
     if (_renderer) {
-        // [self removeRenderer:self.renderer];
         self.renderer = nil;
     }
     self.renderer.model = self.model;
-
+    self.renderer.viewMatrix = _viewMatrix;
     self.renderer.spriteColor = self.spriteColor;
 
     [self.renderer startWithView:self.contentView];
-
-    //  [self addRenderer:self.renderer];
 }
 
 #pragma mark - setter
@@ -123,8 +130,6 @@ EAGLContext *CreateBestEAGLContext() {
     [super setFrame:frame];
 
     self.contentView.frame = self.bounds;
-
-    // [self updateMTKViewPort];
 }
 
 - (void)setBackgroundColor:(UIColor *)backgroundColor {
@@ -178,38 +183,34 @@ EAGLContext *CreateBestEAGLContext() {
     glClearColor(_clearColorR, _clearColorG, _clearColorB, _clearColorA);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-    CGFloat modelWidth = self.canvasSize.width;
-    CGFloat modelHeight = self.canvasSize.height;
-
     NSTimeInterval time = 1.0 / (NSTimeInterval)(self.displayLink.preferredFramesPerSecond);
     [self.model updatePhysics:time];
     [self.model update];
+    [self.model drawModel];
 
     // 各モデルが持つ描画ターゲットをテクスチャとする場合はスプライトへの描画はここ
-    // if (_renderTarget == SelectTarget_ModelFrameBuffer) {
-    float uvVertex[] =
-        {
-            0.0f,
-            0.0f,
-            1.0f,
-            0.0f,
-            0.0f,
-            1.0f,
-            1.0f,
-            1.0f,
-    };
+    if (_renderTarget == SelectTarget_ModelFrameBuffer && _renderer) {
+        float uvVertex[] =
+            {
+                0.0f,
+                0.0f,
+                1.0f,
+                0.0f,
+                0.0f,
+                1.0f,
+                1.0f,
+                1.0f,
+        };
+        // サンプルとしてαに適当な差をつける
+        float a = [self GetSpriteAlpha:0];
 
-    float a = [self GetSpriteAlpha:0];  // サンプルとしてαに適当な差をつける
-
-    L2DUserModel *model = self.model;
-    if (model) {
-        [model performExpression:nil];
-        // model->SetExpression("");
-        // Csm::Rendering::CubismOffscreenFrame_OpenGLES2 &useTarget = model.renderBuffer;
-        // GLuint id = useTarget.GetColorBuffer();
-        [_renderer renderImmidiate:_vertexBufferId fragmentBufferID:_fragmentBufferId TextureId:self.renderer.textureId uvArray:uvVertex];
+        L2DUserModel *model = self.model;
+        if (model) {
+            [model performExpression:nil];
+            self.renderer.spriteColor = [UIColor colorWithRed:1 green:1 blue:1 alpha:a];
+            [_renderer renderImmidiate:_vertexBufferId fragmentBufferID:_fragmentBufferId textureId:self.renderer.textureId uvArray:uvVertex];
+        }
     }
-    //    }
 }
 
 - (float)GetSpriteAlpha:(int)assign {

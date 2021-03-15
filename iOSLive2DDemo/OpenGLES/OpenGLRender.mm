@@ -56,6 +56,8 @@ typedef struct {
     self.baseEffect.useConstantColor = GL_TRUE;
 
     self.baseEffect.texture2d0.enabled = GL_TRUE;
+    
+    self.textureId = 0;
 }
 
 - (void)setModel:(L2DUserModel *)model {
@@ -115,7 +117,6 @@ typedef struct {
     }
     [self.model updatePhysics:time];
     [self.model update];
-    // [self updateDrawables];
 }
 
 - (void)render:(GLuint)vertexBufferID fragmentBufferID:(GLuint)fragmentBufferID {
@@ -176,7 +177,7 @@ typedef struct {
     glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
 }
 
-- (void)renderImmidiate:(GLuint)vertexBufferID fragmentBufferID:(GLuint)fragmentBufferID TextureId:(GLuint)textureId uvArray:(float *)uvArray {
+- (void)renderImmidiate:(GLuint)vertexBufferID fragmentBufferID:(GLuint)fragmentBufferID textureId:(GLuint)textureId uvArray:(float *)uvArray {
     // 描画画像変更
     self.baseEffect.texture2d0.name = textureId;
 

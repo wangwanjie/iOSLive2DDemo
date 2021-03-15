@@ -287,6 +287,7 @@ public:
     csmFloat32  _dragX;                                 ///< マウスドラッグのX位置
     csmFloat32  _dragY;                                 ///< マウスドラッグのY位置
     csmFloat32  _opacity;                               ///< 不透明度
+    Rendering::CubismRenderer* _renderer;               ///< レンダラ
 protected:
     CubismMoc*              _moc;                       ///< Mocデータ
     CubismModelUserData*    _modelUserData;             ///< ユーザデータ
@@ -302,7 +303,6 @@ protected:
     csmBool     _debugMode;                     ///< デバッグモードかどうか
 
 private:
-    Rendering::CubismRenderer* _renderer;       ///< レンダラ
 };
 
 }}}

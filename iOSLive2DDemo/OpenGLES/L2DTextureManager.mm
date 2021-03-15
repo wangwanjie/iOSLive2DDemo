@@ -44,8 +44,6 @@
     textureInfo->id = info.name;
     _textures.PushBack(textureInfo);
 
-    // TextureInfo *textureInfo = [self gerTextureInfoWithFileName:str];
-
     return textureInfo;
 }
 

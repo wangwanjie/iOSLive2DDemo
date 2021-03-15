@@ -1,4 +1,4 @@
-﻿/**
+/**
  * Copyright(c) Live2D Inc. All rights reserved.
  *
  * Use of this source code is governed by the Live2D Open Software license
@@ -12,6 +12,10 @@
  *          Live2D Cubism Coreライブラリを"Live2D::Cubism::Core"名前空間に内包するようにインクルードするヘッダ<br>
  *
  */
-namespace Live2D { namespace Cubism { namespace Core {
-#include "Live2DCubismCore.h"
-}}}
+namespace Live2D {
+    namespace Cubism {
+        namespace Core {
+            #include "Live2DCubismCore.h"
+        }
+    }
+}

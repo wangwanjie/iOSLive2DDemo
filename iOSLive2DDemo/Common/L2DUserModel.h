@@ -17,6 +17,9 @@
 
 - (instancetype)initWithJsonDir:(NSString *)dirName mocJsonName:(NSString *)mocJsonName;
 
+/// 如果使用 OpenGLES 渲染需要
+- (void)createRenderer;
+
 /// 执行表情
 - (void)performExpression:(SBProductioEmotionExpression *)expression;
 
@@ -62,6 +65,7 @@
 - (bool)isVertexPositionDidChangedForDrawable:(int)index;
 
 // Textures.
+/// 如果使用 OpenGLES 渲染需要
 - (void)setupTexturesWithTextureManager:(L2DTextureManager *)textureManager;
 - (NSArray<NSURL *> *)textureURLs;
 - (int)textureIndexForDrawable:(int)index;
@@ -85,6 +89,9 @@
 - (void)update;
 
 - (void)updatePhysics:(NSTimeInterval)dt;
+
+/// 如果使用 OpenGLES 渲染需要
+- (void)drawModel;
 
 /**
  * @brief   画面をドラッグしたときの処理
