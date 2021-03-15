@@ -6,10 +6,8 @@
 //
 
 #import "KGOpenGLLive2DView.h"
-#import <QuartzCore/QuartzCore.h>
-#import <OpenGLES/EAGL.h>
-#import <OpenGLES/ES1/gl.h>
-#import <OpenGLES/ES1/glext.h>
+#import <OpenGLES/ES3/gl.h>
+#import <OpenGLES/ES3/glext.h>
 #import <GLKit/GLKit.h>
 #import "L2DUserModel.h"
 #import "OpenGLRender.h"
@@ -28,7 +26,10 @@
 /// render
 @property (nonatomic, strong) OpenGLRender *renderer;
 /// 背景色
-@property (nonatomic, assign) GLKVector4 clearColor;
+@property (nonatomic, assign) float clearColorR;
+@property (nonatomic, assign) float clearColorG;
+@property (nonatomic, assign) float clearColorB;
+@property (nonatomic, assign) float clearColorA;
 @end
 
 @implementation KGOpenGLLive2DView
@@ -55,7 +56,7 @@ EAGLContext *CreateBestEAGLContext() {
 
     self.backgroundColor = UIColor.clearColor;
 
-    glClearColor(_clearColor.r, _clearColor.g, _clearColor.b, _clearColor.a);
+    glClearColor(_clearColorR, _clearColorG, _clearColorB, _clearColorA);
 
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
@@ -109,8 +110,7 @@ EAGLContext *CreateBestEAGLContext() {
     }
     self.renderer.model = self.model;
 
-    RGBA rgba = self.spriteColor.rgba;
-    self.renderer.spriteColor = GLKVector4Make(rgba.r, rgba.g, rgba.b, rgba.a);
+    self.renderer.spriteColor = self.spriteColor;
 
     [self.renderer startWithView:self.contentView];
 
@@ -132,15 +132,16 @@ EAGLContext *CreateBestEAGLContext() {
 
     RGBA rgba = backgroundColor.rgba;
 
-    self.clearColor = GLKVector4Make(rgba.r, rgba.g, rgba.b, rgba.a);
+    _clearColorR = rgba.r;
+    _clearColorG = rgba.g;
+    _clearColorB = rgba.b;
+    _clearColorA = rgba.a;
 }
 
 - (void)setSpriteColor:(UIColor *)spriteColor {
     _spriteColor = spriteColor;
 
-    RGBA rgba = spriteColor.rgba;
-
-    self.renderer.spriteColor = GLKVector4Make(rgba.r, rgba.g, rgba.b, rgba.a);
+    self.renderer.spriteColor = spriteColor;
 }
 
 - (void)setPreferredFramesPerSecond:(NSInteger)preferredFramesPerSecond {
@@ -174,15 +175,11 @@ EAGLContext *CreateBestEAGLContext() {
 
     glClear(GL_COLOR_BUFFER_BIT);
 
-    glClearColor(_clearColor.r, _clearColor.g, _clearColor.b, _clearColor.a);
+    glClearColor(_clearColorR, _clearColorG, _clearColorB, _clearColorA);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
     CGFloat modelWidth = self.canvasSize.width;
     CGFloat modelHeight = self.canvasSize.height;
-
-    glLoadIdentity();
-
-    glOrthof(0, modelWidth, modelHeight, 0, 0.5f, -0.5f);
 
     NSTimeInterval time = 1.0 / (NSTimeInterval)(self.displayLink.preferredFramesPerSecond);
     [self.model updatePhysics:time];
@@ -208,8 +205,8 @@ EAGLContext *CreateBestEAGLContext() {
     if (model) {
         [model performExpression:nil];
         // model->SetExpression("");
-        //            Csm::Rendering::CubismOffscreenFrame_OpenGLES2 &useTarget = model.renderBuffer;
-        //            GLuint id = useTarget.GetColorBuffer();
+        // Csm::Rendering::CubismOffscreenFrame_OpenGLES2 &useTarget = model.renderBuffer;
+        // GLuint id = useTarget.GetColorBuffer();
         [_renderer renderImmidiate:_vertexBufferId fragmentBufferID:_fragmentBufferId TextureId:self.renderer.textureId uvArray:uvVertex];
     }
     //    }

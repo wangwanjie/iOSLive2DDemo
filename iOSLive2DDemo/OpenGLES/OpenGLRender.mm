@@ -10,6 +10,7 @@
 #import <OpenGLES/ES3/gl.h>
 #import <OpenGLES/ES3/glext.h>
 #import "L2DTextureManager.h"
+#import "UIColor+Live2D.h"
 
 /**
  * @brief Rect 構造体。
@@ -32,6 +33,11 @@ typedef struct {
 @property (nonatomic, strong) L2DTextureManager *textureManager;
 /// GLKTextureLoader
 @property (nonatomic, strong) GLKTextureLoader *textureLoader;
+/// 前景色
+@property (nonatomic, assign) float spriteColorR;
+@property (nonatomic, assign) float spriteColorG;
+@property (nonatomic, assign) float spriteColorB;
+@property (nonatomic, assign) float spriteColorA;
 @end
 
 @implementation OpenGLRender
@@ -65,10 +71,17 @@ typedef struct {
 - (void)SetupTextures {
 }
 
-- (void)setSpriteColor:(GLKVector4)spriteColor {
+- (void)setSpriteColor:(UIColor *)spriteColor {
     _spriteColor = spriteColor;
 
-    self.baseEffect.constantColor = GLKVector4Make(_spriteColor.r, _spriteColor.g, _spriteColor.b, _spriteColor.a);
+    RGBA rgba = spriteColor.rgba;
+
+    _spriteColorR = rgba.r;
+    _spriteColorG = rgba.g;
+    _spriteColorB = rgba.b;
+    _spriteColorA = rgba.a;
+
+    self.baseEffect.constantColor = GLKVector4Make(_spriteColorR, _spriteColorG, _spriteColorB, _spriteColorA);
 }
 @end
 
@@ -93,12 +106,6 @@ typedef struct {
     self.renderRect = view.bounds;
 }
 
-- (void)setSpriteColor:(GLKVector4)spriteColor {
-    _spriteColor = spriteColor;
-
-    self.baseEffect.constantColor = GLKVector4Make(_spriteColor.r, _spriteColor.g, _spriteColor.b, _spriteColor.a);
-}
-
 - (void)drawableSizeWillChange:(GLKView *)view size:(CGSize)size {
 }
 
@@ -116,7 +123,7 @@ typedef struct {
     self.baseEffect.texture2d0.name = _textureId;
 
     // color
-    self.baseEffect.constantColor = GLKVector4Make(_spriteColor.r, _spriteColor.g, _spriteColor.b, _spriteColor.a);
+    self.baseEffect.constantColor = GLKVector4Make(_spriteColorR, _spriteColorG, _spriteColorB, _spriteColorA);
 
     [self.baseEffect prepareToDraw];
 
@@ -174,7 +181,7 @@ typedef struct {
     self.baseEffect.texture2d0.name = textureId;
 
     // color
-    self.baseEffect.constantColor = GLKVector4Make(_spriteColor.r, _spriteColor.g, _spriteColor.b, _spriteColor.a);
+    self.baseEffect.constantColor = GLKVector4Make(_spriteColorR, _spriteColorG, _spriteColorB, _spriteColorA);
 
     [self.baseEffect prepareToDraw];
 

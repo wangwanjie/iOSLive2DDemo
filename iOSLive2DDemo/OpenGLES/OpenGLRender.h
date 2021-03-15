@@ -29,7 +29,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, assign) CGRect renderRect;
 @property (nonatomic, readonly, getter=GetTextureId) GLuint textureId;  // テクスチャID
 /// 前景色
-@property (nonatomic, assign) GLKVector4 spriteColor;
+@property (nonatomic, strong) UIColor *spriteColor;
 
 @property (nonatomic, weak) id<OpenGLRenderDelegate> delegate;
 @property (nonatomic, strong) L2DUserModel *model;
