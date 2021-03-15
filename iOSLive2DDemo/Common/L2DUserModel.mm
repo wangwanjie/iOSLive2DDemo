@@ -16,6 +16,7 @@
 #import <CubismDefaultParameterId.hpp>
 #import <Utils/CubismString.hpp>
 #import <Motion/CubismMotion.hpp>
+#import "L2DTextureManager.h"
 
 using namespace ::L2DAppDefine;
 using namespace Live2D::Cubism::Core;
@@ -29,7 +30,7 @@ using namespace Live2D::Cubism::Framework::DefaultParameterId;
     Csm::csmFloat32 _userTimeSeconds;  ///< 增量时间的积分值[秒]
     Csm::csmString _modelHomeDir;      ///< 模型设置所在的目录
     CubismUserModel *_model;
-    ICubismModelSetting *_modelSetting;                              ///< 型号设定信息
+    CubismModelSettingJson *_modelSetting;                           ///< 型号设定信息
     Csm::csmMap<Csm::csmString, Csm::ACubismMotion *> _motions;      ///< 加载的动作列表
     Csm::csmMap<Csm::csmString, Csm::ACubismMotion *> _expressions;  ///< 已加载的面部表情列表
     Csm::csmVector<Csm::CubismIdHandle> _eyeBlinkIds;                ///< 模型中设置的眨眼功能的参数ID
@@ -178,6 +179,8 @@ using namespace Live2D::Cubism::Framework::DefaultParameterId;
 }
 
 - (void)dealloc {
+    NSLog(@"L2DUserModel dealloc - %p", self);
+
     [self releaseMotions];
     [self releaseExpressions];
 
@@ -188,14 +191,12 @@ using namespace Live2D::Cubism::Framework::DefaultParameterId;
         }
     }
 
-    NSLog(@"L2DUserModel dealloc - %p", self);
-
     if (_model != NULL) {
         CSM_DELETE_SELF(CubismUserModel, _model);
     }
 
     if (_modelSetting != NULL) {
-        CSM_DELETE_SELF(ICubismModelSetting, _modelSetting);
+        CSM_DELETE_SELF(CubismModelSettingJson, _modelSetting);
     }
 }
 
@@ -343,6 +344,11 @@ static void FinishedMotion(Csm::ACubismMotion *self) {
 }
 
 - (void)performExpression:(SBProductioEmotionExpression *)expression {
+    if (!expression) {
+        _model->_expressionManager->StopAllMotions();
+        return;
+    }
+
     NSString *str = [expression.action yy_modelToJSONString];
     NSData *data = [str dataUsingEncoding:NSUTF8StringEncoding];
     NSUInteger len = [data length];
@@ -395,7 +401,7 @@ static void FinishedMotion(Csm::ACubismMotion *self) {
     return opacity;
 }
 
-- (NSArray *)textureURLs {
+- (NSArray<NSURL *> *)textureURLs {
     NSMutableArray<NSURL *> *urls = [NSMutableArray array];
     for (int i = 0; i < _modelSetting->GetTextureCount(); ++i) {
         @autoreleasepool {
@@ -404,6 +410,28 @@ static void FinishedMotion(Csm::ACubismMotion *self) {
         }
     }
     return urls;
+}
+
+- (void)setupTexturesWithTextureManager:(L2DTextureManager *)textureManager {
+    NSArray<NSURL *> *textureURLs = self.textureURLs;
+    if (textureURLs.count <= 0) return;
+
+    for (unsigned int modelTextureNumber = 0; modelTextureNumber < textureURLs.count; modelTextureNumber++) {
+        // テクスチャ名が空文字だった場合はロード・バインド処理をスキップ
+        if (strcmp(_modelSetting->GetTextureFileName(modelTextureNumber), "") == 0) {
+            continue;
+        }
+
+        // OpenGLのテクスチャユニットにテクスチャをロードする
+        csmString texturePath = _modelSetting->GetTextureFileName(modelTextureNumber);
+        texturePath = _modelHomeDir + texturePath;
+
+        TextureInfo *texture = [textureManager createTextureFromPngFile:texturePath.GetRawString()];
+        csmInt32 glTextueNumber = texture->id;
+
+        // OpenGL
+        // _model->GetRenderer<Rendering::CubismRenderer_OpenGLES2>()->BindTexture(modelTextureNumber, glTextueNumber);
+    }
 }
 
 - (int)textureIndexForDrawable:(int)index {

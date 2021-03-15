@@ -5,11 +5,14 @@
  * that can be found at https://www.live2d.com/eula/live2d-open-software-license-agreement_en.html.
  */
 
-#ifndef L2DAppDefine_h
-#define L2DAppDefine_h
-
 #import <Foundation/Foundation.h>
 #import <CubismFramework.hpp>
+
+typedef NS_ENUM(NSUInteger, SelectTarget) {
+    SelectTarget_None,              ///< デフォルトのフレームバッファにレンダリング
+    SelectTarget_ModelFrameBuffer,  ///< L2DUserModelが各自持つフレームバッファにレンダリング
+    SelectTarget_ViewFrameBuffer,   ///< L2DViewの持つフレームバッファにレンダリング
+};
 
 /**
  * @brief  Sample Appで使用する定数
@@ -57,5 +60,3 @@ namespace L2DAppDefine {
     // 框架的日志级别设置输出
     extern const CubismFramework::Option::LogLevel CubismLoggingLevel;
 }
-
-#endif /* L2DAppDefine_h */

@@ -1,38 +1,27 @@
 //
-//  MetalLive2DViewController.m
+//  OpenGLLive2DViewController.m
 //  iOSLive2DDemo
 //
 //  Created by VanJay on 2021/3/13.
 //
 
-#import "MetalLive2DViewController.h"
-#import "KGMetalLive2DView.h"
+#import "OpenGLLive2DViewController.h"
+#import "KGOpenGLLive2DView.h"
 
-@interface MetalLive2DViewController () <MetalRenderDelegate>
-/// 渲染线程
-@property (nonatomic, strong) dispatch_queue_t renderQueue;
+@interface OpenGLLive2DViewController ()
 /// 展示 live2d 的 View
-@property (nonatomic, strong) KGMetalLive2DView *live2DView;
+@property (nonatomic, strong) KGOpenGLLive2DView *live2DView;
 /// 展示 live2d 的 View
-@property (nonatomic, strong) KGMetalLive2DView *live2DView2;
+@property (nonatomic, strong) KGOpenGLLive2DView *live2DView2;
 /// 是否已经加载资源
 @property (nonatomic, assign) BOOL hasLoadResource;
 @end
 
-@implementation MetalLive2DViewController
-
-- (instancetype)init {
-    self = [super init];
-    if (self) {
-        _renderQueue = dispatch_queue_create("com.virtualsingler.render.home", DISPATCH_QUEUE_CONCURRENT);
-    }
-    return self;
-}
-
+@implementation OpenGLLive2DViewController
 - (void)viewDidLoad {
     [super viewDidLoad];
 
-    self.title = @"Live2D Metal Render";
+    self.title = @"Live2D OpenGLES Render";
     self.view.backgroundColor = UIColor.whiteColor;
 
     [self.view addSubview:self.live2DView];
@@ -78,7 +67,7 @@
 
 - (void)dealloc {
 
-    self.live2DView.delegate = nil;
+    //  self.live2DView.delegate = nil;
 
     [NSNotificationCenter.defaultCenter removeObserver:self];
 }
@@ -96,23 +85,23 @@
     }
 }
 
-#pragma mark - MetalRenderDelegate
-- (void)rendererUpdateWithRender:(MetalRender *)renderer duration:(NSTimeInterval)duration {
-}
+//#pragma mark - MetalRenderDelegate
+//- (void)rendererUpdateWithRender:(MetalRender *)renderer duration:(NSTimeInterval)duration {
+//}
 
 #pragma mark - lazy load
-- (KGMetalLive2DView *)live2DView {
+- (KGOpenGLLive2DView *)live2DView {
     if (!_live2DView) {
-        _live2DView = [[KGMetalLive2DView alloc] init];
-        _live2DView.delegate = self;
+        _live2DView = [[KGOpenGLLive2DView alloc] init];
+        // _live2DView.delegate = self;
     }
     return _live2DView;
 }
 
-- (KGMetalLive2DView *)live2DView2 {
+- (KGOpenGLLive2DView *)live2DView2 {
     if (!_live2DView2) {
-        _live2DView2 = [[KGMetalLive2DView alloc] init];
-        _live2DView2.delegate = self;
+        _live2DView2 = [[KGOpenGLLive2DView alloc] init];
+        //  _live2DView2.delegate = self;
     }
     return _live2DView2;
 }

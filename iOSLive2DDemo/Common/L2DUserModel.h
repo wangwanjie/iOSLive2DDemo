@@ -8,8 +8,9 @@
 #import "RawArray.h"
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
-#import "L2DModelDefine.h"
 #import "SBProductioEmotionExpression.h"
+
+@class L2DTextureManager;
 
 /// Live2D 模型
 @interface L2DUserModel : NSObject
@@ -61,7 +62,8 @@
 - (bool)isVertexPositionDidChangedForDrawable:(int)index;
 
 // Textures.
-- (NSArray *)textureURLs;
+- (void)setupTexturesWithTextureManager:(L2DTextureManager *)textureManager;
+- (NSArray<NSURL *> *)textureURLs;
 - (int)textureIndexForDrawable:(int)index;
 - (RawFloatArray *)vertexTextureCoordinateForDrawable:(int)index;
 
