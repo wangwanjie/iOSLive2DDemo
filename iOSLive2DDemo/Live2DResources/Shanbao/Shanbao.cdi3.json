@@ -155,6 +155,16 @@
 			"Id": "Param15",
 			"GroupId": "",
 			"Name": "流苏"
+		},
+		{
+			"Id": "Param",
+			"GroupId": "",
+			"Name": "左手A"
+		},
+		{
+			"Id": "Param4",
+			"GroupId": "",
+			"Name": "左右B"
 		}
 	],
 	"ParameterGroups": [],

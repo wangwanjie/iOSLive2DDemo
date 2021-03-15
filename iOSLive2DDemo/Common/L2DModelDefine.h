@@ -1,6 +1,6 @@
 //
 //  L2DModelDefine.h
-//  iOSLive2DDemo
+//  ShanBao
 //
 //  Created by VanJay on 2021/2/3.
 //
@@ -24,6 +24,13 @@ typedef NS_ENUM(int, L2DPriority) {
     L2DPriorityIdle = 1,
     L2DPriorityNormal = 2,
     L2DPriorityForce = 3
+};
+
+typedef NS_ENUM(NSUInteger, KGLive2DViewStatus) {
+    KGLive2DViewStatusWaiting = 0,      ///< 执行待机动作
+    KGLive2DViewStatusSinging = 1,      ///< 唱歌
+    KGLive2DViewStatusPaused = 2,       ///< 暂停
+    KGLive2DViewStatusResetWaiting = 3  ///< 执行重置后待机动作
 };
 
 typedef NSString *SBLive2DActionBlendMode NS_STRING_ENUM;

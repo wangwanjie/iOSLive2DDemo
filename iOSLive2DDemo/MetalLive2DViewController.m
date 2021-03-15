@@ -38,8 +38,8 @@
     [self.view addSubview:self.live2DView];
     [self.view addSubview:self.live2DView2];
 
-    self.live2DView.preferredFramesPerSecond = 30;
-    self.live2DView2.preferredFramesPerSecond = 30;
+    self.live2DView.preferredFramesPerSecond = 60;
+    self.live2DView2.preferredFramesPerSecond = 60;
 }
 
 - (void)viewDidDisappear:(BOOL)animated {
@@ -79,6 +79,7 @@
 - (void)dealloc {
 
     self.live2DView.delegate = nil;
+    self.live2DView2.delegate = nil;
 
     [NSNotificationCenter.defaultCenter removeObserver:self];
 }
@@ -86,8 +87,10 @@
 - (void)viewDidLayoutSubviews {
     [super viewDidLayoutSubviews];
 
-    self.live2DView.frame = CGRectMake(0, 0, CGRectGetWidth(self.view.frame), CGRectGetHeight(self.view.frame) * 0.5);
-    self.live2DView2.frame = CGRectMake(0, CGRectGetMaxY(self.live2DView.frame), CGRectGetWidth(self.view.frame), CGRectGetHeight(self.view.frame) * 0.5);
+    CGFloat height = CGRectGetHeight(self.view.frame) / 2;
+
+    self.live2DView.frame = CGRectMake(0, 0, CGRectGetWidth(self.view.frame), height);
+    self.live2DView2.frame = CGRectMake(0, CGRectGetMaxY(self.live2DView.frame), CGRectGetWidth(self.view.frame), height);
 
     if (!self.hasLoadResource) {
         [self.live2DView loadLive2DModelWithDir:@"Live2DResources/Mark/" mocJsonName:@"Mark.model3.json"];

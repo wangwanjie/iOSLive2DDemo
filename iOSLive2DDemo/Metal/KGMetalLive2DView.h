@@ -10,13 +10,6 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-typedef NS_ENUM(NSUInteger, KGMetalLive2DViewStatus) {
-    KGMetalLive2DViewStatusWaiting = 0,      ///< 执行待机动作
-    KGMetalLive2DViewStatusSinging = 1,      ///< 唱歌
-    KGMetalLive2DViewStatusPaused = 2,       ///< 暂停
-    KGMetalLive2DViewStatusResetWaiting = 3  ///< 执行重置后待机动作
-};
-
 @interface KGMetalLive2DView : UIView
 
 /// 加载资源 json
