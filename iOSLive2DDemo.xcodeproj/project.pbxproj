@@ -210,6 +210,8 @@
 		95E35F0E25FF65F20092540E /* KGOpenGLLive2DView.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = KGOpenGLLive2DView.mm; sourceTree = "<group>"; };
 		95E35F1F25FF66240092540E /* SBProductioEmotionExpression.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBProductioEmotionExpression.m; sourceTree = "<group>"; };
 		95E35F2025FF66250092540E /* SBProductioEmotionExpression.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBProductioEmotionExpression.h; sourceTree = "<group>"; };
+		95E35F2325FF68D40092540E /* L2DModelActionProtocol.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = L2DModelActionProtocol.h; sourceTree = "<group>"; };
+		95E35F2625FF6A610092540E /* L2DViewRenderer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = L2DViewRenderer.h; sourceTree = "<group>"; };
 		ABD79E68F398A48645A3DED9 /* Pods_iOSLive2DDemo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_iOSLive2DDemo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -258,11 +260,11 @@
 			isa = PBXGroup;
 			children = (
 				95E35EEC25FF65F20092540E /* Common */,
-				95E35EF925FF65F20092540E /* Metal */,
-				95E35F0625FF65F20092540E /* OpenGLES */,
 				959FF51F25FCEEA200AB0924 /* Helper */,
 				959FF51C25FCEE7600AB0924 /* Live2DResources */,
 				959FF48825FC935200AB0924 /* Live2DSDK */,
+				95E35EF925FF65F20092540E /* Metal */,
+				95E35F0625FF65F20092540E /* OpenGLES */,
 				959FF45D25FC906300AB0924 /* AppDelegate.h */,
 				959FF45E25FC906300AB0924 /* AppDelegate.m */,
 				959FF46925FC906500AB0924 /* Assets.xcassets */,
@@ -480,20 +482,22 @@
 		95E35EEC25FF65F20092540E /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				95E35EF625FF65F20092540E /* L2DAppDefine.h */,
+				95E35EF525FF65F20092540E /* L2DAppDefine.mm */,
+				95E35EF025FF65F20092540E /* L2DCubism.h */,
+				95E35EEF25FF65F20092540E /* L2DCubism.mm */,
+				95E35F2325FF68D40092540E /* L2DModelActionProtocol.h */,
+				95E35EED25FF65F20092540E /* L2DModelDefine.h */,
+				95E35EF325FF65F20092540E /* L2DModelDefine.mm */,
+				95E35EF225FF65F20092540E /* L2DUserModel.h */,
+				95E35EF425FF65F20092540E /* L2DUserModel.mm */,
+				95E35F2625FF6A610092540E /* L2DViewRenderer.h */,
+				95E35EF125FF65F20092540E /* RawArray.h */,
+				95E35EF825FF65F20092540E /* RawArray.m */,
+				95E35EEE25FF65F20092540E /* SBL2DHelper.h */,
+				95E35EF725FF65F20092540E /* SBL2DHelper.mm */,
 				95E35F2025FF66250092540E /* SBProductioEmotionExpression.h */,
 				95E35F1F25FF66240092540E /* SBProductioEmotionExpression.m */,
-				95E35EED25FF65F20092540E /* L2DModelDefine.h */,
-				95E35EEE25FF65F20092540E /* SBL2DHelper.h */,
-				95E35EEF25FF65F20092540E /* L2DCubism.mm */,
-				95E35EF025FF65F20092540E /* L2DCubism.h */,
-				95E35EF125FF65F20092540E /* RawArray.h */,
-				95E35EF225FF65F20092540E /* L2DUserModel.h */,
-				95E35EF325FF65F20092540E /* L2DModelDefine.mm */,
-				95E35EF425FF65F20092540E /* L2DUserModel.mm */,
-				95E35EF525FF65F20092540E /* L2DAppDefine.mm */,
-				95E35EF625FF65F20092540E /* L2DAppDefine.h */,
-				95E35EF725FF65F20092540E /* SBL2DHelper.mm */,
-				95E35EF825FF65F20092540E /* RawArray.m */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -501,10 +505,10 @@
 		95E35EF925FF65F20092540E /* Metal */ = {
 			isa = PBXGroup;
 			children = (
-				95E35EFA25FF65F20092540E /* KGMetalLive2DView.h */,
 				95E35EFB25FF65F20092540E /* Render */,
-				95E35F0025FF65F20092540E /* KGMetalLive2DView.m */,
 				95E35F0125FF65F20092540E /* Shader */,
+				95E35EFA25FF65F20092540E /* KGMetalLive2DView.h */,
+				95E35F0025FF65F20092540E /* KGMetalLive2DView.m */,
 			);
 			path = Metal;
 			sourceTree = "<group>";
@@ -512,10 +516,10 @@
 		95E35EFB25FF65F20092540E /* Render */ = {
 			isa = PBXGroup;
 			children = (
-				95E35EFC25FF65F20092540E /* MetalRender.h */,
 				95E35EFD25FF65F20092540E /* MetalDrawable.h */,
-				95E35EFE25FF65F20092540E /* MetalRender.m */,
 				95E35EFF25FF65F20092540E /* MetalDrawable.m */,
+				95E35EFC25FF65F20092540E /* MetalRender.h */,
+				95E35EFE25FF65F20092540E /* MetalRender.m */,
 			);
 			path = Render;
 			sourceTree = "<group>";
@@ -523,10 +527,10 @@
 		95E35F0125FF65F20092540E /* Shader */ = {
 			isa = PBXGroup;
 			children = (
-				95E35F0225FF65F20092540E /* mask.metal */,
 				95E35F0325FF65F20092540E /* basic.metal */,
 				95E35F0425FF65F20092540E /* L2DBufferIndex.h */,
 				95E35F0525FF65F20092540E /* L2DShaderType.h */,
+				95E35F0225FF65F20092540E /* mask.metal */,
 			);
 			path = Shader;
 			sourceTree = "<group>";
@@ -534,14 +538,14 @@
 		95E35F0625FF65F20092540E /* OpenGLES */ = {
 			isa = PBXGroup;
 			children = (
-				95E35F0725FF65F20092540E /* OpenGLRender.mm */,
-				95E35F0825FF65F20092540E /* SBNSObjectProxy.m */,
-				95E35F0925FF65F20092540E /* OpenGLRender.h */,
 				95E35F0A25FF65F20092540E /* KGOpenGLLive2DView.h */,
-				95E35F0B25FF65F20092540E /* L2DTextureManager.mm */,
-				95E35F0C25FF65F20092540E /* SBNSObjectProxy.h */,
-				95E35F0D25FF65F20092540E /* L2DTextureManager.h */,
 				95E35F0E25FF65F20092540E /* KGOpenGLLive2DView.mm */,
+				95E35F0D25FF65F20092540E /* L2DTextureManager.h */,
+				95E35F0B25FF65F20092540E /* L2DTextureManager.mm */,
+				95E35F0925FF65F20092540E /* OpenGLRender.h */,
+				95E35F0725FF65F20092540E /* OpenGLRender.mm */,
+				95E35F0C25FF65F20092540E /* SBNSObjectProxy.h */,
+				95E35F0825FF65F20092540E /* SBNSObjectProxy.m */,
 			);
 			path = OpenGLES;
 			sourceTree = "<group>";
@@ -661,25 +665,18 @@
 			files = (
 				959FF4F025FC93F900AB0924 /* ACubismMotion.cpp in Sources */,
 				959FF45F25FC906300AB0924 /* AppDelegate.m in Sources */,
-				959FF50725FC93F900AB0924 /* csmRectF.cpp in Sources */,
-				95E35F1D25FF65F30092540E /* KGOpenGLLive2DView.mm in Sources */,
-				95E35F1125FF65F30092540E /* L2DUserModel.mm in Sources */,
-				95E35F1825FF65F30092540E /* mask.metal in Sources */,
-				95E35F1725FF65F30092540E /* KGMetalLive2DView.m in Sources */,
 				95E35F1925FF65F30092540E /* basic.metal in Sources */,
+				959FF50725FC93F900AB0924 /* csmRectF.cpp in Sources */,
 				959FF50625FC93F900AB0924 /* csmString.cpp in Sources */,
 				959FF4E925FC93F900AB0924 /* CubismBreath.cpp in Sources */,
 				959FF4E625FC93F900AB0924 /* CubismCdiJson.cpp in Sources */,
 				959FF4EE25FC93F900AB0924 /* CubismDebug.cpp in Sources */,
 				959FF4EA25FC93F900AB0924 /* CubismDefaultParameterId.cpp in Sources */,
-				95E35F1525FF65F30092540E /* MetalRender.m in Sources */,
 				959FF4F425FC93F900AB0924 /* CubismExpressionMotion.cpp in Sources */,
 				959FF4E825FC93F900AB0924 /* CubismEyeBlink.cpp in Sources */,
 				959FF4EB25FC93F900AB0924 /* CubismFramework.cpp in Sources */,
 				959FF4F825FC93F900AB0924 /* CubismId.cpp in Sources */,
-				95E35F1025FF65F30092540E /* L2DModelDefine.mm in Sources */,
 				959FF4F725FC93F900AB0924 /* CubismIdManager.cpp in Sources */,
-				95E35F1B25FF65F30092540E /* SBNSObjectProxy.m in Sources */,
 				959FF4EC25FC93F900AB0924 /* CubismJson.cpp in Sources */,
 				959FF50425FC93F900AB0924 /* CubismMath.cpp in Sources */,
 				959FF50525FC93F900AB0924 /* CubismMatrix44.cpp in Sources */,
@@ -690,15 +687,10 @@
 				959FF4F925FC93F900AB0924 /* CubismModelUserData.cpp in Sources */,
 				959FF4FA25FC93F900AB0924 /* CubismModelUserDataJson.cpp in Sources */,
 				959FF4F125FC93F900AB0924 /* CubismMotion.cpp in Sources */,
-				95E35F1425FF65F30092540E /* RawArray.m in Sources */,
 				959FF4F525FC93F900AB0924 /* CubismMotionJson.cpp in Sources */,
 				959FF4F225FC93F900AB0924 /* CubismMotionManager.cpp in Sources */,
-				95E35F1A25FF65F30092540E /* OpenGLRender.mm in Sources */,
 				959FF4F625FC93F900AB0924 /* CubismMotionQueueEntry.cpp in Sources */,
 				959FF4F325FC93F900AB0924 /* CubismMotionQueueManager.cpp in Sources */,
-				95E35F1C25FF65F30092540E /* L2DTextureManager.mm in Sources */,
-				95E35F1325FF65F30092540E /* SBL2DHelper.mm in Sources */,
-				95E35F1225FF65F30092540E /* L2DAppDefine.mm in Sources */,
 				959FF50A25FC93F900AB0924 /* CubismOffscreenSurface_OpenGLES2.cpp in Sources */,
 				959FF4FF25FC93F900AB0924 /* CubismPhysics.cpp in Sources */,
 				959FF4FE25FC93F900AB0924 /* CubismPhysicsJson.cpp in Sources */,
@@ -710,12 +702,24 @@
 				959FF4FB25FC93F900AB0924 /* CubismUserModel.cpp in Sources */,
 				959FF50225FC93F900AB0924 /* CubismVector2.cpp in Sources */,
 				959FF50125FC93F900AB0924 /* CubismViewMatrix.cpp in Sources */,
-				95E35F2125FF66250092540E /* SBProductioEmotionExpression.m in Sources */,
-				959FF47025FC906500AB0924 /* main.m in Sources */,
-				959FF48225FC919800AB0924 /* MetalLive2DViewController.m in Sources */,
-				95E35F1625FF65F30092540E /* MetalDrawable.m in Sources */,
-				959FF47E25FC918100AB0924 /* OpenGLLive2DViewController.mm in Sources */,
+				95E35F1725FF65F30092540E /* KGMetalLive2DView.m in Sources */,
+				95E35F1D25FF65F30092540E /* KGOpenGLLive2DView.mm in Sources */,
+				95E35F1225FF65F30092540E /* L2DAppDefine.mm in Sources */,
 				95E35F0F25FF65F30092540E /* L2DCubism.mm in Sources */,
+				95E35F1025FF65F30092540E /* L2DModelDefine.mm in Sources */,
+				95E35F1C25FF65F30092540E /* L2DTextureManager.mm in Sources */,
+				95E35F1125FF65F30092540E /* L2DUserModel.mm in Sources */,
+				959FF47025FC906500AB0924 /* main.m in Sources */,
+				95E35F1825FF65F30092540E /* mask.metal in Sources */,
+				95E35F1625FF65F30092540E /* MetalDrawable.m in Sources */,
+				959FF48225FC919800AB0924 /* MetalLive2DViewController.m in Sources */,
+				95E35F1525FF65F30092540E /* MetalRender.m in Sources */,
+				959FF47E25FC918100AB0924 /* OpenGLLive2DViewController.mm in Sources */,
+				95E35F1A25FF65F30092540E /* OpenGLRender.mm in Sources */,
+				95E35F1425FF65F30092540E /* RawArray.m in Sources */,
+				95E35F1325FF65F30092540E /* SBL2DHelper.mm in Sources */,
+				95E35F1B25FF65F30092540E /* SBNSObjectProxy.m in Sources */,
+				95E35F2125FF66250092540E /* SBProductioEmotionExpression.m in Sources */,
 				959FF52225FCEEA200AB0924 /* UIColor+Live2D.m in Sources */,
 				959FF46525FC906300AB0924 /* ViewController.m in Sources */,
 			);

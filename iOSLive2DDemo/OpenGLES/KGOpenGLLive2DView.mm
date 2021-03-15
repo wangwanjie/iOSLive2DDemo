@@ -121,24 +121,6 @@ EAGLContext *CreateBestEAGLContext() {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
-- (void)loadLive2DModelWithDir:(NSString *)dirName mocJsonName:(NSString *)mocJsonName {
-    if (!dirName || !mocJsonName) {
-        NSLog(@"资源路径不存在");
-        return;
-    }
-    self.model = [[L2DUserModel alloc] initWithJsonDir:dirName mocJsonName:mocJsonName];
-    [self.model createRenderer];
-
-    if (_renderer) {
-        self.renderer = nil;
-    }
-    self.renderer.model = self.model;
-    self.renderer.viewMatrix = _viewMatrix;
-    self.renderer.spriteColor = self.spriteColor;
-
-    [self.renderer startWithView:self.glkView];
-}
-
 #pragma mark - Notification
 - (void)applicationDidEnterBackground {
     self.paused = true;
@@ -171,6 +153,7 @@ EAGLContext *CreateBestEAGLContext() {
 
 - (void)setPreferredFramesPerSecond:(NSInteger)preferredFramesPerSecond {
     _preferredFramesPerSecond = preferredFramesPerSecond;
+
     self.displayLink.preferredFramesPerSecond = MAX(1, 60.0f / _preferredFramesPerSecond);
 }
 
@@ -189,6 +172,79 @@ EAGLContext *CreateBestEAGLContext() {
 - (void)drawView {
     [self.glkView setNeedsDisplay];
 }
+
+#pragma mark - L2DModelActionProtocol
+
+- (float)getPartsOpacityNamed:(NSString *)name {
+    return [self.model getPartsOpacityNamed:name];
+}
+
+- (float)getValueForModelParameterNamed:(NSString *)name {
+    return [self.model getValueForModelParameterNamed:name];
+}
+
+- (void)performExpression:(SBProductioEmotionExpression *)expression {
+    [self.model performExpression:expression];
+}
+
+- (void)performExpressionWithExpressionID:(NSString *)expressionID {
+    [self.model performExpressionWithExpressionID:expressionID];
+}
+
+- (void)performMotion:(NSString *)groupName index:(NSUInteger)index priority:(L2DPriority)priority {
+    [self.model performMotion:groupName index:index priority:priority];
+}
+
+- (void)performRandomExpression {
+    [self.model performRandomExpression];
+}
+
+- (void)setModelParameterNamed:(NSString *)name blendMode:(L2DBlendMode)blendMode value:(float)value {
+    [self.model setModelParameterNamed:name blendMode:blendMode value:value];
+}
+
+- (void)setModelParameterNamed:(NSString *)name value:(float)value {
+    [self.model setModelParameterNamed:name value:value];
+}
+
+- (void)setPartsOpacityNamed:(NSString *)name opacity:(float)opacity {
+    [self.model setPartsOpacityNamed:name opacity:opacity];
+}
+
+#pragma mark - L2DViewRenderer
+
+- (void)loadLive2DModelWithDir:(NSString *)dirName mocJsonName:(NSString *)mocJsonName {
+    if (!dirName || !mocJsonName) {
+        NSLog(@"资源路径不存在");
+        return;
+    }
+    self.model = [[L2DUserModel alloc] initWithJsonDir:dirName mocJsonName:mocJsonName];
+    [self.model createRenderer];
+
+    if (_renderer) {
+        self.renderer = nil;
+    }
+    self.renderer.model = self.model;
+    self.renderer.viewMatrix = _viewMatrix;
+    self.renderer.spriteColor = self.spriteColor;
+
+    [self.renderer startWithView:self.glkView];
+}
+
+- (void)setParameterWithDictionary:(NSDictionary<NSString *, NSNumber *> *)params {
+    [params enumerateKeysAndObjectsUsingBlock:^(NSString *_Nonnull key, NSNumber *_Nonnull obj, BOOL *_Nonnull stop) {
+        [self setModelParameterNamed:key value:[obj floatValue]];
+    }];
+}
+
+- (void)setPartOpacityWithDictionary:(NSDictionary<NSString *, NSNumber *> *)parts {
+    [parts enumerateKeysAndObjectsUsingBlock:^(NSString *_Nonnull key, NSNumber *_Nonnull obj, BOOL *_Nonnull stop) {
+        [self setPartsOpacityNamed:key opacity:[obj floatValue]];
+    }];
+}
+
+@synthesize preferredFramesPerSecond = _preferredFramesPerSecond;
+@synthesize paused = _paused;
 
 - (CGSize)canvasSize {
     return self.model.modelSize;

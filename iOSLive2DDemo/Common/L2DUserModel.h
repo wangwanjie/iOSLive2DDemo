@@ -9,47 +9,17 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 #import "SBProductioEmotionExpression.h"
+#import "L2DModelActionProtocol.h"
 
 @class L2DTextureManager;
 
 /// Live2D 模型
-@interface L2DUserModel : NSObject
+@interface L2DUserModel : NSObject <L2DModelActionProtocol>
 
 - (instancetype)initWithJsonDir:(NSString *)dirName mocJsonName:(NSString *)mocJsonName;
 
 /// 如果使用 OpenGLES 渲染需要
 - (void)createRenderer;
-
-/// 执行表情
-- (void)performExpression:(SBProductioEmotionExpression *)expression;
-
-/// 执行 id 动作
-- (void)setModelParameterNamed:(NSString *)name value:(float)value;
-
-/// 执行表情
-- (void)performExpressionWithExpressionID:(NSString *)expressionID;
-
-/// 执行动作
-/// @param groupName 动作组名
-/// @param index 动作 id
-/// @param priority 优先级
-- (void)performMotion:(NSString *)groupName index:(NSUInteger)index priority:(L2DPriority)priority;
-
-/// 随机显示表情
-- (void)performRandomExpression;
-
-/// 执行 id 动作
-/// @param name 动作 id
-/// @param blendMode 渲染模式
-/// @param value 值
-- (void)setModelParameterNamed:(NSString *)name blendMode:(L2DBlendMode)blendMode value:(float)value;
-
-/// 获取某个动作 value
-- (float)getValueForModelParameterNamed:(NSString *)name;
-
-- (void)setPartsOpacityNamed:(NSString *)name opacity:(float)opacity;
-
-- (float)getPartsOpacityNamed:(NSString *)name;
 
 /// 画布大小
 - (CGSize)modelSize;

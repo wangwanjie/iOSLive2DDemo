@@ -24,6 +24,7 @@
 @end
 
 @implementation KGMetalLive2DView
+
 #pragma mark - life cycle
 - (void)commonInit {
 
@@ -138,7 +139,45 @@
     self.renderer.clearColor = self.clearColor;
 }
 
-#pragma mark - public methods
+#pragma mark - L2DModelActionProtocol
+
+- (float)getPartsOpacityNamed:(NSString *)name {
+    return [self.model getPartsOpacityNamed:name];
+}
+
+- (float)getValueForModelParameterNamed:(NSString *)name {
+    return [self.model getValueForModelParameterNamed:name];
+}
+
+- (void)performExpression:(SBProductioEmotionExpression *)expression {
+    [self.model performExpression:expression];
+}
+
+- (void)performExpressionWithExpressionID:(NSString *)expressionID {
+    [self.model performExpressionWithExpressionID:expressionID];
+}
+
+- (void)performMotion:(NSString *)groupName index:(NSUInteger)index priority:(L2DPriority)priority {
+    [self.model performMotion:groupName index:index priority:priority];
+}
+
+- (void)performRandomExpression {
+    [self.model performRandomExpression];
+}
+
+- (void)setModelParameterNamed:(NSString *)name blendMode:(L2DBlendMode)blendMode value:(float)value {
+    [self.model setModelParameterNamed:name blendMode:blendMode value:value];
+}
+
+- (void)setModelParameterNamed:(NSString *)name value:(float)value {
+    [self.model setModelParameterNamed:name value:value];
+}
+
+- (void)setPartsOpacityNamed:(NSString *)name opacity:(float)opacity {
+    [self.model setPartsOpacityNamed:name opacity:opacity];
+}
+
+#pragma mark - L2DViewRenderer
 - (void)loadLive2DModelWithDir:(NSString *)dirName mocJsonName:(NSString *)mocJsonName {
     if (!dirName || !mocJsonName) {
         NSLog(@"资源路径不存在");
@@ -154,51 +193,20 @@
     [self addRenderer:self.renderer];
 }
 
-- (void)setParameterNamed:(NSString *)name value:(float)value {
-    [self setParameterNamed:name blendMode:L2DBlendModeNormal value:value];
-}
-
-- (void)setParameterNamed:(NSString *)name blendMode:(L2DBlendMode)blendMode value:(float)value {
-    if (!name || ![name isKindOfClass:NSString.class] || name.length <= 0) return;
-
-    [self.model setModelParameterNamed:name blendMode:blendMode value:value];
-}
-
-- (void)performExpression:(SBProductioEmotionExpression *)expression {
-    if (!expression) return;
-
-    [self.model performExpression:expression];
-}
-
-- (float)valueForParameterNamed:(NSString *)name {
-    if (!name || ![name isKindOfClass:NSString.class] || name.length <= 0) return 0;
-
-    return [self.model getValueForModelParameterNamed:name];
-}
-
-- (void)setPartOpacityNamed:(NSString *)name value:(float)value {
-    if (!name || ![name isKindOfClass:NSString.class] || name.length <= 0) return;
-
-    [self.model setPartsOpacityNamed:name opacity:value];
-}
-
-- (float)valueForPartOpacityNamed:(NSString *)name {
-    if (!name || ![name isKindOfClass:NSString.class] || name.length <= 0) return 0;
-
-    return [self.model getPartsOpacityNamed:name];
-}
-
 - (void)setParameterWithDictionary:(NSDictionary<NSString *, NSNumber *> *)params {
     [params enumerateKeysAndObjectsUsingBlock:^(NSString *_Nonnull key, NSNumber *_Nonnull obj, BOOL *_Nonnull stop) {
-        [self setParameterNamed:key value:[obj floatValue]];
+        [self setModelParameterNamed:key value:[obj floatValue]];
     }];
 }
 
 - (void)setPartOpacityWithDictionary:(NSDictionary<NSString *, NSNumber *> *)parts {
     [parts enumerateKeysAndObjectsUsingBlock:^(NSString *_Nonnull key, NSNumber *_Nonnull obj, BOOL *_Nonnull stop) {
-        [self setPartOpacityNamed:key value:[obj floatValue]];
+        [self setPartsOpacityNamed:key opacity:[obj floatValue]];
     }];
 }
+
+@synthesize preferredFramesPerSecond = _preferredFramesPerSecond;
+@synthesize paused = _paused;
 
 - (CGSize)canvasSize {
     return self.model.modelSize;

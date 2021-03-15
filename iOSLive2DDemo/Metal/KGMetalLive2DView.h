@@ -7,28 +7,12 @@
 
 #import "MetalRender.h"
 #import <UIKit/UIKit.h>
+#import "L2DModelActionProtocol.h"
+#import "L2DViewRenderer.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface KGMetalLive2DView : UIView
-
-/// 加载资源 json
-/// @param dirName model3 文件夹路径
-/// @param mocJsonName model3 名称
-- (void)loadLive2DModelWithDir:(NSString *)dirName mocJsonName:(NSString *)mocJsonName;
-- (void)performExpression:(SBProductioEmotionExpression *)expression;
-- (void)setParameterNamed:(NSString *)name value:(float)value;
-- (void)setParameterNamed:(NSString *)name blendMode:(L2DBlendMode)blendMode value:(float)value;
-- (float)valueForParameterNamed:(NSString *)name;
-- (void)setParameterWithDictionary:(NSDictionary<NSString *, NSNumber *> *)params;
-
-- (void)setPartOpacityNamed:(NSString *)name value:(float)value;
-- (float)valueForPartOpacityNamed:(NSString *)name;
-- (void)setPartOpacityWithDictionary:(NSDictionary<NSString *, NSNumber *> *)parts;
-
-@property (nonatomic, assign) NSInteger preferredFramesPerSecond;
-@property (nonatomic, assign) BOOL paused;
-@property (nonatomic, assign, readonly) CGSize canvasSize;
+@interface KGMetalLive2DView : UIView <L2DModelActionProtocol, L2DViewRenderer>
 
 /// 代理
 @property (nonatomic, weak) id<MetalRenderDelegate> delegate;
