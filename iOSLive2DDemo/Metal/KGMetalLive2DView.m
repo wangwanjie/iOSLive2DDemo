@@ -59,7 +59,7 @@
 
 - (void)dealloc {
 
-    NSLog(@"KGLiv2DView dealloc - %p", self);
+    NSLog(@"KGMetalLive2DView dealloc - %p", self);
 
     [self stopMetalRender];
 
@@ -139,7 +139,7 @@
 }
 
 #pragma mark - public methods
-- (void)loadLive2DWithJsonDir:(NSString *)dirName mocJsonName:(NSString *)mocJsonName {
+- (void)loadLive2DModelWithDir:(NSString *)dirName mocJsonName:(NSString *)mocJsonName {
     if (!dirName || !mocJsonName) {
         NSLog(@"资源路径不存在");
         return;

@@ -71,6 +71,7 @@
 		95E35E9725FF18D10092540E /* L2DTextureManager.mm in Sources */ = {isa = PBXBuildFile; fileRef = 95E35E9125FF18D00092540E /* L2DTextureManager.mm */; };
 		95E35E9825FF18D10092540E /* KGOpenGLLive2DView.mm in Sources */ = {isa = PBXBuildFile; fileRef = 95E35E9225FF18D00092540E /* KGOpenGLLive2DView.mm */; };
 		95E35E9925FF18D10092540E /* OpenGLRender.mm in Sources */ = {isa = PBXBuildFile; fileRef = 95E35E9625FF18D10092540E /* OpenGLRender.mm */; };
+		95E35EA325FF4E8B0092540E /* SBNSObjectProxy.m in Sources */ = {isa = PBXBuildFile; fileRef = 95E35EA225FF4E8B0092540E /* SBNSObjectProxy.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -207,6 +208,8 @@
 		95E35E9425FF18D00092540E /* L2DTextureManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = L2DTextureManager.h; sourceTree = "<group>"; };
 		95E35E9525FF18D10092540E /* KGOpenGLLive2DView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KGOpenGLLive2DView.h; sourceTree = "<group>"; };
 		95E35E9625FF18D10092540E /* OpenGLRender.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = OpenGLRender.mm; sourceTree = "<group>"; };
+		95E35EA125FF4E8B0092540E /* SBNSObjectProxy.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SBNSObjectProxy.h; sourceTree = "<group>"; };
+		95E35EA225FF4E8B0092540E /* SBNSObjectProxy.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SBNSObjectProxy.m; sourceTree = "<group>"; };
 		ABD79E68F398A48645A3DED9 /* Pods_iOSLive2DDemo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_iOSLive2DDemo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -285,6 +288,8 @@
 				95E35E9125FF18D00092540E /* L2DTextureManager.mm */,
 				95E35E9325FF18D00092540E /* OpenGLRender.h */,
 				95E35E9625FF18D10092540E /* OpenGLRender.mm */,
+				95E35EA125FF4E8B0092540E /* SBNSObjectProxy.h */,
+				95E35EA225FF4E8B0092540E /* SBNSObjectProxy.m */,
 			);
 			path = OpenGLES;
 			sourceTree = "<group>";
@@ -667,6 +672,7 @@
 				95E35E9925FF18D10092540E /* OpenGLRender.mm in Sources */,
 				959FF4E825FC93F900AB0924 /* CubismEyeBlink.cpp in Sources */,
 				959FF4EB25FC93F900AB0924 /* CubismFramework.cpp in Sources */,
+				95E35EA325FF4E8B0092540E /* SBNSObjectProxy.m in Sources */,
 				959FF4F825FC93F900AB0924 /* CubismId.cpp in Sources */,
 				959FF4F725FC93F900AB0924 /* CubismIdManager.cpp in Sources */,
 				959FF4EC25FC93F900AB0924 /* CubismJson.cpp in Sources */,

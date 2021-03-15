@@ -14,6 +14,7 @@
 #import "UIColor+Live2D.h"
 #import <CubismFramework.hpp>
 #import <Math/CubismViewMatrix.hpp>
+#import "SBNSObjectProxy.h"
 
 using namespace Live2D::Cubism::Framework;
 
@@ -23,7 +24,9 @@ using namespace Live2D::Cubism::Framework;
 @property (nonatomic, assign) GLuint fragmentBufferId;
 
 @property (nonatomic, strong) L2DUserModel *model;
-@property (nonatomic, strong) GLKView *contentView;
+@property (nonatomic, strong) GLKView *glkView;
+/// displayLink 代理
+@property (nonatomic, strong) SBNSObjectProxy *displayLinkProxy;
 @property (nonatomic, strong) CADisplayLink *displayLink;
 @property (nonatomic, strong) NSMutableArray *textures;
 @property (nonatomic, strong) EAGLContext *context;
@@ -52,13 +55,13 @@ EAGLContext *CreateBestEAGLContext() {
 - (void)commonInit {
     _context = CreateBestEAGLContext();
 
-    _contentView = [[GLKView alloc] init];
-    _contentView.delegate = self;
-    _contentView.context = _context;
-    _contentView.drawableDepthFormat = GLKViewDrawableDepthFormat24;
-    [self addSubview:_contentView];
+    _glkView = [[GLKView alloc] init];
+    _glkView.delegate = self;
+    _glkView.context = _context;
+    _glkView.drawableDepthFormat = GLKViewDrawableDepthFormat24;
+    [self addSubview:_glkView];
 
-    [EAGLContext setCurrentContext:_contentView.context];
+    [EAGLContext setCurrentContext:_glkView.context];
 
     // 画面の表示の拡大縮小や移動の変換を行う行列
     _viewMatrix = new CubismViewMatrix();
@@ -80,9 +83,15 @@ EAGLContext *CreateBestEAGLContext() {
     glBindBuffer(GL_ARRAY_BUFFER, _fragmentBufferId);
 
     self.preferredFramesPerSecond = 30;
-    self.displayLink = [CADisplayLink displayLinkWithTarget:self selector:@selector(drawView)];
+
+    self.displayLink = [CADisplayLink displayLinkWithTarget:[SBNSObjectProxy proxyWithObj:self] selector:@selector(drawView)];
     self.displayLink.preferredFramesPerSecond = MAX(1, 60.0f / _preferredFramesPerSecond);
     [self.displayLink addToRunLoop:[NSRunLoop currentRunLoop] forMode:NSRunLoopCommonModes];
+
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(applicationDidEnterBackground)
+                                                 name:UIApplicationDidEnterBackgroundNotification
+                                               object:nil];
 }
 
 - (instancetype)initWithFrame:(CGRect)frame {
@@ -102,11 +111,17 @@ EAGLContext *CreateBestEAGLContext() {
 }
 
 - (void)dealloc {
+    NSLog(@"KGOpenGLLive2DView dealloc - %p", self);
+
+    [self.glkView deleteDrawable];
+
     [self.displayLink invalidate];
     self.displayLink = nil;
+
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
-- (void)loadLive2DWithJsonDir:(NSString *)dirName mocJsonName:(NSString *)mocJsonName {
+- (void)loadLive2DModelWithDir:(NSString *)dirName mocJsonName:(NSString *)mocJsonName {
     if (!dirName || !mocJsonName) {
         NSLog(@"资源路径不存在");
         return;
@@ -121,7 +136,12 @@ EAGLContext *CreateBestEAGLContext() {
     self.renderer.viewMatrix = _viewMatrix;
     self.renderer.spriteColor = self.spriteColor;
 
-    [self.renderer startWithView:self.contentView];
+    [self.renderer startWithView:self.glkView];
+}
+
+#pragma mark - Notification
+- (void)applicationDidEnterBackground {
+    self.paused = true;
 }
 
 #pragma mark - setter
@@ -129,7 +149,7 @@ EAGLContext *CreateBestEAGLContext() {
 - (void)setFrame:(CGRect)frame {
     [super setFrame:frame];
 
-    self.contentView.frame = self.bounds;
+    self.glkView.frame = self.bounds;
 }
 
 - (void)setBackgroundColor:(UIColor *)backgroundColor {
@@ -167,7 +187,7 @@ EAGLContext *CreateBestEAGLContext() {
 }
 
 - (void)drawView {
-    [self.contentView setNeedsDisplay];
+    [self.glkView setNeedsDisplay];
 }
 
 - (CGSize)canvasSize {

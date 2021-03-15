@@ -90,8 +90,8 @@
     self.live2DView2.frame = CGRectMake(0, CGRectGetMaxY(self.live2DView.frame), CGRectGetWidth(self.view.frame), CGRectGetHeight(self.view.frame) * 0.5);
 
     if (!self.hasLoadResource) {
-        [self.live2DView loadLive2DWithJsonDir:@"Live2DResources/Mark/" mocJsonName:@"Mark.model3.json"];
-        [self.live2DView2 loadLive2DWithJsonDir:@"Live2DResources/Shanbao/" mocJsonName:@"Shanbao.model3.json"];
+        [self.live2DView loadLive2DModelWithDir:@"Live2DResources/Mark/" mocJsonName:@"Mark.model3.json"];
+        [self.live2DView2 loadLive2DModelWithDir:@"Live2DResources/Shanbao/" mocJsonName:@"Shanbao.model3.json"];
         self.hasLoadResource = YES;
     }
 }

@@ -22,7 +22,7 @@ typedef NS_ENUM(NSUInteger, KGMetalLive2DViewStatus) {
 /// 加载资源 json
 /// @param dirName model3 文件夹路径
 /// @param mocJsonName model3 名称
-- (void)loadLive2DWithJsonDir:(NSString *)dirName mocJsonName:(NSString *)mocJsonName;
+- (void)loadLive2DModelWithDir:(NSString *)dirName mocJsonName:(NSString *)mocJsonName;
 - (void)performExpression:(SBProductioEmotionExpression *)expression;
 - (void)setParameterNamed:(NSString *)name value:(float)value;
 - (void)setParameterNamed:(NSString *)name blendMode:(L2DBlendMode)blendMode value:(float)value;

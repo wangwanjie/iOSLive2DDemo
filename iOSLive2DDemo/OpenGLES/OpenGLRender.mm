@@ -67,10 +67,6 @@ typedef struct {
 }
 
 - (void)dealloc {
-    // TODO: clean up
-}
-
-- (void)SetupTextures {
 }
 
 - (void)setSpriteColor:(UIColor *)spriteColor {

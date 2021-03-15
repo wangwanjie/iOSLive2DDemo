@@ -15,7 +15,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// 加载资源 json
 /// @param dirName model3 文件夹路径
 /// @param mocJsonName model3 名称
-- (void)loadLive2DWithJsonDir:(NSString *)dirName mocJsonName:(NSString *)mocJsonName;
+- (void)loadLive2DModelWithDir:(NSString *)dirName mocJsonName:(NSString *)mocJsonName;
 
 @property (nonatomic) NSInteger preferredFramesPerSecond;
 @property (nonatomic, assign) BOOL paused;
