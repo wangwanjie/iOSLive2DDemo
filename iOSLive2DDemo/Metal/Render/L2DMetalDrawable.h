@@ -1,5 +1,5 @@
 //
-//  MetalDrawable.h
+//  L2DMetalDrawable.h
 //  iOSLive2DDemo
 //
 //  Created by VanJay on 2020/12/19.
@@ -12,7 +12,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface MetalDrawable : NSObject
+@interface L2DMetalDrawable : NSObject
 
 /// Index for buffer reference.
 @property (nonatomic, assign) int drawableIndex;
@@ -37,25 +37,25 @@ NS_ASSUME_NONNULL_BEGIN
 /// Blend mode.
 @property (nonatomic, assign) L2DBlendMode blendMode;
 
-/// Vertex buffers. Create by `MetalRender`.
+/// Vertex buffers. Create by `L2DMetalRender`.
 @property (nonatomic, nullable, strong) id<MTLBuffer> vertexPositionBuffer;
 
-/// Vertex UV buffers. Create by `MetalRender`.
+/// Vertex UV buffers. Create by `L2DMetalRender`.
 @property (nonatomic, nullable, strong) id<MTLBuffer> vertexTextureCoordinateBuffer;
 
-/// Draw index buffers. Create by `MetalRender`.
+/// Draw index buffers. Create by `L2DMetalRender`.
 @property (nonatomic, nullable, strong) id<MTLBuffer> vertexIndexBuffer;
 
 /// Masks.
 @property (nonatomic, strong) NSArray *masks;
 
-/// Mask texture. Create by `MetalRender`.
+/// Mask texture. Create by `L2DMetalRender`.
 @property (nonatomic, strong) id<MTLTexture> maskTexture;
 
 /// Opacity.
 @property (nonatomic, assign) float opacity;
 
-/// Opacity buffer. Create by `MetalRender`.
+/// Opacity buffer. Create by `L2DMetalRender`.
 @property (nonatomic, strong) id<MTLBuffer> opacityBuffer;
 
 /// Visibility.

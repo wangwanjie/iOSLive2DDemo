@@ -1,5 +1,5 @@
 //
-//  RawArray.h
+//  L2DRawArray.h
 //  iOSLive2DDemo
 //
 //  Created by VanJay on 2020/12/19.

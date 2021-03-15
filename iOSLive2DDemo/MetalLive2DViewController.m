@@ -24,6 +24,7 @@
 - (instancetype)init {
     self = [super init];
     if (self) {
+        // Metal 可异步渲染
         _renderQueue = dispatch_queue_create("com.virtualsingler.render.home", DISPATCH_QUEUE_CONCURRENT);
     }
     return self;
@@ -38,8 +39,8 @@
     [self.view addSubview:self.live2DView];
     [self.view addSubview:self.live2DView2];
 
-    self.live2DView.preferredFramesPerSecond = 60;
-    self.live2DView2.preferredFramesPerSecond = 60;
+    self.live2DView.preferredFramesPerSecond = 30;
+    self.live2DView2.preferredFramesPerSecond = 30;
 }
 
 - (void)viewDidDisappear:(BOOL)animated {
@@ -80,8 +81,6 @@
 
     self.live2DView.delegate = nil;
     self.live2DView2.delegate = nil;
-
-    [NSNotificationCenter.defaultCenter removeObserver:self];
 }
 
 - (void)viewDidLayoutSubviews {
@@ -100,7 +99,7 @@
 }
 
 #pragma mark - MetalRenderDelegate
-- (void)rendererUpdateWithRender:(MetalRender *)renderer duration:(NSTimeInterval)duration {
+- (void)rendererUpdateWithRender:(L2DMetalRender *)renderer duration:(NSTimeInterval)duration {
 }
 
 #pragma mark - lazy load

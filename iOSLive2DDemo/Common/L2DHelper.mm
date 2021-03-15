@@ -1,11 +1,11 @@
 //
-//  SBL2DHelper.m
+//  L2DHelper.m
 //  iOSLive2DDemo
 //
 //  Created by VanJay on 2021/3/13.
 //
 
-#import "SBL2DHelper.h"
+#import "L2DHelper.h"
 #import <stdio.h>
 #import <stdlib.h>
 #import <stdarg.h>

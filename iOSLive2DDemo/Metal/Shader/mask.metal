@@ -6,7 +6,7 @@
 //
 
 #include <metal_stdlib>
-#include "L2DShaderType.h"
+#import "L2DShaderType.h"
 
 using namespace metal;
 

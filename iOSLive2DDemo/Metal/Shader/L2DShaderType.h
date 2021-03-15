@@ -11,7 +11,7 @@
 #include <metal_stdlib>
 #include <simd/simd.h>
 
-#include "L2DBufferIndex.h"
+#import "L2DBufferIndex.h"
 
 using namespace metal;
 

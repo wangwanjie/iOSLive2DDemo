@@ -21,11 +21,6 @@
 
 @implementation L2DTextureManager
 
-- (instancetype)init {
-    self = [super init];
-    return self;
-}
-
 - (void)dealloc {
     [self releaseTextures];
 }

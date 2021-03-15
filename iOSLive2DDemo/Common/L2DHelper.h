@@ -1,5 +1,5 @@
 //
-//  SBL2DHelper.h
+//  L2DHelper.h
 //  iOSLive2DDemo
 //
 //  Created by VanJay on 2021/3/13.

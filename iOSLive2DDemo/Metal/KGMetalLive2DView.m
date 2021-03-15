@@ -7,18 +7,18 @@
 
 #import "KGMetalLive2DView.h"
 #import "L2DUserModel.h"
-#import "MetalRender.h"
+#import "L2DMetalRender.h"
 #import "UIColor+Live2D.h"
 #import <Metal/Metal.h>
 #import <MetalKit/MetalKit.h>
 
 @interface KGMetalLive2DView () <MTKViewDelegate>
 @property (nonatomic, strong) L2DUserModel *model;
-@property (nonatomic, strong) MetalRender *renderer;
+@property (nonatomic, strong) L2DMetalRender *renderer;
 @property (nonatomic, strong) MTKView *mtkView;
 @property (nonatomic, assign) MTLViewport viewPort;
 @property (nonatomic, strong) id<MTLCommandQueue> commandQueue;
-@property (nonatomic, strong) NSMutableArray<MetalRender *> *renderers;
+@property (nonatomic, strong) NSMutableArray<L2DMetalRender *> *renderers;
 /// 背景色
 @property (nonatomic, assign) MTLClearColor clearColor;
 @end
@@ -227,7 +227,7 @@
     self.mtkView.paused = false;
     self.mtkView.hidden = false;
 
-    for (MetalRender *render in self.renderers) {
+    for (L2DMetalRender *render in self.renderers) {
         [render startWithView:self.mtkView];
     }
 }
@@ -238,7 +238,7 @@
     self.mtkView.device = nil;
 }
 
-- (void)addRenderer:(MetalRender *)render {
+- (void)addRenderer:(L2DMetalRender *)render {
     if (!self.mtkView) {
         return;
     }
@@ -253,7 +253,7 @@
     }
 }
 
-- (void)removeRenderer:(MetalRender *)render {
+- (void)removeRenderer:(L2DMetalRender *)render {
     [self.renderers removeAllObjects];
 
     if (self.renderers.count == 0) {
@@ -309,7 +309,7 @@
 
 #pragma mark - MTKViewDelegate
 - (void)mtkView:(MTKView *)view drawableSizeWillChange:(CGSize)size {
-    for (MetalRender *render in self.renderers) {
+    for (L2DMetalRender *render in self.renderers) {
         [render drawableSizeWillChange:view size:size];
     }
 }
@@ -318,7 +318,7 @@
 
     NSTimeInterval time = 1.0 / (NSTimeInterval)(view.preferredFramesPerSecond);
 
-    for (MetalRender *render in self.renderers) {
+    for (L2DMetalRender *render in self.renderers) {
         [render update:time];
     }
 
@@ -340,7 +340,7 @@
         renderPassDescriptor.colorAttachments[0].clearColor = self.clearColor;
 
         // Renderers.
-        for (MetalRender *render in self.renderers) {
+        for (L2DMetalRender *render in self.renderers) {
             [render beginRenderWithTime:time viewPort:self.viewPort commandBuffer:commandBuffer passDescriptor:renderPassDescriptor];
         }
         [commandBuffer presentDrawable:view.currentDrawable];
@@ -354,9 +354,9 @@
 }
 
 #pragma mark - lazy load
-- (MetalRender *)renderer {
+- (L2DMetalRender *)renderer {
     if (!_renderer) {
-        _renderer = [[MetalRender alloc] init];
+        _renderer = [[L2DMetalRender alloc] init];
         __weak __typeof(self) weakSelf = self;
 
         _renderer.didCreatedTransformBuffer = ^{
@@ -364,9 +364,8 @@
             if (self.didCreatedTransformBuffer) {
                 self.didCreatedTransformBuffer();
             } else {
-                MetalRender *renderer = self.renderer;
+                L2DMetalRender *renderer = self.renderer;
                 renderer.scale = 1 / renderer.defaultRenderScale;
-                //renderer.origin = CGPointMake(-0.5, -0.5);
             }
         };
 

@@ -10,11 +10,11 @@
 #import <OpenGLES/ES3/glext.h>
 #import <GLKit/GLKit.h>
 #import "L2DUserModel.h"
-#import "OpenGLRender.h"
 #import "UIColor+Live2D.h"
 #import <CubismFramework.hpp>
 #import <Math/CubismViewMatrix.hpp>
 #import "SBNSObjectProxy.h"
+#import "L2DCOCBridge.h"
 
 using namespace Live2D::Cubism::Framework;
 
@@ -31,19 +31,21 @@ using namespace Live2D::Cubism::Framework;
 @property (nonatomic, strong) NSMutableArray *textures;
 @property (nonatomic, strong) EAGLContext *context;
 /// render
-@property (nonatomic, strong) OpenGLRender *renderer;
+@property (nonatomic, strong) L2DOpenGLRender *renderer;
 /// 背景色
 @property (nonatomic, assign) float clearColorR;
 @property (nonatomic, assign) float clearColorG;
 @property (nonatomic, assign) float clearColorB;
 @property (nonatomic, assign) float clearColorA;
+/// 桥接对象
+@property (nonatomic, strong) L2DCOCBridge *bridge;
 /// モデル描画に用いるView行列
 @property (nonatomic, assign) Csm::CubismMatrix44 *viewMatrix;
 @end
 
 @implementation KGOpenGLLive2DView
 
-EAGLContext *CreateBestEAGLContext() {
+NS_INLINE EAGLContext *CreateBestEAGLContext() {
     EAGLContext *context = [[EAGLContext alloc] initWithAPI:kEAGLRenderingAPIOpenGLES3];
     if (context == nil) {
         context = [[EAGLContext alloc] initWithAPI:kEAGLRenderingAPIOpenGLES2];
@@ -63,10 +65,7 @@ EAGLContext *CreateBestEAGLContext() {
 
     [EAGLContext setCurrentContext:_glkView.context];
 
-    // 画面の表示の拡大縮小や移動の変換を行う行列
-    _viewMatrix = new CubismViewMatrix();
-
-    self.backgroundColor = UIColor.clearColor;
+    self.backgroundColor = UIColor.whiteColor;
 
     glClearColor(_clearColorR, _clearColorG, _clearColorB, _clearColorA);
 
@@ -114,9 +113,12 @@ EAGLContext *CreateBestEAGLContext() {
     NSLog(@"KGOpenGLLive2DView dealloc - %p", self);
 
     [self.glkView deleteDrawable];
+    [EAGLContext setCurrentContext:nil];
 
     [self.displayLink invalidate];
     self.displayLink = nil;
+
+    self.renderer = nil;
 
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
@@ -127,6 +129,15 @@ EAGLContext *CreateBestEAGLContext() {
 }
 
 #pragma mark - setter
+
+- (void)setDelegate:(id<OpenGLRenderDelegate>)delegate {
+    if (!self.renderer) {
+        return;
+    }
+    _delegate = delegate;
+
+    self.renderer.delegate = delegate;
+}
 
 - (void)setFrame:(CGRect)frame {
     [super setFrame:frame];
@@ -154,7 +165,7 @@ EAGLContext *CreateBestEAGLContext() {
 - (void)setPreferredFramesPerSecond:(NSInteger)preferredFramesPerSecond {
     _preferredFramesPerSecond = preferredFramesPerSecond;
 
-    self.displayLink.preferredFramesPerSecond = MAX(1, 60.0f / _preferredFramesPerSecond);
+    self.displayLink.preferredFramesPerSecond = _preferredFramesPerSecond;
 }
 
 - (BOOL)paused {
@@ -225,7 +236,7 @@ EAGLContext *CreateBestEAGLContext() {
         self.renderer = nil;
     }
     self.renderer.model = self.model;
-    self.renderer.viewMatrix = _viewMatrix;
+    self.renderer.bridgeOutSet = self.bridge;
     self.renderer.spriteColor = self.spriteColor;
 
     [self.renderer startWithView:self.glkView];
@@ -260,33 +271,8 @@ EAGLContext *CreateBestEAGLContext() {
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
     NSTimeInterval time = 1.0 / (NSTimeInterval)(self.displayLink.preferredFramesPerSecond);
-    [self.model updateWithDeltaTime:time];
-    [self.model update];
-    [self.model drawModel];
 
-    // 各モデルが持つ描画ターゲットをテクスチャとする場合はスプライトへの描画はここ
-    if (_renderTarget == SelectTarget_ModelFrameBuffer && _renderer) {
-        float uvVertex[] =
-            {
-                0.0f,
-                0.0f,
-                1.0f,
-                0.0f,
-                0.0f,
-                1.0f,
-                1.0f,
-                1.0f,
-        };
-        // サンプルとしてαに適当な差をつける
-        float a = [self GetSpriteAlpha:0];
-
-        L2DUserModel *model = self.model;
-        if (model) {
-            [model performExpression:nil];
-            self.renderer.spriteColor = [UIColor colorWithRed:1 green:1 blue:1 alpha:a];
-            [_renderer renderImmidiate:_vertexBufferId fragmentBufferID:_fragmentBufferId textureId:self.renderer.textureId uvArray:uvVertex];
-        }
-    }
+    [self.renderer update:time];
 }
 
 - (float)GetSpriteAlpha:(int)assign {
@@ -304,10 +290,26 @@ EAGLContext *CreateBestEAGLContext() {
 
 #pragma mark - lazy load
 
-- (OpenGLRender *)renderer {
+- (L2DOpenGLRender *)renderer {
     if (!_renderer) {
-        _renderer = [[OpenGLRender alloc] init];
+        _renderer = [[L2DOpenGLRender alloc] init];
+
+        if (self.delegate) {
+            _renderer.delegate = self.delegate;
+        }
     }
     return _renderer;
+}
+
+- (L2DCOCBridge *)bridge {
+    if (!_bridge) {
+        _bridge = [[L2DCOCBridge alloc] init];
+
+        // 画面の表示の拡大縮小や移動の変換を行う行列
+        _viewMatrix = new CubismViewMatrix();
+
+        _bridge.viewMatrix = _viewMatrix;
+    }
+    return _bridge;
 }
 @end

@@ -12,12 +12,14 @@
 #import "CubismModelSettingJson.hpp"
 #import "CubismIdManager.hpp"
 #import "L2DAppDefine.h"
-#import "SBL2DHelper.h"
+#import "L2DHelper.h"
 #import <CubismDefaultParameterId.hpp>
 #import <Utils/CubismString.hpp>
 #import <Motion/CubismMotion.hpp>
 #import "L2DTextureManager.h"
 #import <Rendering/OpenGL/CubismRenderer_OpenGLES2.hpp>
+#import "L2DCOCBridge.h"
+#import <Math/CubismMatrix44.hpp>
 
 using namespace ::L2DAppDefine;
 using namespace Live2D::Cubism::Core;
@@ -606,14 +608,14 @@ static void FinishedMotion(Csm::ACubismMotion *self) {
     _model->GetRenderer<Rendering::CubismRenderer_OpenGLES2>()->DrawModel();
 }
 
-- (void)drawModelWithMatrix:(Csm::CubismMatrix44 *)matrix {
-    if (_model == NULL) {
+- (void)drawModelWithBridge:(L2DCOCBridge *)bridge {
+    if (_model == NULL || !bridge) {
         return;
     }
 
-    matrix->MultiplyByMatrix(_model->_modelMatrix);
+    bridge.viewMatrix->MultiplyByMatrix(_model->_modelMatrix);
 
-    _model->GetRenderer<Rendering::CubismRenderer_OpenGLES2>()->SetMvpMatrix(matrix);
+    _model->GetRenderer<Rendering::CubismRenderer_OpenGLES2>()->SetMvpMatrix(bridge.viewMatrix);
 
     [self drawModel];
 }

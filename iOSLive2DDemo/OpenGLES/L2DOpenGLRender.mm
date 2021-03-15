@@ -1,16 +1,18 @@
 //
-//  OpenGLRender.m
+//  L2DOpenGLRender.m
 //  iOSLive2DDemo
 //
 //  Created by VanJay on 2021/3/14.
 //
 
-#import "OpenGLRender.h"
+#import "L2DOpenGLRender.h"
 #import <GLKit/GLKit.h>
 #import <OpenGLES/ES3/gl.h>
 #import <OpenGLES/ES3/glext.h>
 #import "L2DTextureManager.h"
 #import "UIColor+Live2D.h"
+#import "L2DUserModel.h"
+#import "L2DCOCBridge.h"
 
 /**
  * @brief Rect 構造体。
@@ -24,7 +26,7 @@ typedef struct {
 
 #define BUFFER_OFFSET(bytes) ((GLubyte *)NULL + (bytes))
 
-@interface OpenGLRender ()
+@interface L2DOpenGLRender ()
 @property (nonatomic, assign) GLuint textureId;  // テクスチャID
 @property (nonatomic, assign) SpriteRect rect;   // 矩形
 @property (nonatomic, assign) GLuint vertexBufferId;
@@ -38,9 +40,11 @@ typedef struct {
 @property (nonatomic, assign) float spriteColorG;
 @property (nonatomic, assign) float spriteColorB;
 @property (nonatomic, assign) float spriteColorA;
+/// 桥接对象
+@property (nonatomic, strong) L2DCOCBridge *bridge;
 @end
 
-@implementation OpenGLRender
+@implementation L2DOpenGLRender
 
 - (instancetype)init {
     self = [super init];
@@ -58,8 +62,8 @@ typedef struct {
     self.baseEffect.texture2d0.enabled = GL_TRUE;
 
     self.textureId = 0;
-    
-    self.scale = 1.0;
+
+    self.scale = 1.0 / self.defaultRenderScale;
 }
 
 - (void)setModel:(L2DUserModel *)model {
@@ -69,6 +73,9 @@ typedef struct {
 }
 
 - (void)dealloc {
+    _baseEffect = nil;
+    
+    NSLog(@"L2DOpenGLRender dealloc - %p", self);
 }
 
 - (void)setSpriteColor:(UIColor *)spriteColor {
@@ -83,9 +90,14 @@ typedef struct {
 
     self.baseEffect.constantColor = GLKVector4Make(_spriteColorR, _spriteColorG, _spriteColorB, _spriteColorA);
 }
+
+#pragma mark - getter
+- (float)defaultRenderScale {
+    return 210.0 / 1046.0;
+}
 @end
 
-@implementation OpenGLRender (Renderer)
+@implementation L2DOpenGLRender (Renderer)
 
 - (void)startWithView:(GLKView *)view {
 
@@ -106,17 +118,19 @@ typedef struct {
     self.renderRect = view.bounds;
 }
 
-- (void)drawableSizeWillChange:(GLKView *)view size:(CGSize)size {
-}
-
 - (void)update:(NSTimeInterval)time {
     if (self.delegate && [self.delegate respondsToSelector:@selector(rendererUpdateWithRender:duration:)]) {
         [self.delegate rendererUpdateWithRender:self duration:time];
     }
+
     [self.model updateWithDeltaTime:time];
     [self.model update];
 
     Csm::CubismMatrix44 projection;
+
+    if (self.bridgeOutSet.viewMatrix != nil) {
+        projection.MultiplyByMatrix(self.bridgeOutSet.viewMatrix);
+    }
 
     CGRect renderRect = self.renderRect;
     int width = renderRect.size.width;
@@ -125,7 +139,9 @@ typedef struct {
     projection.Scale(1.0f, static_cast<float>(width) / static_cast<float>(height));
     projection.ScaleRelative(_scale, _scale);
 
-    [self.model drawModelWithMatrix:&projection];
+    self.bridge.viewMatrix = &projection;
+
+    [self.model drawModelWithBridge:self.bridge];
 }
 
 - (void)render:(GLuint)vertexBufferID fragmentBufferID:(GLuint)fragmentBufferID {
@@ -242,5 +258,12 @@ typedef struct {
         _textureManager = [[L2DTextureManager alloc] init];
     }
     return _textureManager;
+}
+
+- (L2DCOCBridge *)bridge {
+    if (!_bridge) {
+        _bridge = [[L2DCOCBridge alloc] init];
+    }
+    return _bridge;
 }
 @end

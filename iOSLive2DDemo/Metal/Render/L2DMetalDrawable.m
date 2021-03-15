@@ -1,16 +1,16 @@
 //
-//  MetalDrawable.m
+//  L2DMetalDrawable.m
 //  iOSLive2DDemo
 //
 //  Created by VanJay on 2020/12/19.
 //
 
-#import "MetalDrawable.h"
+#import "L2DMetalDrawable.h"
 
-@interface MetalDrawable ()
+@interface L2DMetalDrawable ()
 @end
 
-@implementation MetalDrawable
+@implementation L2DMetalDrawable
 
 - (instancetype)init {
     self = [super init];

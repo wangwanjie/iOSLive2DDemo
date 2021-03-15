@@ -8,7 +8,7 @@
 #import "OpenGLLive2DViewController.h"
 #import "KGOpenGLLive2DView.h"
 
-@interface OpenGLLive2DViewController ()
+@interface OpenGLLive2DViewController () <OpenGLRenderDelegate>
 /// 展示 live2d 的 View
 @property (nonatomic, strong) KGOpenGLLive2DView *live2DView;
 /// 是否已经加载资源
@@ -53,9 +53,7 @@
 
 - (void)dealloc {
 
-    // self.live2DView.delegate = nil;
-
-    [NSNotificationCenter.defaultCenter removeObserver:self];
+    self.live2DView.delegate = nil;
 }
 
 - (void)viewDidLayoutSubviews {
@@ -69,15 +67,15 @@
     }
 }
 
-//#pragma mark - MetalRenderDelegate
-//- (void)rendererUpdateWithRender:(MetalRender *)renderer duration:(NSTimeInterval)duration {
-//}
+#pragma mark - OpenGLRenderDelegate
+- (void)rendererUpdateWithRender:(L2DOpenGLRender *)renderer duration:(NSTimeInterval)duration {
+}
 
 #pragma mark - lazy load
 - (KGOpenGLLive2DView *)live2DView {
     if (!_live2DView) {
         _live2DView = [[KGOpenGLLive2DView alloc] init];
-        // _live2DView.delegate = self;
+        _live2DView.delegate = self;
     }
     return _live2DView;
 }

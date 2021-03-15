@@ -1,13 +1,11 @@
 //
-//  MetalRender.h
+//  L2DMetalRender.h
 //  iOSLive2DDemo
 //
 //  Created by VanJay on 2020/12/19.
 //
 
 #import "L2DBufferIndex.h"
-#import "L2DUserModel.h"
-#import "MetalDrawable.h"
 #import <Metal/Metal.h>
 #import <MetalKit/MetalKit.h>
 #import <UIKit/UIKit.h>
@@ -16,7 +14,8 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@class MetalRender;
+@class L2DMetalRender;
+@class L2DUserModel;
 
 @protocol MetalRenderDelegate <NSObject>
 @required
@@ -24,10 +23,10 @@ NS_ASSUME_NONNULL_BEGIN
 /// 用于外部接收刷新事件
 /// @param renderer 渲染器
 /// @param duration 时长
-- (void)rendererUpdateWithRender:(MetalRender *)renderer duration:(NSTimeInterval)duration;
+- (void)rendererUpdateWithRender:(L2DMetalRender *)renderer duration:(NSTimeInterval)duration;
 @end
 
-@interface MetalRender : NSObject
+@interface L2DMetalRender : NSObject
 @property (nonatomic, weak) id<MetalRenderDelegate> delegate;
 @property (nonatomic, strong) L2DUserModel *model;
 
@@ -60,7 +59,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (float)defaultRenderScale;
 @end
 
-@interface MetalRender (Renderer)
+@interface L2DMetalRender (Renderer)
 
 - (void)startWithView:(MTKView *)view;
 

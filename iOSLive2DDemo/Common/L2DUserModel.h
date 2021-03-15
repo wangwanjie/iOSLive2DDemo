@@ -5,15 +5,13 @@
 //  Created by VanJay on 2020/12/19.
 //
 
-#import "RawArray.h"
+#import "L2DRawArray.h"
 #import <UIKit/UIKit.h>
 #import "SBProductioEmotionExpression.h"
 #import "L2DModelActionProtocol.h"
 
-#import <CubismFramework.hpp>
-#import <Math/CubismMatrix44.hpp>
-
 @class L2DTextureManager;
+@class L2DCOCBridge;
 
 /// Live2D 模型
 @interface L2DUserModel : NSObject <L2DModelActionProtocol>
@@ -64,7 +62,7 @@
 
 /// 如果使用 OpenGLES 渲染需要
 - (void)drawModel;
-- (void)drawModelWithMatrix:(Csm::CubismMatrix44 *)matrix;
+- (void)drawModelWithBridge:(L2DCOCBridge *)bridge;
 
 /**
  * @brief   画面をドラッグしたときの処理

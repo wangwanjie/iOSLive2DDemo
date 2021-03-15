@@ -8,12 +8,6 @@
 #import <Foundation/Foundation.h>
 #import <CubismFramework.hpp>
 
-typedef NS_ENUM(NSUInteger, SelectTarget) {
-    SelectTarget_None,              ///< デフォルトのフレームバッファにレンダリング
-    SelectTarget_ModelFrameBuffer,  ///< L2DUserModelが各自持つフレームバッファにレンダリング
-    SelectTarget_ViewFrameBuffer,   ///< L2DViewの持つフレームバッファにレンダリング
-};
-
 /**
  * @brief  Sample Appで使用する定数
  *

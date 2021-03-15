@@ -1,17 +1,17 @@
 //
-//  OpenGLRender.h
+//  L2DOpenGLRender.h
 //  iOSLive2DDemo
 //
 //  Created by VanJay on 2021/3/14.
 //
 
 #import <Foundation/Foundation.h>
-#import "L2DUserModel.h"
 #import <GLKit/GLKit.h>
-#import <CubismFramework.hpp>
-#import <Math/CubismMatrix44.hpp>
+#import "L2DCOCBridge.h"
 
-@class OpenGLRender;
+@class L2DOpenGLRender;
+@class L2DUserModel;
+@class L2DCOCBridge;
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -21,10 +21,10 @@ NS_ASSUME_NONNULL_BEGIN
 /// 用于外部接收刷新事件
 /// @param renderer 渲染器
 /// @param duration 时长
-- (void)rendererUpdateWithRender:(OpenGLRender *)renderer duration:(NSTimeInterval)duration;
+- (void)rendererUpdateWithRender:(L2DOpenGLRender *)renderer duration:(NSTimeInterval)duration;
 @end
 
-@interface OpenGLRender : NSObject
+@interface L2DOpenGLRender : NSObject
 
 @property (strong, nonatomic) GLKBaseEffect *baseEffect;
 /// rect
@@ -39,15 +39,16 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, weak) id<OpenGLRenderDelegate> delegate;
 @property (nonatomic, strong) L2DUserModel *model;
-/// モデル描画に用いるView行列
-@property (nonatomic, assign) Csm::CubismMatrix44 *viewMatrix;
+/// 外部设置的桥接对象
+@property (nonatomic, strong) L2DCOCBridge *bridgeOutSet;
+
+/// 默认渲染人物高度与画布高度比例
+- (float)defaultRenderScale;
 @end
 
-@interface OpenGLRender (Renderer)
+@interface L2DOpenGLRender (Renderer)
 
 - (void)startWithView:(GLKView *)view;
-
-- (void)drawableSizeWillChange:(GLKView *)view size:(CGSize)size;
 
 - (void)update:(NSTimeInterval)time;
 

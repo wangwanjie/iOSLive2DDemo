@@ -1,11 +1,11 @@
 //
-//  RawArray.m
+//  L2DRawArray.m
 //  iOSLive2DDemo
 //
 //  Created by VanJay on 2020/12/19.
 //
 
-#import "RawArray.h"
+#import "L2DRawArray.h"
 
 // Float array.
 @implementation RawFloatArray

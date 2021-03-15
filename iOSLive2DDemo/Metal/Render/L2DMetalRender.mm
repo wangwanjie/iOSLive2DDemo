@@ -1,13 +1,15 @@
 //
-//  MetalRender.m
+//  L2DMetalRender.m
 //  iOSLive2DDemo
 //
 //  Created by VanJay on 2020/12/19.
 //
 
-#import "MetalRender.h"
+#import "L2DMetalRender.h"
+#import "L2DUserModel.h"
+#import "L2DMetalDrawable.h"
 
-@interface MetalRender ()
+@interface L2DMetalRender ()
 @property (nonatomic, nullable, strong) MTKView *view;
 /// Render pipelines.
 @property (nonatomic, nonnull, strong) id<MTLRenderPipelineState> pipelineStateBlendingAdditive;
@@ -15,15 +17,15 @@
 @property (nonatomic, nonnull, strong) id<MTLRenderPipelineState> pipelineStateBlendingNormal;
 @property (nonatomic, nonnull, strong) id<MTLRenderPipelineState> pipelineStateMasking;
 /// Live2D drawable parts.
-@property (nonatomic, nonnull, strong) NSMutableArray<MetalDrawable *> *drawables;
-@property (nonatomic, nonnull, copy) NSArray<MetalDrawable *> *drawableSorted;
+@property (nonatomic, nonnull, strong) NSMutableArray<L2DMetalDrawable *> *drawables;
+@property (nonatomic, nonnull, copy) NSArray<L2DMetalDrawable *> *drawableSorted;
 /// Buffers.
 @property (nonatomic, nonnull, strong) id<MTLBuffer> transformBuffer;
 /// Textures.
 @property (nonatomic, nonnull, strong) NSMutableArray<id<MTLTexture>> *textures;
 @end
 
-@implementation MetalRender
+@implementation L2DMetalRender
 
 - (instancetype)init {
     self = [super init];
@@ -36,6 +38,10 @@
         _textures = [NSMutableArray array];
     }
     return self;
+}
+
+- (void)dealloc {
+    NSLog(@"L2DMetalRender dealloc - %p", self);
 }
 
 - (void)createBuffersWithView:(MTKView *)view {
@@ -62,7 +68,7 @@
 
     for (int i = 0; i < drawableCount; i++) {
         @autoreleasepool {
-            MetalDrawable *drawable = [[MetalDrawable alloc] init];
+            L2DMetalDrawable *drawable = [[L2DMetalDrawable alloc] init];
             drawable.drawableIndex = i;
 
             RawFloatArray *vertexPositions = [model vertexPositionsForDrawable:i];
@@ -116,8 +122,16 @@
     }
     // Sort drawables.
     NSArray<NSNumber *> *renderOrders = model.renderOrders.intArray;
-    self.drawableSorted = [self.drawables sortedArrayUsingComparator:^NSComparisonResult(MetalDrawable *obj1, MetalDrawable *obj2) {
-        return renderOrders[obj1.drawableIndex].intValue > renderOrders[obj2.drawableIndex].intValue;
+    self.drawableSorted = [self.drawables sortedArrayUsingComparator:^NSComparisonResult(L2DMetalDrawable *obj1, L2DMetalDrawable *obj2) {
+        NSComparisonResult result = NSOrderedAscending;
+        int obj1Value = renderOrders[obj1.drawableIndex].intValue;
+        int obj2Value = renderOrders[obj2.drawableIndex].intValue;
+        if (obj1Value > obj2Value) {
+            result = NSOrderedDescending;
+        } else if (obj1Value == obj2Value) {
+            result = NSOrderedSame;
+        }
+        return result;
     }];
 }
 
@@ -156,7 +170,7 @@
         }
     }
 
-    for (MetalDrawable *drawable in self.drawables) {
+    for (L2DMetalDrawable *drawable in self.drawables) {
         @autoreleasepool {
             if (drawable.maskCount > 0) {
                 MTLTextureDescriptor *maskTextureDesc = [[MTLTextureDescriptor alloc] init];
@@ -277,7 +291,7 @@
         return;
     }
     BOOL needSorting = false;
-    for (MetalDrawable *drawable in self.drawables) {
+    for (L2DMetalDrawable *drawable in self.drawables) {
         @autoreleasepool {
             int index = drawable.drawableIndex;
             if ([model isOpacityDidChangedForDrawable:index]) {
@@ -308,8 +322,16 @@
         }
         if (needSorting) {
             NSArray<NSNumber *> *renderOrders = model.renderOrders.intArray;
-            self.drawableSorted = [self.drawables sortedArrayUsingComparator:^NSComparisonResult(MetalDrawable *obj1, MetalDrawable *obj2) {
-                return renderOrders[obj1.drawableIndex].intValue > renderOrders[obj2.drawableIndex].intValue;
+            self.drawableSorted = [self.drawables sortedArrayUsingComparator:^NSComparisonResult(L2DMetalDrawable *obj1, L2DMetalDrawable *obj2) {
+                NSComparisonResult result = NSOrderedAscending;
+                int obj1Value = renderOrders[obj1.drawableIndex].intValue;
+                int obj2Value = renderOrders[obj2.drawableIndex].intValue;
+                if (obj1Value > obj2Value) {
+                    result = NSOrderedDescending;
+                } else if (obj1Value == obj2Value) {
+                    result = NSOrderedSame;
+                }
+                return result;
             }];
         }
     }
@@ -321,7 +343,7 @@
     passDesc.colorAttachments[0].storeAction = MTLStoreActionStore;
     // 设置默认颜色
     passDesc.colorAttachments[0].clearColor = self.clearColor;
-    for (MetalDrawable *drawable in self.drawables) {
+    for (L2DMetalDrawable *drawable in self.drawables) {
         @autoreleasepool {
             if (drawable.maskCount > 0) {
                 passDesc.colorAttachments[0].texture = drawable.maskTexture;
@@ -335,7 +357,7 @@
                 [encoder setViewport:viewPort];
 
                 for (NSNumber *index in drawable.masks) {
-                    MetalDrawable *mask = self.drawables[index.intValue];
+                    L2DMetalDrawable *mask = self.drawables[index.intValue];
                     // Bind vertex buffers.
                     [encoder setVertexBuffer:self.transformBuffer
                                       offset:0
@@ -378,7 +400,7 @@
     [encoder setVertexBuffer:self.transformBuffer
                       offset:0
                      atIndex:L2DBufferIndexTransform];
-    for (MetalDrawable *drawable in self.drawableSorted) {
+    for (L2DMetalDrawable *drawable in self.drawableSorted) {
         @autoreleasepool {
             // Bind vertex buffer.
             [encoder setVertexBuffer:drawable.vertexPositionBuffer
@@ -489,7 +511,7 @@
 }
 @end
 
-@implementation MetalRender (Renderer)
+@implementation L2DMetalRender (Renderer)
 
 - (void)startWithView:(MTKView *)view {
     self.view = view;
@@ -509,7 +531,7 @@
     }
 
     /// Reset mask texture.
-    for (MetalDrawable *drawable in self.drawables) {
+    for (L2DMetalDrawable *drawable in self.drawables) {
         @autoreleasepool {
             if (drawable.maskCount > 0) {
                 MTLTextureDescriptor *maskTextureDesc = [[MTLTextureDescriptor alloc] init];
