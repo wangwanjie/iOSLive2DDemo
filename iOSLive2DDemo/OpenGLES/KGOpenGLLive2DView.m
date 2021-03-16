@@ -34,6 +34,8 @@
 @property (nonatomic, strong) L2DOpenGLRender *renderer;
 /// 桥接对象
 @property (nonatomic, strong) L2DMatrix44Bridge *bridge;
+/// 是否自动暂停
+@property (nonatomic, assign) BOOL isAutoPaused;
 @end
 
 @implementation KGOpenGLLive2DView
@@ -52,9 +54,9 @@ NS_INLINE EAGLContext *CreateBestEAGLContext() {
 
     _glkView = [[GLKView alloc] init];
     _glkView.delegate = self;
+    _glkView.opaque = NO;
     _glkView.context = context;
     _glkView.drawableDepthFormat = GLKViewDrawableDepthFormat24;
-    _glkView.opaque = NO;
     [self addSubview:_glkView];
 
     [EAGLContext setCurrentContext:_glkView.context];
@@ -77,13 +79,14 @@ NS_INLINE EAGLContext *CreateBestEAGLContext() {
 
     self.preferredFramesPerSecond = 30;
 
-    self.displayLink = [CADisplayLink displayLinkWithTarget:[SBNSObjectProxy proxyWithObj:self] selector:@selector(drawView)];
-    self.displayLink.preferredFramesPerSecond = MAX(1, 60.0f / _preferredFramesPerSecond);
-    [self.displayLink addToRunLoop:[NSRunLoop currentRunLoop] forMode:NSRunLoopCommonModes];
-
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(applicationDidEnterBackground)
                                                  name:UIApplicationDidEnterBackgroundNotification
+                                               object:nil];
+
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(applicationDidBecomeActive)
+                                                 name:UIApplicationDidBecomeActiveNotification
                                                object:nil];
 }
 
@@ -118,17 +121,38 @@ NS_INLINE EAGLContext *CreateBestEAGLContext() {
     [self.glkView deleteDrawable];
     [EAGLContext setCurrentContext:nil];
 
-    [self.displayLink invalidate];
-    self.displayLink = nil;
+    [self clearDisplayLink];
 
     self.renderer = nil;
 
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
+#pragma mark - private methods
+
+- (void)clearDisplayLink {
+    [self.displayLink invalidate];
+    self.displayLink = nil;
+}
+
+- (void)createDisplayLink {
+    if (_displayLink) {
+        [self clearDisplayLink];
+    }
+    self.displayLink = [CADisplayLink displayLinkWithTarget:[SBNSObjectProxy proxyWithObj:self] selector:@selector(drawView)];
+    self.displayLink.preferredFramesPerSecond = _preferredFramesPerSecond;
+    [self.displayLink addToRunLoop:[NSRunLoop currentRunLoop] forMode:NSRunLoopCommonModes];
+}
+
 #pragma mark - Notification
 - (void)applicationDidEnterBackground {
-    self.paused = true;
+    [self setPaused:true isAutoPaused:true];
+}
+
+- (void)applicationDidBecomeActive {
+    if (self.isAutoPaused) {
+        self.paused = false;
+    }
 }
 
 #pragma mark - setter
@@ -176,11 +200,13 @@ NS_INLINE EAGLContext *CreateBestEAGLContext() {
 }
 
 - (void)setPaused:(BOOL)paused {
-    self.displayLink.paused = paused;
+    [self setPaused:paused isAutoPaused:false];
+}
 
-    if (paused) {
-        [self.displayLink setPaused:true];
-    }
+- (void)setPaused:(BOOL)paused isAutoPaused:(BOOL)isAutoPaused {
+    self.isAutoPaused = isAutoPaused;
+
+    self.displayLink.paused = paused;
 }
 
 - (void)drawView {
@@ -243,6 +269,8 @@ NS_INLINE EAGLContext *CreateBestEAGLContext() {
     self.renderer.spriteColor = self.spriteColor;
 
     [self.renderer startWithView:self.glkView];
+
+    [self createDisplayLink];
 }
 
 - (void)setParameterWithDictionary:(NSDictionary<NSString *, NSNumber *> *)params {
@@ -276,19 +304,6 @@ NS_INLINE EAGLContext *CreateBestEAGLContext() {
     NSTimeInterval time = 1.0 / (NSTimeInterval)(self.displayLink.preferredFramesPerSecond);
 
     [self.renderer update:time];
-}
-
-- (float)GetSpriteAlpha:(int)assign {
-    // assignの数値に応じて適当に決定
-    float alpha = 0.25f + (float)assign * 0.5f;  // サンプルとしてαに適当な差をつける
-    if (alpha > 1.0f) {
-        alpha = 1.0f;
-    }
-    if (alpha < 0.1f) {
-        alpha = 0.1f;
-    }
-
-    return alpha;
 }
 
 #pragma mark - lazy load

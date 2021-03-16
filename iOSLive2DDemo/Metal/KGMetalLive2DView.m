@@ -76,11 +76,6 @@
     self.paused = true;
 }
 
-#pragma mark - event response
-- (void)drawView {
-    [self.mtkView draw];
-}
-
 #pragma mark - setter
 - (void)setDelegate:(id<MetalRenderDelegate>)delegate {
     if (!self.renderer) {

@@ -57,22 +57,22 @@
 		959FF51D25FCEE7600AB0924 /* Live2DResources in Resources */ = {isa = PBXBuildFile; fileRef = 959FF51C25FCEE7600AB0924 /* Live2DResources */; };
 		959FF52225FCEEA200AB0924 /* UIColor+Live2D.m in Sources */ = {isa = PBXBuildFile; fileRef = 959FF52125FCEEA200AB0924 /* UIColor+Live2D.m */; };
 		95E35F2125FF66250092540E /* SBProductioEmotionExpression.m in Sources */ = {isa = PBXBuildFile; fileRef = 95E35F1F25FF66240092540E /* SBProductioEmotionExpression.m */; };
-		95E36001260072990092540E /* L2DMetalRender.mm in Sources */ = {isa = PBXBuildFile; fileRef = 95E35FDE260072980092540E /* L2DMetalRender.mm */; };
-		95E36002260072990092540E /* L2DMetalDrawable.m in Sources */ = {isa = PBXBuildFile; fileRef = 95E35FDF260072980092540E /* L2DMetalDrawable.m */; };
-		95E36003260072990092540E /* KGMetalLive2DView.m in Sources */ = {isa = PBXBuildFile; fileRef = 95E35FE1260072980092540E /* KGMetalLive2DView.m */; };
-		95E36004260072990092540E /* mask.metal in Sources */ = {isa = PBXBuildFile; fileRef = 95E35FE3260072980092540E /* mask.metal */; };
-		95E36005260072990092540E /* basic.metal in Sources */ = {isa = PBXBuildFile; fileRef = 95E35FE4260072980092540E /* basic.metal */; };
-		95E36006260072990092540E /* SBNSObjectProxy.m in Sources */ = {isa = PBXBuildFile; fileRef = 95E35FE8260072980092540E /* SBNSObjectProxy.m */; };
-		95E36007260072990092540E /* L2DOpenGLRender.m in Sources */ = {isa = PBXBuildFile; fileRef = 95E35FE9260072980092540E /* L2DOpenGLRender.m */; };
-		95E36008260072990092540E /* L2DTextureManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 95E35FEB260072980092540E /* L2DTextureManager.m */; };
-		95E36009260072990092540E /* KGOpenGLLive2DView.m in Sources */ = {isa = PBXBuildFile; fileRef = 95E35FEE260072980092540E /* KGOpenGLLive2DView.m */; };
-		95E3600A260072990092540E /* L2DHelper.mm in Sources */ = {isa = PBXBuildFile; fileRef = 95E35FF3260072990092540E /* L2DHelper.mm */; };
-		95E3600B260072990092540E /* L2DCubism.mm in Sources */ = {isa = PBXBuildFile; fileRef = 95E35FF4260072990092540E /* L2DCubism.mm */; };
-		95E3600C260072990092540E /* L2DRawArray.m in Sources */ = {isa = PBXBuildFile; fileRef = 95E35FF5260072990092540E /* L2DRawArray.m */; };
-		95E3600D260072990092540E /* L2DModelDefine.mm in Sources */ = {isa = PBXBuildFile; fileRef = 95E35FF9260072990092540E /* L2DModelDefine.mm */; };
-		95E3600E260072990092540E /* L2DUserModel.mm in Sources */ = {isa = PBXBuildFile; fileRef = 95E35FFA260072990092540E /* L2DUserModel.mm */; };
-		95E3600F260072990092540E /* L2DAppDefine.mm in Sources */ = {isa = PBXBuildFile; fileRef = 95E35FFC260072990092540E /* L2DAppDefine.mm */; };
-		95E36010260072990092540E /* L2DMatrix44Bridge.mm in Sources */ = {isa = PBXBuildFile; fileRef = 95E36000260072990092540E /* L2DMatrix44Bridge.mm */; };
+		95E360812600CF0E0092540E /* L2DMatrix44Bridge.mm in Sources */ = {isa = PBXBuildFile; fileRef = 95E3605C2600CF0C0092540E /* L2DMatrix44Bridge.mm */; };
+		95E360822600CF0E0092540E /* L2DHelper.mm in Sources */ = {isa = PBXBuildFile; fileRef = 95E3605E2600CF0C0092540E /* L2DHelper.mm */; };
+		95E360832600CF0E0092540E /* L2DCubism.mm in Sources */ = {isa = PBXBuildFile; fileRef = 95E3605F2600CF0C0092540E /* L2DCubism.mm */; };
+		95E360842600CF0E0092540E /* L2DRawArray.m in Sources */ = {isa = PBXBuildFile; fileRef = 95E360602600CF0C0092540E /* L2DRawArray.m */; };
+		95E360852600CF0E0092540E /* L2DModelDefine.mm in Sources */ = {isa = PBXBuildFile; fileRef = 95E360642600CF0C0092540E /* L2DModelDefine.mm */; };
+		95E360862600CF0E0092540E /* L2DUserModel.mm in Sources */ = {isa = PBXBuildFile; fileRef = 95E360652600CF0C0092540E /* L2DUserModel.mm */; };
+		95E360872600CF0E0092540E /* L2DAppDefine.mm in Sources */ = {isa = PBXBuildFile; fileRef = 95E360672600CF0C0092540E /* L2DAppDefine.mm */; };
+		95E360882600CF0E0092540E /* SBNSObjectProxy.m in Sources */ = {isa = PBXBuildFile; fileRef = 95E3606C2600CF0D0092540E /* SBNSObjectProxy.m */; };
+		95E360892600CF0E0092540E /* L2DOpenGLRender.m in Sources */ = {isa = PBXBuildFile; fileRef = 95E3606D2600CF0D0092540E /* L2DOpenGLRender.m */; };
+		95E3608A2600CF0E0092540E /* L2DTextureManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 95E3606F2600CF0D0092540E /* L2DTextureManager.m */; };
+		95E3608B2600CF0E0092540E /* KGOpenGLLive2DView.m in Sources */ = {isa = PBXBuildFile; fileRef = 95E360722600CF0D0092540E /* KGOpenGLLive2DView.m */; };
+		95E3608C2600CF0E0092540E /* L2DMetalRender.mm in Sources */ = {isa = PBXBuildFile; fileRef = 95E360782600CF0D0092540E /* L2DMetalRender.mm */; };
+		95E3608D2600CF0E0092540E /* L2DMetalDrawable.m in Sources */ = {isa = PBXBuildFile; fileRef = 95E360792600CF0D0092540E /* L2DMetalDrawable.m */; };
+		95E3608E2600CF0E0092540E /* KGMetalLive2DView.m in Sources */ = {isa = PBXBuildFile; fileRef = 95E3607B2600CF0D0092540E /* KGMetalLive2DView.m */; };
+		95E3608F2600CF0E0092540E /* mask.metal in Sources */ = {isa = PBXBuildFile; fileRef = 95E3607D2600CF0D0092540E /* mask.metal */; };
+		95E360902600CF0E0092540E /* basic.metal in Sources */ = {isa = PBXBuildFile; fileRef = 95E3607E2600CF0D0092540E /* basic.metal */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -181,40 +181,40 @@
 		959FF52125FCEEA200AB0924 /* UIColor+Live2D.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+Live2D.m"; sourceTree = "<group>"; };
 		95E35F1F25FF66240092540E /* SBProductioEmotionExpression.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBProductioEmotionExpression.m; sourceTree = "<group>"; };
 		95E35F2025FF66250092540E /* SBProductioEmotionExpression.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBProductioEmotionExpression.h; sourceTree = "<group>"; };
-		95E35FDB260072980092540E /* KGMetalLive2DView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KGMetalLive2DView.h; sourceTree = "<group>"; };
-		95E35FDD260072980092540E /* L2DMetalDrawable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = L2DMetalDrawable.h; sourceTree = "<group>"; };
-		95E35FDE260072980092540E /* L2DMetalRender.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = L2DMetalRender.mm; sourceTree = "<group>"; };
-		95E35FDF260072980092540E /* L2DMetalDrawable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = L2DMetalDrawable.m; sourceTree = "<group>"; };
-		95E35FE0260072980092540E /* L2DMetalRender.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = L2DMetalRender.h; sourceTree = "<group>"; };
-		95E35FE1260072980092540E /* KGMetalLive2DView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KGMetalLive2DView.m; sourceTree = "<group>"; };
-		95E35FE3260072980092540E /* mask.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; path = mask.metal; sourceTree = "<group>"; };
-		95E35FE4260072980092540E /* basic.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; path = basic.metal; sourceTree = "<group>"; };
-		95E35FE5260072980092540E /* L2DBufferIndex.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = L2DBufferIndex.h; sourceTree = "<group>"; };
-		95E35FE6260072980092540E /* L2DShaderType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = L2DShaderType.h; sourceTree = "<group>"; };
-		95E35FE8260072980092540E /* SBNSObjectProxy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBNSObjectProxy.m; sourceTree = "<group>"; };
-		95E35FE9260072980092540E /* L2DOpenGLRender.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = L2DOpenGLRender.m; sourceTree = "<group>"; };
-		95E35FEA260072980092540E /* KGOpenGLLive2DView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KGOpenGLLive2DView.h; sourceTree = "<group>"; };
-		95E35FEB260072980092540E /* L2DTextureManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = L2DTextureManager.m; sourceTree = "<group>"; };
-		95E35FEC260072980092540E /* L2DOpenGLRender.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = L2DOpenGLRender.h; sourceTree = "<group>"; };
-		95E35FED260072980092540E /* SBNSObjectProxy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBNSObjectProxy.h; sourceTree = "<group>"; };
-		95E35FEE260072980092540E /* KGOpenGLLive2DView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KGOpenGLLive2DView.m; sourceTree = "<group>"; };
-		95E35FEF260072980092540E /* L2DTextureManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = L2DTextureManager.h; sourceTree = "<group>"; };
-		95E35FF1260072990092540E /* L2DHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = L2DHelper.h; sourceTree = "<group>"; };
-		95E35FF2260072990092540E /* L2DModelDefine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = L2DModelDefine.h; sourceTree = "<group>"; };
-		95E35FF3260072990092540E /* L2DHelper.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = L2DHelper.mm; sourceTree = "<group>"; };
-		95E35FF4260072990092540E /* L2DCubism.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = L2DCubism.mm; sourceTree = "<group>"; };
-		95E35FF5260072990092540E /* L2DRawArray.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = L2DRawArray.m; sourceTree = "<group>"; };
-		95E35FF6260072990092540E /* L2DCubism.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = L2DCubism.h; sourceTree = "<group>"; };
-		95E35FF7260072990092540E /* L2DModelActionProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = L2DModelActionProtocol.h; sourceTree = "<group>"; };
-		95E35FF8260072990092540E /* L2DUserModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = L2DUserModel.h; sourceTree = "<group>"; };
-		95E35FF9260072990092540E /* L2DModelDefine.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = L2DModelDefine.mm; sourceTree = "<group>"; };
-		95E35FFA260072990092540E /* L2DUserModel.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = L2DUserModel.mm; sourceTree = "<group>"; };
-		95E35FFB260072990092540E /* L2DRawArray.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = L2DRawArray.h; sourceTree = "<group>"; };
-		95E35FFC260072990092540E /* L2DAppDefine.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = L2DAppDefine.mm; sourceTree = "<group>"; };
-		95E35FFD260072990092540E /* L2DAppDefine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = L2DAppDefine.h; sourceTree = "<group>"; };
-		95E35FFE260072990092540E /* L2DMatrix44Bridge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = L2DMatrix44Bridge.h; sourceTree = "<group>"; };
-		95E35FFF260072990092540E /* L2DViewRenderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = L2DViewRenderer.h; sourceTree = "<group>"; };
-		95E36000260072990092540E /* L2DMatrix44Bridge.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = L2DMatrix44Bridge.mm; sourceTree = "<group>"; };
+		95E3605B2600CF0C0092540E /* L2DHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = L2DHelper.h; sourceTree = "<group>"; };
+		95E3605C2600CF0C0092540E /* L2DMatrix44Bridge.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = L2DMatrix44Bridge.mm; sourceTree = "<group>"; };
+		95E3605D2600CF0C0092540E /* L2DModelDefine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = L2DModelDefine.h; sourceTree = "<group>"; };
+		95E3605E2600CF0C0092540E /* L2DHelper.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = L2DHelper.mm; sourceTree = "<group>"; };
+		95E3605F2600CF0C0092540E /* L2DCubism.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = L2DCubism.mm; sourceTree = "<group>"; };
+		95E360602600CF0C0092540E /* L2DRawArray.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = L2DRawArray.m; sourceTree = "<group>"; };
+		95E360612600CF0C0092540E /* L2DCubism.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = L2DCubism.h; sourceTree = "<group>"; };
+		95E360622600CF0C0092540E /* L2DModelActionProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = L2DModelActionProtocol.h; sourceTree = "<group>"; };
+		95E360632600CF0C0092540E /* L2DUserModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = L2DUserModel.h; sourceTree = "<group>"; };
+		95E360642600CF0C0092540E /* L2DModelDefine.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = L2DModelDefine.mm; sourceTree = "<group>"; };
+		95E360652600CF0C0092540E /* L2DUserModel.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = L2DUserModel.mm; sourceTree = "<group>"; };
+		95E360662600CF0C0092540E /* L2DRawArray.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = L2DRawArray.h; sourceTree = "<group>"; };
+		95E360672600CF0C0092540E /* L2DAppDefine.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = L2DAppDefine.mm; sourceTree = "<group>"; };
+		95E360682600CF0C0092540E /* L2DAppDefine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = L2DAppDefine.h; sourceTree = "<group>"; };
+		95E360692600CF0C0092540E /* L2DViewRenderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = L2DViewRenderer.h; sourceTree = "<group>"; };
+		95E3606A2600CF0C0092540E /* L2DMatrix44Bridge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = L2DMatrix44Bridge.h; sourceTree = "<group>"; };
+		95E3606C2600CF0D0092540E /* SBNSObjectProxy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBNSObjectProxy.m; sourceTree = "<group>"; };
+		95E3606D2600CF0D0092540E /* L2DOpenGLRender.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = L2DOpenGLRender.m; sourceTree = "<group>"; };
+		95E3606E2600CF0D0092540E /* KGOpenGLLive2DView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KGOpenGLLive2DView.h; sourceTree = "<group>"; };
+		95E3606F2600CF0D0092540E /* L2DTextureManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = L2DTextureManager.m; sourceTree = "<group>"; };
+		95E360702600CF0D0092540E /* L2DOpenGLRender.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = L2DOpenGLRender.h; sourceTree = "<group>"; };
+		95E360712600CF0D0092540E /* SBNSObjectProxy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBNSObjectProxy.h; sourceTree = "<group>"; };
+		95E360722600CF0D0092540E /* KGOpenGLLive2DView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KGOpenGLLive2DView.m; sourceTree = "<group>"; };
+		95E360732600CF0D0092540E /* L2DTextureManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = L2DTextureManager.h; sourceTree = "<group>"; };
+		95E360752600CF0D0092540E /* KGMetalLive2DView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KGMetalLive2DView.h; sourceTree = "<group>"; };
+		95E360772600CF0D0092540E /* L2DMetalDrawable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = L2DMetalDrawable.h; sourceTree = "<group>"; };
+		95E360782600CF0D0092540E /* L2DMetalRender.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = L2DMetalRender.mm; sourceTree = "<group>"; };
+		95E360792600CF0D0092540E /* L2DMetalDrawable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = L2DMetalDrawable.m; sourceTree = "<group>"; };
+		95E3607A2600CF0D0092540E /* L2DMetalRender.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = L2DMetalRender.h; sourceTree = "<group>"; };
+		95E3607B2600CF0D0092540E /* KGMetalLive2DView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KGMetalLive2DView.m; sourceTree = "<group>"; };
+		95E3607D2600CF0D0092540E /* mask.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; path = mask.metal; sourceTree = "<group>"; };
+		95E3607E2600CF0D0092540E /* basic.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; path = basic.metal; sourceTree = "<group>"; };
+		95E3607F2600CF0D0092540E /* L2DBufferIndex.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = L2DBufferIndex.h; sourceTree = "<group>"; };
+		95E360802600CF0D0092540E /* L2DShaderType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = L2DShaderType.h; sourceTree = "<group>"; };
 		ABD79E68F398A48645A3DED9 /* Pods_iOSLive2DDemo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_iOSLive2DDemo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -262,12 +262,12 @@
 		959FF45C25FC906300AB0924 /* iOSLive2DDemo */ = {
 			isa = PBXGroup;
 			children = (
-				95E35FF0260072990092540E /* Common */,
+				95E3605A2600CF0C0092540E /* Common */,
 				959FF51F25FCEEA200AB0924 /* Helper */,
 				959FF51C25FCEE7600AB0924 /* Live2DResources */,
 				959FF48825FC935200AB0924 /* Live2DSDK */,
-				95E35FDA260072980092540E /* Metal */,
-				95E35FE7260072980092540E /* OpenGLES */,
+				95E360742600CF0D0092540E /* Metal */,
+				95E3606B2600CF0D0092540E /* OpenGLES */,
 				959FF45D25FC906300AB0924 /* AppDelegate.h */,
 				959FF45E25FC906300AB0924 /* AppDelegate.m */,
 				959FF46925FC906500AB0924 /* Assets.xcassets */,
@@ -484,75 +484,75 @@
 			path = Helper;
 			sourceTree = "<group>";
 		};
-		95E35FDA260072980092540E /* Metal */ = {
+		95E3605A2600CF0C0092540E /* Common */ = {
 			isa = PBXGroup;
 			children = (
-				95E35FDC260072980092540E /* Render */,
-				95E35FE2260072980092540E /* Shader */,
-				95E35FDB260072980092540E /* KGMetalLive2DView.h */,
-				95E35FE1260072980092540E /* KGMetalLive2DView.m */,
+				95E360682600CF0C0092540E /* L2DAppDefine.h */,
+				95E360672600CF0C0092540E /* L2DAppDefine.mm */,
+				95E360612600CF0C0092540E /* L2DCubism.h */,
+				95E3605F2600CF0C0092540E /* L2DCubism.mm */,
+				95E3605B2600CF0C0092540E /* L2DHelper.h */,
+				95E3605E2600CF0C0092540E /* L2DHelper.mm */,
+				95E3606A2600CF0C0092540E /* L2DMatrix44Bridge.h */,
+				95E3605C2600CF0C0092540E /* L2DMatrix44Bridge.mm */,
+				95E360622600CF0C0092540E /* L2DModelActionProtocol.h */,
+				95E3605D2600CF0C0092540E /* L2DModelDefine.h */,
+				95E360642600CF0C0092540E /* L2DModelDefine.mm */,
+				95E360662600CF0C0092540E /* L2DRawArray.h */,
+				95E360602600CF0C0092540E /* L2DRawArray.m */,
+				95E360632600CF0C0092540E /* L2DUserModel.h */,
+				95E360652600CF0C0092540E /* L2DUserModel.mm */,
+				95E360692600CF0C0092540E /* L2DViewRenderer.h */,
 			);
-			path = Metal;
+			path = Common;
 			sourceTree = "<group>";
 		};
-		95E35FDC260072980092540E /* Render */ = {
+		95E3606B2600CF0D0092540E /* OpenGLES */ = {
 			isa = PBXGroup;
 			children = (
-				95E35FDD260072980092540E /* L2DMetalDrawable.h */,
-				95E35FDF260072980092540E /* L2DMetalDrawable.m */,
-				95E35FE0260072980092540E /* L2DMetalRender.h */,
-				95E35FDE260072980092540E /* L2DMetalRender.mm */,
-			);
-			path = Render;
-			sourceTree = "<group>";
-		};
-		95E35FE2260072980092540E /* Shader */ = {
-			isa = PBXGroup;
-			children = (
-				95E35FE4260072980092540E /* basic.metal */,
-				95E35FE5260072980092540E /* L2DBufferIndex.h */,
-				95E35FE6260072980092540E /* L2DShaderType.h */,
-				95E35FE3260072980092540E /* mask.metal */,
-			);
-			path = Shader;
-			sourceTree = "<group>";
-		};
-		95E35FE7260072980092540E /* OpenGLES */ = {
-			isa = PBXGroup;
-			children = (
-				95E35FEA260072980092540E /* KGOpenGLLive2DView.h */,
-				95E35FEE260072980092540E /* KGOpenGLLive2DView.m */,
-				95E35FEC260072980092540E /* L2DOpenGLRender.h */,
-				95E35FE9260072980092540E /* L2DOpenGLRender.m */,
-				95E35FEF260072980092540E /* L2DTextureManager.h */,
-				95E35FEB260072980092540E /* L2DTextureManager.m */,
-				95E35FED260072980092540E /* SBNSObjectProxy.h */,
-				95E35FE8260072980092540E /* SBNSObjectProxy.m */,
+				95E3606E2600CF0D0092540E /* KGOpenGLLive2DView.h */,
+				95E360722600CF0D0092540E /* KGOpenGLLive2DView.m */,
+				95E360702600CF0D0092540E /* L2DOpenGLRender.h */,
+				95E3606D2600CF0D0092540E /* L2DOpenGLRender.m */,
+				95E360732600CF0D0092540E /* L2DTextureManager.h */,
+				95E3606F2600CF0D0092540E /* L2DTextureManager.m */,
+				95E360712600CF0D0092540E /* SBNSObjectProxy.h */,
+				95E3606C2600CF0D0092540E /* SBNSObjectProxy.m */,
 			);
 			path = OpenGLES;
 			sourceTree = "<group>";
 		};
-		95E35FF0260072990092540E /* Common */ = {
+		95E360742600CF0D0092540E /* Metal */ = {
 			isa = PBXGroup;
 			children = (
-				95E35FFD260072990092540E /* L2DAppDefine.h */,
-				95E35FFC260072990092540E /* L2DAppDefine.mm */,
-				95E35FF6260072990092540E /* L2DCubism.h */,
-				95E35FF4260072990092540E /* L2DCubism.mm */,
-				95E35FF1260072990092540E /* L2DHelper.h */,
-				95E35FF3260072990092540E /* L2DHelper.mm */,
-				95E35FFE260072990092540E /* L2DMatrix44Bridge.h */,
-				95E36000260072990092540E /* L2DMatrix44Bridge.mm */,
-				95E35FF7260072990092540E /* L2DModelActionProtocol.h */,
-				95E35FF2260072990092540E /* L2DModelDefine.h */,
-				95E35FF9260072990092540E /* L2DModelDefine.mm */,
-				95E35FFB260072990092540E /* L2DRawArray.h */,
-				95E35FF5260072990092540E /* L2DRawArray.m */,
-				95E35FF8260072990092540E /* L2DUserModel.h */,
-				95E35FFA260072990092540E /* L2DUserModel.mm */,
-				95E35FFF260072990092540E /* L2DViewRenderer.h */,
+				95E360762600CF0D0092540E /* Render */,
+				95E3607C2600CF0D0092540E /* Shader */,
+				95E360752600CF0D0092540E /* KGMetalLive2DView.h */,
+				95E3607B2600CF0D0092540E /* KGMetalLive2DView.m */,
 			);
-			path = Common;
+			path = Metal;
+			sourceTree = "<group>";
+		};
+		95E360762600CF0D0092540E /* Render */ = {
+			isa = PBXGroup;
+			children = (
+				95E360772600CF0D0092540E /* L2DMetalDrawable.h */,
+				95E360792600CF0D0092540E /* L2DMetalDrawable.m */,
+				95E3607A2600CF0D0092540E /* L2DMetalRender.h */,
+				95E360782600CF0D0092540E /* L2DMetalRender.mm */,
+			);
+			path = Render;
+			sourceTree = "<group>";
+		};
+		95E3607C2600CF0D0092540E /* Shader */ = {
+			isa = PBXGroup;
+			children = (
+				95E3607E2600CF0D0092540E /* basic.metal */,
+				95E3607F2600CF0D0092540E /* L2DBufferIndex.h */,
+				95E360802600CF0D0092540E /* L2DShaderType.h */,
+				95E3607D2600CF0D0092540E /* mask.metal */,
+			);
+			path = Shader;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -670,7 +670,7 @@
 			files = (
 				959FF4F025FC93F900AB0924 /* ACubismMotion.cpp in Sources */,
 				959FF45F25FC906300AB0924 /* AppDelegate.m in Sources */,
-				95E36005260072990092540E /* basic.metal in Sources */,
+				95E360902600CF0E0092540E /* basic.metal in Sources */,
 				959FF50725FC93F900AB0924 /* csmRectF.cpp in Sources */,
 				959FF50625FC93F900AB0924 /* csmString.cpp in Sources */,
 				959FF4E925FC93F900AB0924 /* CubismBreath.cpp in Sources */,
@@ -707,24 +707,24 @@
 				959FF4FB25FC93F900AB0924 /* CubismUserModel.cpp in Sources */,
 				959FF50225FC93F900AB0924 /* CubismVector2.cpp in Sources */,
 				959FF50125FC93F900AB0924 /* CubismViewMatrix.cpp in Sources */,
-				95E36003260072990092540E /* KGMetalLive2DView.m in Sources */,
-				95E36009260072990092540E /* KGOpenGLLive2DView.m in Sources */,
-				95E3600F260072990092540E /* L2DAppDefine.mm in Sources */,
-				95E3600B260072990092540E /* L2DCubism.mm in Sources */,
-				95E3600A260072990092540E /* L2DHelper.mm in Sources */,
-				95E36010260072990092540E /* L2DMatrix44Bridge.mm in Sources */,
-				95E36002260072990092540E /* L2DMetalDrawable.m in Sources */,
-				95E36001260072990092540E /* L2DMetalRender.mm in Sources */,
-				95E3600D260072990092540E /* L2DModelDefine.mm in Sources */,
-				95E36007260072990092540E /* L2DOpenGLRender.m in Sources */,
-				95E3600C260072990092540E /* L2DRawArray.m in Sources */,
-				95E36008260072990092540E /* L2DTextureManager.m in Sources */,
-				95E3600E260072990092540E /* L2DUserModel.mm in Sources */,
+				95E3608E2600CF0E0092540E /* KGMetalLive2DView.m in Sources */,
+				95E3608B2600CF0E0092540E /* KGOpenGLLive2DView.m in Sources */,
+				95E360872600CF0E0092540E /* L2DAppDefine.mm in Sources */,
+				95E360832600CF0E0092540E /* L2DCubism.mm in Sources */,
+				95E360822600CF0E0092540E /* L2DHelper.mm in Sources */,
+				95E360812600CF0E0092540E /* L2DMatrix44Bridge.mm in Sources */,
+				95E3608D2600CF0E0092540E /* L2DMetalDrawable.m in Sources */,
+				95E3608C2600CF0E0092540E /* L2DMetalRender.mm in Sources */,
+				95E360852600CF0E0092540E /* L2DModelDefine.mm in Sources */,
+				95E360892600CF0E0092540E /* L2DOpenGLRender.m in Sources */,
+				95E360842600CF0E0092540E /* L2DRawArray.m in Sources */,
+				95E3608A2600CF0E0092540E /* L2DTextureManager.m in Sources */,
+				95E360862600CF0E0092540E /* L2DUserModel.mm in Sources */,
 				959FF47025FC906500AB0924 /* main.m in Sources */,
-				95E36004260072990092540E /* mask.metal in Sources */,
+				95E3608F2600CF0E0092540E /* mask.metal in Sources */,
 				959FF48225FC919800AB0924 /* MetalLive2DViewController.m in Sources */,
 				959FF47E25FC918100AB0924 /* OpenGLLive2DViewController.mm in Sources */,
-				95E36006260072990092540E /* SBNSObjectProxy.m in Sources */,
+				95E360882600CF0E0092540E /* SBNSObjectProxy.m in Sources */,
 				95E35F2125FF66250092540E /* SBProductioEmotionExpression.m in Sources */,
 				959FF52225FCEEA200AB0924 /* UIColor+Live2D.m in Sources */,
 				959FF46525FC906300AB0924 /* ViewController.m in Sources */,
