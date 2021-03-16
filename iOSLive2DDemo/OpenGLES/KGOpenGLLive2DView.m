@@ -11,12 +11,8 @@
 #import <GLKit/GLKit.h>
 #import "L2DUserModel.h"
 #import "UIColor+Live2D.h"
-#import <CubismFramework.hpp>
-#import <Math/CubismViewMatrix.hpp>
 #import "SBNSObjectProxy.h"
-#import "L2DCOCBridge.h"
-
-using namespace Live2D::Cubism::Framework;
+#import "L2DMatrix44Bridge.h"
 
 @interface KGOpenGLLive2DView () <GLKViewDelegate>
 @property (nonatomic, strong) GLKBaseEffect *baseEffect;
@@ -28,8 +24,6 @@ using namespace Live2D::Cubism::Framework;
 /// displayLink 代理
 @property (nonatomic, strong) SBNSObjectProxy *displayLinkProxy;
 @property (nonatomic, strong) CADisplayLink *displayLink;
-@property (nonatomic, strong) NSMutableArray *textures;
-@property (nonatomic, strong) EAGLContext *context;
 /// render
 @property (nonatomic, strong) L2DOpenGLRender *renderer;
 /// 背景色
@@ -38,9 +32,7 @@ using namespace Live2D::Cubism::Framework;
 @property (nonatomic, assign) float clearColorB;
 @property (nonatomic, assign) float clearColorA;
 /// 桥接对象
-@property (nonatomic, strong) L2DCOCBridge *bridge;
-/// モデル描画に用いるView行列
-@property (nonatomic, assign) Csm::CubismMatrix44 *viewMatrix;
+@property (nonatomic, strong) L2DMatrix44Bridge *bridge;
 @end
 
 @implementation KGOpenGLLive2DView
@@ -55,11 +47,11 @@ NS_INLINE EAGLContext *CreateBestEAGLContext() {
 
 #pragma mark - life cycle
 - (void)commonInit {
-    _context = CreateBestEAGLContext();
+    EAGLContext *context = CreateBestEAGLContext();
 
     _glkView = [[GLKView alloc] init];
     _glkView.delegate = self;
-    _glkView.context = _context;
+    _glkView.context = context;
     _glkView.drawableDepthFormat = GLKViewDrawableDepthFormat24;
     [self addSubview:_glkView];
 
@@ -109,8 +101,17 @@ NS_INLINE EAGLContext *CreateBestEAGLContext() {
     return self;
 }
 
+- (void)destoryRenderAndFrameBuffer {
+    glDeleteFramebuffers(1, &_vertexBufferId);
+    _vertexBufferId = 0;
+    glDeleteRenderbuffers(1, &_fragmentBufferId);
+    _fragmentBufferId = 0;
+}
+
 - (void)dealloc {
     NSLog(@"KGOpenGLLive2DView dealloc - %p", self);
+
+    [self destoryRenderAndFrameBuffer];
 
     [self.glkView deleteDrawable];
     [EAGLContext setCurrentContext:nil];
@@ -273,11 +274,13 @@ NS_INLINE EAGLContext *CreateBestEAGLContext() {
     NSTimeInterval time = 1.0 / (NSTimeInterval)(self.displayLink.preferredFramesPerSecond);
 
     [self.renderer update:time];
+
+    // [self.renderer render:_vertexBufferId fragmentBufferID:_fragmentBufferId];
 }
 
 - (float)GetSpriteAlpha:(int)assign {
     // assignの数値に応じて適当に決定
-    float alpha = 0.25f + static_cast<float>(assign) * 0.5f;  // サンプルとしてαに適当な差をつける
+    float alpha = 0.25f + (float)assign * 0.5f;  // サンプルとしてαに適当な差をつける
     if (alpha > 1.0f) {
         alpha = 1.0f;
     }
@@ -299,17 +302,5 @@ NS_INLINE EAGLContext *CreateBestEAGLContext() {
         }
     }
     return _renderer;
-}
-
-- (L2DCOCBridge *)bridge {
-    if (!_bridge) {
-        _bridge = [[L2DCOCBridge alloc] init];
-
-        // 画面の表示の拡大縮小や移動の変換を行う行列
-        _viewMatrix = new CubismViewMatrix();
-
-        _bridge.viewMatrix = _viewMatrix;
-    }
-    return _bridge;
 }
 @end

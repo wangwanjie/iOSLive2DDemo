@@ -1,24 +1,19 @@
-/**
- * Copyright(c) Live2D Inc. All rights reserved.
- *
- * Use of this source code is governed by the Live2D Open Software license
- * that can be found at https://www.live2d.com/eula/live2d-open-software-license-agreement_en.html.
- */
+//
+//  L2DTextureManager.m
+//  iOSLive2DDemo
+//
+//  Created by VanJay on 2021/3/14.
+//
 
 #import <Foundation/Foundation.h>
-#import <string>
-#import <OpenGLES/ES2/gl.h>
-#import <OpenGLES/ES2/glext.h>
-#import <Type/csmVector.hpp>
 
 /**
  * @brief 画像情報構造体
  */
 typedef struct {
-    GLuint id;             ///< テクスチャID
-    int width;             ///< 横幅
-    int height;            ///< 高さ
-    std::string fileName;  ///< ファイル名
+    unsigned int name;  ///< テクスチャID
+    int width;          ///< 横幅
+    int height;         ///< 高さ
 } TextureInfo;
 
 @interface L2DTextureManager : NSObject
@@ -33,7 +28,7 @@ typedef struct {
  *
  * @return プリマルチプライ処理後のカラー値
  */
-- (unsigned int)pemultiply:(unsigned char)red Green:(unsigned char)green Blue:(unsigned char)blue Alpha:(unsigned char)alpha;
+- (unsigned int)pemultiply:(unsigned char)red green:(unsigned char)green blue:(unsigned char)blue alpha:(unsigned char)alpha;
 
 /**
  * @brief 画像読み込み
@@ -41,7 +36,7 @@ typedef struct {
  * @param[in] fileName  読み込む画像ファイルパス名
  * @return 画像情報。読み込み失敗時はNULLを返す
  */
-- (TextureInfo *)createTextureFromPngFile:(std::string)fileName;
+- (TextureInfo)createTextureFromPngFile:(NSString *)fileName;
 
 /**
  * @brief 画像の解放
@@ -56,14 +51,6 @@ typedef struct {
  * 指定したテクスチャIDの画像を解放する
  * @param[in] textureId  解放するテクスチャID
  **/
-- (void)releaseTextureWithId:(Csm::csmUint32)textureId;
-
-/**
- * @brief 画像の解放
- *
- * 指定した名前の画像を解放する
- * @param[in] fileName  解放する画像ファイルパス名
- **/
-- (void)releaseTextureByName:(std::string)fileName;
+- (void)releaseTextureWithId:(unsigned int)textureId;
 
 @end

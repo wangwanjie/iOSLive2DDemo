@@ -12,7 +12,7 @@
 #import "L2DTextureManager.h"
 #import "UIColor+Live2D.h"
 #import "L2DUserModel.h"
-#import "L2DCOCBridge.h"
+#import "L2DMatrix44Bridge.h"
 
 /**
  * @brief Rect 構造体。
@@ -41,7 +41,7 @@ typedef struct {
 @property (nonatomic, assign) float spriteColorB;
 @property (nonatomic, assign) float spriteColorA;
 /// 桥接对象
-@property (nonatomic, strong) L2DCOCBridge *bridge;
+@property (nonatomic, strong) L2DMatrix44Bridge *bridge;
 @end
 
 @implementation L2DOpenGLRender
@@ -74,7 +74,7 @@ typedef struct {
 
 - (void)dealloc {
     _baseEffect = nil;
-    
+
     NSLog(@"L2DOpenGLRender dealloc - %p", self);
 }
 
@@ -125,21 +125,17 @@ typedef struct {
 
     [self.model updateWithDeltaTime:time];
     [self.model update];
+    L2DMatrix44Bridge *matrixBridge = [[L2DMatrix44Bridge alloc] init];
 
-    Csm::CubismMatrix44 projection;
-
-    if (self.bridgeOutSet.viewMatrix != nil) {
-        projection.MultiplyByMatrix(self.bridgeOutSet.viewMatrix);
+    if (self.bridgeOutSet.getArray != nil) {
+        [matrixBridge multiplyByMatrix:self.bridgeOutSet];
     }
 
     CGRect renderRect = self.renderRect;
     int width = renderRect.size.width;
     int height = renderRect.size.height;
-
-    projection.Scale(1.0f, static_cast<float>(width) / static_cast<float>(height));
-    projection.ScaleRelative(_scale, _scale);
-
-    self.bridge.viewMatrix = &projection;
+    [matrixBridge scaleX:1.0f y:(float)width / (float)height];
+    [matrixBridge scaleRelativeX:_scale y:_scale];
 
     [self.model drawModelWithBridge:self.bridge];
 }
@@ -195,6 +191,7 @@ typedef struct {
     glBufferData(GL_ARRAY_BUFFER, sizeof(uv), uv, GL_STATIC_DRAW);
 
     glEnableVertexAttribArray(GLKVertexAttribTexCoord0);
+
     glVertexAttribPointer(GLKVertexAttribTexCoord0, 2, GL_FLOAT, GL_FALSE, 0, BUFFER_OFFSET(0));
 
     // 図形を描く
@@ -260,9 +257,9 @@ typedef struct {
     return _textureManager;
 }
 
-- (L2DCOCBridge *)bridge {
+- (L2DMatrix44Bridge *)bridge {
     if (!_bridge) {
-        _bridge = [[L2DCOCBridge alloc] init];
+        _bridge = [[L2DMatrix44Bridge alloc] init];
     }
     return _bridge;
 }

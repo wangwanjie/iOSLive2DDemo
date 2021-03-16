@@ -11,7 +11,7 @@
 #import "L2DModelActionProtocol.h"
 
 @class L2DTextureManager;
-@class L2DCOCBridge;
+@class L2DMatrix44Bridge;
 
 /// Live2D 模型
 @interface L2DUserModel : NSObject <L2DModelActionProtocol>
@@ -62,7 +62,7 @@
 
 /// 如果使用 OpenGLES 渲染需要
 - (void)drawModel;
-- (void)drawModelWithBridge:(L2DCOCBridge *)bridge;
+- (void)drawModelWithBridge:(L2DMatrix44Bridge *)bridge;
 
 /**
  * @brief   画面をドラッグしたときの処理

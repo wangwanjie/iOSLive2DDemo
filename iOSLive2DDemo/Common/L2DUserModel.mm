@@ -18,7 +18,7 @@
 #import <Motion/CubismMotion.hpp>
 #import "L2DTextureManager.h"
 #import <Rendering/OpenGL/CubismRenderer_OpenGLES2.hpp>
-#import "L2DCOCBridge.h"
+#import "L2DMatrix44Bridge.h"
 #import <Math/CubismMatrix44.hpp>
 
 using namespace ::L2DAppDefine;
@@ -192,6 +192,8 @@ using namespace Live2D::Cubism::Framework::DefaultParameterId;
 
 - (void)dealloc {
     NSLog(@"L2DUserModel dealloc - %p", self);
+
+    _model->DeleteRenderer();
 
     [self releaseMotions];
     [self releaseExpressions];
@@ -438,8 +440,10 @@ static void FinishedMotion(Csm::ACubismMotion *self) {
         csmString texturePath = _modelSetting->GetTextureFileName(modelTextureNumber);
         texturePath = _modelHomeDir + texturePath;
 
-        TextureInfo *texture = [textureManager createTextureFromPngFile:texturePath.GetRawString()];
-        csmInt32 glTextueNumber = texture->id;
+        NSString *fileName = [NSString stringWithCString:texturePath.GetRawString() encoding:NSUTF8StringEncoding];
+
+        TextureInfo info = [textureManager createTextureFromPngFile:fileName];
+        csmInt32 glTextueNumber = info.name;
 
         // OpenGL
         _model->GetRenderer<Rendering::CubismRenderer_OpenGLES2>()->BindTexture(modelTextureNumber, glTextueNumber);
@@ -608,14 +612,20 @@ static void FinishedMotion(Csm::ACubismMotion *self) {
     _model->GetRenderer<Rendering::CubismRenderer_OpenGLES2>()->DrawModel();
 }
 
-- (void)drawModelWithBridge:(L2DCOCBridge *)bridge {
-    if (_model == NULL || !bridge) {
+- (void)drawModelWithBridge:(L2DMatrix44Bridge *)bridge {
+    if (_model == NULL) {
         return;
     }
 
-    bridge.viewMatrix->MultiplyByMatrix(_model->_modelMatrix);
+    Csm::CubismMatrix44 matrix;
 
-    _model->GetRenderer<Rendering::CubismRenderer_OpenGLES2>()->SetMvpMatrix(bridge.viewMatrix);
+    if (bridge.getArray != NULL) {
+        matrix.SetMatrix(bridge.getArray);
+    }
+
+    matrix.MultiplyByMatrix(_model->_modelMatrix);
+
+    _model->GetRenderer<Rendering::CubismRenderer_OpenGLES2>()->SetMvpMatrix(&matrix);
 
     [self drawModel];
 }

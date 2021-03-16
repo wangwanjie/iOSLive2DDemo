@@ -7,11 +7,11 @@
 
 #import <Foundation/Foundation.h>
 #import <GLKit/GLKit.h>
-#import "L2DCOCBridge.h"
+#import "L2DMatrix44Bridge.h"
 
 @class L2DOpenGLRender;
 @class L2DUserModel;
-@class L2DCOCBridge;
+@class L2DMatrix44Bridge;
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -40,7 +40,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, weak) id<OpenGLRenderDelegate> delegate;
 @property (nonatomic, strong) L2DUserModel *model;
 /// 外部设置的桥接对象
-@property (nonatomic, strong) L2DCOCBridge *bridgeOutSet;
+@property (nonatomic, strong) L2DMatrix44Bridge *bridgeOutSet;
 
 /// 默认渲染人物高度与画布高度比例
 - (float)defaultRenderScale;
