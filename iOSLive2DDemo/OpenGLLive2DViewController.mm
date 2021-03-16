@@ -23,7 +23,7 @@
     self.view.backgroundColor = UIColor.yellowColor;
 
     [self.view addSubview:self.live2DView];
-
+    self.live2DView.backgroundColor = UIColor.redColor;
     self.live2DView.preferredFramesPerSecond = 30;
 }
 
@@ -59,7 +59,7 @@
 - (void)viewDidLayoutSubviews {
     [super viewDidLayoutSubviews];
 
-    self.live2DView.frame = CGRectMake(0, 0, CGRectGetWidth(self.view.frame), CGRectGetHeight(self.view.frame) * 1);
+    self.live2DView.frame = CGRectMake(0, 200, CGRectGetWidth(self.view.frame), CGRectGetHeight(self.view.frame) * 1 - 300);
 
     if (!self.hasLoadResource) {
         [self.live2DView loadLive2DModelWithDir:@"Live2DResources/Shanbao/" mocJsonName:@"Shanbao.model3.json"];

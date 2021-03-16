@@ -63,8 +63,6 @@ typedef struct {
     self.baseEffect.texture2d0.enabled = GL_TRUE;
 
     self.textureId = 0;
-
-    self.scale = 1.0 / self.defaultRenderScale;
 }
 
 - (void)setModel:(L2DUserModel *)model {
@@ -117,6 +115,7 @@ typedef struct {
     _rect.down = (y - fHeight * 0.5f);
 
     self.renderRect = view.bounds;
+    self.scale = 1.0 / self.defaultRenderScale * (view.bounds.size.height / 812.0);
 }
 
 - (void)update:(NSTimeInterval)time {
