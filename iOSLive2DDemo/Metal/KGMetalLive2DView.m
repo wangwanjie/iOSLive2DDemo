@@ -28,8 +28,6 @@
 #pragma mark - life cycle
 - (void)commonInit {
 
-    self.opaque = NO;
-
     self.renderers = [NSMutableArray array];
     [self setupMtkView];
     [self startRenderWithMetal];
@@ -129,7 +127,7 @@
 }
 
 - (void)setBackgroundColor:(UIColor *)backgroundColor {
-    [super setBackgroundColor:backgroundColor];
+    [super setBackgroundColor:UIColor.clearColor];
 
     RGBA rgba = backgroundColor.rgba;
 

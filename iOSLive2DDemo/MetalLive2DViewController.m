@@ -34,9 +34,10 @@
     [super viewDidLoad];
 
     self.title = @"Live2D Metal Render";
-    self.view.backgroundColor = UIColor.whiteColor;
+    self.view.backgroundColor = UIColor.greenColor;
 
     [self.view addSubview:self.live2DView];
+    self.live2DView.backgroundColor = UIColor.redColor;
     [self.view addSubview:self.live2DView2];
 
     self.live2DView.preferredFramesPerSecond = 30;

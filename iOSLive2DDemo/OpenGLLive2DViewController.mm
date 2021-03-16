@@ -20,7 +20,7 @@
     [super viewDidLoad];
 
     self.title = @"Live2D OpenGLES Render";
-    self.view.backgroundColor = UIColor.redColor;
+    self.view.backgroundColor = UIColor.yellowColor;
 
     [self.view addSubview:self.live2DView];
 

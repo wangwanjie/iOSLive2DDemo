@@ -54,11 +54,12 @@ NS_INLINE EAGLContext *CreateBestEAGLContext() {
     _glkView.delegate = self;
     _glkView.context = context;
     _glkView.drawableDepthFormat = GLKViewDrawableDepthFormat24;
+    _glkView.opaque = NO;
     [self addSubview:_glkView];
 
     [EAGLContext setCurrentContext:_glkView.context];
 
-    self.backgroundColor = UIColor.whiteColor;
+    self.backgroundColor = UIColor.clearColor;
 
     glClearColor(_clearColorR, _clearColorG, _clearColorB, _clearColorA);
 
@@ -148,7 +149,7 @@ NS_INLINE EAGLContext *CreateBestEAGLContext() {
 }
 
 - (void)setBackgroundColor:(UIColor *)backgroundColor {
-    [super setBackgroundColor:backgroundColor];
+    [super setBackgroundColor:UIColor.clearColor];
 
     RGBA rgba = backgroundColor.rgba;
 
@@ -275,8 +276,6 @@ NS_INLINE EAGLContext *CreateBestEAGLContext() {
     NSTimeInterval time = 1.0 / (NSTimeInterval)(self.displayLink.preferredFramesPerSecond);
 
     [self.renderer update:time];
-
-    // [self.renderer render:_vertexBufferId fragmentBufferID:_fragmentBufferId];
 }
 
 - (float)GetSpriteAlpha:(int)assign {
