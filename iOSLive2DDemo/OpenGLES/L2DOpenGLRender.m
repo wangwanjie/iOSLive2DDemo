@@ -26,20 +26,21 @@ typedef struct {
 
 #define BUFFER_OFFSET(bytes) ((GLubyte *)NULL + (bytes))
 
-@interface L2DOpenGLRender ()
-@property (nonatomic, assign) GLuint textureId;  // テクスチャID
-@property (nonatomic, assign) SpriteRect rect;   // 矩形
+@interface L2DOpenGLRender () {
+    /// 前景色
+    float _spriteColorR;
+    float _spriteColorG;
+    float _spriteColorB;
+    float _spriteColorA;
+}
+@property (nonatomic, assign) GLuint textureId;
+@property (nonatomic, assign) SpriteRect rect;
 @property (nonatomic, assign) GLuint vertexBufferId;
 @property (nonatomic, assign) GLuint fragmentBufferId;
 /// L2DTextureManager
 @property (nonatomic, strong) L2DTextureManager *textureManager;
 /// GLKTextureLoader
 @property (nonatomic, strong) GLKTextureLoader *textureLoader;
-/// 前景色
-@property (nonatomic, assign) float spriteColorR;
-@property (nonatomic, assign) float spriteColorG;
-@property (nonatomic, assign) float spriteColorB;
-@property (nonatomic, assign) float spriteColorA;
 /// 桥接对象
 @property (nonatomic, strong) L2DMatrix44Bridge *bridge;
 @end
@@ -125,17 +126,16 @@ typedef struct {
 
     [self.model updateWithDeltaTime:time];
     [self.model update];
-    L2DMatrix44Bridge *matrixBridge = [[L2DMatrix44Bridge alloc] init];
 
     if (self.bridgeOutSet.getArray != nil) {
-        [matrixBridge multiplyByMatrix:self.bridgeOutSet];
+        [self.bridge multiplyByMatrix:self.bridgeOutSet];
     }
 
     CGRect renderRect = self.renderRect;
     int width = renderRect.size.width;
     int height = renderRect.size.height;
-    [matrixBridge scaleX:1.0f y:(float)width / (float)height];
-    [matrixBridge scaleRelativeX:_scale y:_scale];
+    [self.bridge scaleX:1.0f y:(float)width / (float)height];
+    [self.bridge scaleRelativeX:_scale y:_scale];
 
     [self.model drawModelWithBridge:self.bridge];
 }

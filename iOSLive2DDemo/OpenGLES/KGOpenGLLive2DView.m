@@ -14,23 +14,24 @@
 #import "SBNSObjectProxy.h"
 #import "L2DMatrix44Bridge.h"
 
-@interface KGOpenGLLive2DView () <GLKViewDelegate>
-@property (nonatomic, strong) GLKBaseEffect *baseEffect;
-@property (nonatomic, assign) GLuint vertexBufferId;
-@property (nonatomic, assign) GLuint fragmentBufferId;
+@interface KGOpenGLLive2DView () <GLKViewDelegate> {
+    GLuint _vertexBufferId;
+    GLuint _fragmentBufferId;
+    /// 背景色
+    float _clearColorR;
+    float _clearColorG;
+    float _clearColorB;
+    float _clearColorA;
+}
 
 @property (nonatomic, strong) L2DUserModel *model;
 @property (nonatomic, strong) GLKView *glkView;
-/// displayLink 代理
+/// 定时器代理
 @property (nonatomic, strong) SBNSObjectProxy *displayLinkProxy;
+/// 定时器
 @property (nonatomic, strong) CADisplayLink *displayLink;
 /// render
 @property (nonatomic, strong) L2DOpenGLRender *renderer;
-/// 背景色
-@property (nonatomic, assign) float clearColorR;
-@property (nonatomic, assign) float clearColorG;
-@property (nonatomic, assign) float clearColorB;
-@property (nonatomic, assign) float clearColorA;
 /// 桥接对象
 @property (nonatomic, strong) L2DMatrix44Bridge *bridge;
 @end
@@ -302,5 +303,12 @@ NS_INLINE EAGLContext *CreateBestEAGLContext() {
         }
     }
     return _renderer;
+}
+
+- (L2DMatrix44Bridge *)bridge {
+    if (!_bridge) {
+        _bridge = [[L2DMatrix44Bridge alloc] init];
+    }
+    return _bridge;
 }
 @end
