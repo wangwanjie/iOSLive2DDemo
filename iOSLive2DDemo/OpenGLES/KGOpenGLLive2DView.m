@@ -59,7 +59,8 @@ NS_INLINE EAGLContext *CreateBestEAGLContext() {
     _glkView.drawableDepthFormat = GLKViewDrawableDepthFormat24;
     [self addSubview:_glkView];
 
-    [EAGLContext setCurrentContext:_glkView.context];
+    BOOL isSuccess = [EAGLContext setCurrentContext:_glkView.context];
+    NSLog(@"setCurrentContext: %@", isSuccess ? @"成功" : @"失败");
 
     self.backgroundColor = UIColor.clearColor;
 
@@ -259,11 +260,11 @@ NS_INLINE EAGLContext *CreateBestEAGLContext() {
         return;
     }
     self.model = [[L2DUserModel alloc] initWithJsonDir:dirName mocJsonName:mocJsonName];
-    [self.model createRenderer];
 
     if (_renderer) {
         self.renderer = nil;
     }
+
     self.renderer.model = self.model;
     self.renderer.bridgeOutSet = self.bridge;
     self.renderer.spriteColor = self.spriteColor;

@@ -11,10 +11,8 @@
 #import <GLKit/GLKit.h>
 
 @interface L2DTextureManager ()
-
 /// 所有纹理
 @property (nonatomic, strong) NSMutableArray<NSValue *> *textures;
-
 @end
 
 @implementation L2DTextureManager
@@ -24,27 +22,16 @@
 }
 
 - (TextureInfo)createTextureFromPngFile:(NSString *)fileName {
-
-    UIImage *image = [UIImage imageNamed:fileName];
-    CGImageRef spriteImage = image.CGImage;
-
-    GLKTextureInfo *info = [GLKTextureLoader textureWithCGImage:spriteImage options:nil error:nil];
-    TextureInfo textureInfo = {};
-    textureInfo.name = info.name;
-    textureInfo.width = info.width;
-    textureInfo.height = info.height;
-    NSValue *value = [NSValue valueWithBytes:&textureInfo objCType:@encode(TextureInfo)];
-    [_textures addObject:value];
-
-    return textureInfo;
+    TextureInfo info = [self getTextureInfoWithFileName:fileName];
+    return info;
 }
 
-- (TextureInfo)gerTextureInfoWithFileName:(NSString *)fileName {
-    // 1获取图片的CGImageRef
+- (TextureInfo)getTextureInfoWithFileName:(NSString *)fileName {
+    // 获取图片的CGImageRef
     UIImage *image = [UIImage imageNamed:fileName];
     CGImageRef spriteImage = image.CGImage;
 
-    // 2 读取图片的大小
+    // 读取图片的大小
     GLuint width = (GLuint)CGImageGetWidth(spriteImage);
     GLuint height = (GLuint)CGImageGetHeight(spriteImage);
 
@@ -53,7 +40,7 @@
     CGContextRef spriteContext = CGBitmapContextCreate(spriteData, width, height, 8, width * 4,
                                                        CGImageGetColorSpace(spriteImage), kCGImageAlphaPremultipliedLast);
 
-    // 3在CGContextRef上绘图
+    // 在CGContextRef上绘图
     CGContextDrawImage(spriteContext, CGRectMake(0, 0, width, height), spriteImage);
 
     CGContextRelease(spriteContext);

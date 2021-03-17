@@ -182,12 +182,7 @@ using namespace Live2D::Cubism::Framework::DefaultParameterId;
 }
 
 - (void)createRenderer {
-    if (_model->_renderer) {
-        _model->DeleteRenderer();
-    }
-    _model->_renderer = Rendering::CubismRenderer::Create();
-
-    _model->_renderer->Initialize(self.cubismModel);
+    self.userModel->CreateRenderer();
 }
 
 - (void)dealloc {
@@ -444,6 +439,9 @@ static void FinishedMotion(Csm::ACubismMotion *self) {
 
         TextureInfo info = [textureManager createTextureFromPngFile:fileName];
         csmInt32 glTextueNumber = info.name;
+
+        // 置空单例，否则有问题
+        Rendering::CubismRenderer::StaticRelease();
 
         // OpenGL
         _model->GetRenderer<Rendering::CubismRenderer_OpenGLES2>()->BindTexture(modelTextureNumber, glTextueNumber);

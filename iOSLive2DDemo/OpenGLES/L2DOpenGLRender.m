@@ -68,6 +68,7 @@ typedef struct {
 - (void)setModel:(L2DUserModel *)model {
     _model = model;
 
+    [self.model createRenderer];
     [self.model setupTexturesWithTextureManager:self.textureManager];
 }
 
